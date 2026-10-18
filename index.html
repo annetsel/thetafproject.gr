@@ -620,8 +620,12 @@ img,svg{max-width:100%}
   ];
   // Early bird: purchase before the final plans are issued → extra discount on the total price per sqm.
   var EARLY_BIRD={pct:10,label:'Early bird · αγορά πριν τα σχέδια'};
-  // Form delivery: paste the Web3Forms access key for info@thetafproject.gr here. Empty = prepare the message for the visitor's own email app.
-  var FORM_ACCESS_KEY='';
+  // Form delivery: requests are posted to the Google Form "Αίτημα TAF" (owner tselepi.a@theroommates.gr, email notification on).
+  // Empty action = prepare the message for the visitor's own email app instead.
+  var GFORM={
+    action:'https://docs.google.com/forms/d/e/1FAIpQLSf4UQ-kj3rSBgHBNulaTXjhx6hBBUNC-5seSp_2iB13-bGHTQ/formResponse',
+    fields:{name:'entry.1208920075',phone:'entry.1338267596',email:'entry.1745684487',topic:'entry.2095418600',message:'entry.2062011125'}
+  };
   var PACKAGES=[
     {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι',price_addition_per_sqm:0,features:['Κουφώματα αλουμινίου με θερμοδιακοπή','Ενεργειακοί υαλοπίνακες','Αντλία θερμότητας','Πλακίδια και πόρτες επιλογής']},
     {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,features:['Ενδοδαπέδια θέρμανση','Ξύλινα δάπεδα στα υπνοδωμάτια','Κουζίνα με εντοιχιζόμενες συσκευές','Ηλεκτρικά ρολά']},
@@ -787,7 +791,7 @@ img,svg{max-width:100%}
   }
   $$('.copy').forEach(function(b){ b.addEventListener('click',function(){ copyText(b.getAttribute('data-copy'), b.parentNode.querySelector('.val')); }); });
   function showFallback(name,body){
-    $('#sent-title').textContent=FORM_ACCESS_KEY?'Η αποστολή δεν ολοκληρώθηκε. Στείλε το μήνυμα από το email σου:':'Το μήνυμά σου είναι έτοιμο.';
+    $('#sent-title').textContent=GFORM.action?'Η αποστολή δεν ολοκληρώθηκε. Στείλε το μήνυμα από το email σου:':'Το μήνυμά σου είναι έτοιμο.';
     $('#sent-text').textContent=body;
     $('#mail-link').href='mailto:info@thetafproject.gr?subject='+encodeURIComponent('Αίτημα TAF – '+name)+'&body='+encodeURIComponent(body);
     $('#sent-ok').hidden=true; $('#sent').hidden=false;
@@ -799,15 +803,16 @@ img,svg{max-width:100%}
     var name=$('#f-name').value.trim(), phone=$('#f-phone').value.trim(), email=$('#f-email').value.trim(), msg=$('#f-msg').value.trim(), topic=$('#f-topic').value;
     if(!name||!email||!msg){ toast('Συμπλήρωσε όνομα, email και μήνυμα'); return; }
     var body='Θέμα: '+topic+'\n\n'+msg+'\n\n— '+name+(phone?'\nΤηλ: '+phone:'')+'\nEmail: '+email;
-    if(!FORM_ACCESS_KEY){ showFallback(name,body); return; }
+    if(!GFORM.action){ showFallback(name,body); return; }
     var btn=$('#btn-send'); btn.disabled=true; btn.textContent='Αποστολή…';
-    var payload={access_key:FORM_ACCESS_KEY,subject:'Αίτημα TAF – '+topic+' – '+name,from_name:'thetafproject.gr',name:name,email:email,phone:phone,topic:topic,message:msg,replyto:email};
-    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){return r.json()})
-      .then(function(d){
+    var fd=new FormData();
+    fd.append(GFORM.fields.name,name); fd.append(GFORM.fields.phone,phone); fd.append(GFORM.fields.email,email);
+    fd.append(GFORM.fields.topic,topic); fd.append(GFORM.fields.message,msg);
+    // Google Forms answers with an opaque response (no CORS), so a completed request counts as delivered.
+    fetch(GFORM.action,{method:'POST',mode:'no-cors',body:fd})
+      .then(function(){
         btn.disabled=false; btn.textContent='Στείλε το αίτημα';
-        if(d&&d.success){ $('#sent').hidden=true; $('#sent-ok').hidden=false; $('#sent-ok').scrollIntoView({behavior:'smooth',block:'nearest'}); $('#contact-form').reset(); }
-        else showFallback(name,body);
+        $('#sent').hidden=true; $('#sent-ok').hidden=false; $('#sent-ok').scrollIntoView({behavior:'smooth',block:'nearest'}); $('#contact-form').reset();
       })
       .catch(function(){ btn.disabled=false; btn.textContent='Στείλε το αίτημα'; showFallback(name,body); });
   });
