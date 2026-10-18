@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgMjA3OC4xMSAyMDc4LjExIj4KPHJlY3Qgd2lkdGg9IjIwNzguMTEiIGhlaWdodD0iMjA3OC4xMSIgZmlsbD0iI0UyM0YyNSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuMDAsMjU0LjE3KSI+PGcgZmlsbD0iIzEwMEYwRCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjI3LjI5LDIyNy4yOSkiPgo8cGF0aCBkPSJNIDE2MjMuNTIzIDExMTUuMTkxIEwgMTM0Ni45NDEgMTExNS4xOTEgTCAxMzQ2Ljk0MSAzNDQuNTc0IEwgMTYyMy41MjMgMzQ0LjU3NCBaIE0gMTYyMy41MjMgMTExNS4xOTEiLz4KPHBhdGggZD0iTSA0OTcuODYzIDUwMS4xMDIgTCAwLjAwMCA1MDEuMTAyIEwgMC4wMDAgMjI0LjUyMCBMIDQ5Ny44NjMgMjI0LjUyMCBaIE0gNDk3Ljg2MyA1MDEuMTAyIi8+CjxwYXRoIGQ9Ik0gMTM0Ni45NDEgMzQzLjczOCBMIDEzNDYuOTQxIDAuMDAwIEwgNDk3Ljg2MyA1MDEuOTY5IEwgNDk3Ljg2MyA4MTQuMzY3IFogTSAxMzQ2Ljk0MSAzNDMuNzM4Ii8+CjwvZz48L2c+PC9zdmc+">
+<meta property="og:title" content="TAF · Three-Minded Construction">
+<meta property="og:description" content="Μελέτη, κατασκευή και πώληση διαμερισμάτων με αντιπαροχή στην Ξάνθη.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://thetafproject.gr/website_og_image_1200x630.png">
+<title>TAF Three-Minded Construction</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="TAF · Three-Minded Construction. Μελέτη, κατασκευή και πώληση διαμερισμάτων με αντιπαροχή στην Ξάνθη.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: full-width colour bands (orange / paper / black) with one centred 1180px column; the orange carries the identity, paper and white carry the reading. */
+:root{
+  --orange:#E23F25;
+  --black:#100F0D;
+  --paper:#F2EEE9;
+  --ink:#2B2A28;
+  --white:#FFFFFF;
+  --muted:#8A8783;
+  --bg:#FFFFFF;
+  --bg-alt:#F2EEE9;
+  --fg:#2B2A28;
+  --heading:#100F0D;
+  --surface:#FFFFFF;
+  --line:rgba(16,15,13,.12);
+  --line-strong:rgba(16,15,13,.28);
+  --on-orange:#100F0D;
+  --on-orange-soft:rgba(16,15,13,.72);
+  --logo:#100F0D;
+  --font:"Manrope",Arial,Helvetica,sans-serif;
+  --radius:4px;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#100F0D; --bg-alt:#1A1816; --fg:#D9D4CD; --heading:#F2EEE9; --surface:#1A1816;
+    --line:rgba(242,238,233,.14); --line-strong:rgba(242,238,233,.32); --muted:#9C9893; --logo:#F2EEE9;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#100F0D; --bg-alt:#1A1816; --fg:#D9D4CD; --heading:#F2EEE9; --surface:#1A1816;
+  --line:rgba(242,238,233,.14); --line-strong:rgba(242,238,233,.32); --muted:#9C9893; --logo:#F2EEE9;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important;animation:none!important} }
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{color:var(--heading);margin:0;text-wrap:balance;line-height:1.1;font-weight:800;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+button{font:inherit}
+img,svg{max-width:100%}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.band{padding-block:clamp(56px,8vw,104px)}
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.lead{font-size:clamp(18px,2vw,21px);line-height:1.5;max-width:62ch;color:var(--fg)}
+.sec-head{display:grid;gap:14px;max-width:760px;margin-bottom:clamp(28px,4vw,48px)}
+.sec-head h2{font-size:clamp(30px,4.2vw,46px)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+
+/* Header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px}
+.brand{display:flex;align-items:center;color:var(--logo);text-decoration:none}
+.brand svg{height:34px;width:auto;display:block}
+.nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:14px;padding:8px 12px;border-radius:var(--radius);color:var(--fg)}
+.nav a:hover{background:var(--bg-alt)}
+.nav a.cta{background:var(--orange);color:var(--on-orange);font-weight:700}
+.nav a.cta:hover{background:#c9351e}
+@media (max-width:720px){
+  .site-header .wrap{flex-wrap:wrap;row-gap:0;min-height:0;padding-top:12px}
+  .brand{padding-bottom:10px}
+  .nav{width:100%;margin-inline:calc(var(--gutter-l) * -1) calc(var(--gutter-r) * -1);padding-inline:var(--gutter-l) var(--gutter-r);padding-bottom:10px}
+}
+
+/* Hero */
+.hero{background:var(--orange);color:var(--on-orange);position:relative;overflow:hidden;isolation:isolate}
+.hero-pattern{position:absolute;inset:0;z-index:-1;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2400 2400'><g fill='%23100F0D' fill-opacity='0.045' transform='translate(360,620)'><path d='M1623.5 1115.2H1346.9V344.6h276.6zM497.9 501.1H0V224.5h497.9zM1346.9 343.7V0L497.9 502v312.4z'/></g></svg>");background-size:min(44vw,420px) auto;background-repeat:repeat}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(64px,9vw,120px)}
+.hero h1{font-size:clamp(38px,6vw,76px);color:var(--on-orange);line-height:1.02;letter-spacing:-.02em}
+.hero .tagline{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--on-orange-soft);margin-bottom:20px}
+.hero .lead{color:var(--on-orange-soft);margin-top:22px;max-width:52ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:var(--radius);font-weight:700;font-size:15px;text-decoration:none;border:2px solid transparent;cursor:pointer;line-height:1;transition:transform .15s ease,background .15s ease}
+.btn:active{transform:translateY(1px)}
+.btn-black{background:var(--black);color:var(--paper);border-color:var(--black)}
+.btn-black:hover{background:#000}
+.btn-outline-black{background:transparent;color:var(--black);border-color:var(--black)}
+.btn-outline-black:hover{background:rgba(16,15,13,.08)}
+.btn-orange{background:var(--orange);color:var(--on-orange);border-color:var(--orange)}
+.btn-orange:hover{background:#c9351e;border-color:#c9351e}
+.btn-ghost{background:transparent;color:var(--heading);border-color:var(--line-strong)}
+.btn-ghost:hover{background:var(--bg-alt)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.hero-mark{display:flex;justify-content:flex-end;padding-right:4%}
+.hero-mark svg{width:min(92%,320px);height:auto;color:var(--black)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:44px;padding-top:22px;border-top:1px solid rgba(16,15,13,.25);font-size:14px;font-weight:600;color:var(--on-orange-soft)}
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-mark{justify-content:flex-start;order:-1}
+  .hero-mark svg{width:120px}
+}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.pillar{background:var(--surface);padding:30px 26px;display:grid;gap:14px;align-content:start;min-width:0}
+.pillar .num{font-size:13px;font-weight:700;color:var(--orange);letter-spacing:.08em}
+.pillar h3{font-size:22px}
+.pillar p{color:var(--fg);font-size:16px}
+@media (max-width:800px){.about-grid{grid-template-columns:1fr}}
+.process{margin-top:clamp(40px,6vw,72px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,64px);align-items:start}
+.process h3{font-size:clamp(24px,3vw,32px);margin-bottom:12px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:step}
+.steps li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:18px 0;border-top:1px solid var(--line);counter-increment:step}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(step,decimal-leading-zero);font-weight:800;color:var(--orange);font-size:20px;line-height:1.2;font-variant-numeric:tabular-nums}
+.steps strong{display:block;color:var(--heading);font-size:17px;margin-bottom:4px}
+.steps span{font-size:15px;color:var(--fg)}
+@media (max-width:800px){.process{grid-template-columns:1fr}}
+
+/* Projects */
+.band-alt{background:var(--bg-alt)}
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.project{background:var(--surface);border:1px solid var(--line);display:grid;grid-template-rows:auto 1fr;min-width:0}
+.project-visual{aspect-ratio:16/9;max-width:100%;background:var(--black);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:22px}
+.project-visual svg.skyline{position:absolute;inset:0;width:100%;height:100%}
+.project-visual .chip{position:relative;background:var(--orange);color:var(--on-orange);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 11px;border-radius:var(--radius)}
+.project-body{padding:26px;display:grid;gap:14px;align-content:start}
+.project h3{font-size:24px}
+.project .addr{font-weight:600;color:var(--muted);font-size:15px}
+.project p{font-size:16px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:6px;padding-top:16px;border-top:1px solid var(--line)}
+.fact small{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px}
+.fact span{font-weight:700;color:var(--heading);font-size:15px}
+.project-plot{grid-column:1/-1;background:var(--black);color:var(--paper);border-color:var(--black);padding:30px 26px;display:grid;gap:14px;align-content:start;grid-template-rows:none;grid-template-columns:minmax(0,1.3fr) auto;align-items:center}
+.project-plot .eyebrow,.project-plot h3,.project-plot p{grid-column:1}
+.project-plot .cta{grid-column:2;grid-row:1/4;align-self:center}
+@media (max-width:800px){.project-plot{grid-template-columns:1fr}.project-plot .cta{grid-column:1;grid-row:auto}}
+.project-plot h3{color:var(--paper)}
+.project-plot p{color:rgba(242,238,233,.78)}
+.project-plot .eyebrow{color:var(--orange)}
+@media (max-width:800px){.projects{grid-template-columns:1fr}}
+
+/* Configurator */
+.config{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
+.config-main{min-width:0}
+.stepper{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:28px}
+.stepper button{border:0;background:transparent;padding:0;cursor:pointer;text-align:left;display:grid;gap:8px;color:var(--muted);font-weight:600;font-size:13px;min-width:0}
+.stepper button i{display:block;height:4px;background:var(--line);border-radius:2px}
+.stepper button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stepper button.done i,.stepper button.active i{background:var(--orange)}
+.stepper button.active{color:var(--heading)}
+.stepper button[disabled]{cursor:default}
+.step{display:none}
+.step.active{display:block}
+.step-title{display:grid;gap:6px;margin-bottom:22px}
+.step-title h3{font-size:clamp(24px,3vw,30px)}
+.step-title p{color:var(--muted)}
+.opts{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.opt{text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:var(--radius);padding:20px;cursor:pointer;display:grid;gap:10px;align-content:start;color:var(--fg);transition:border-color .15s ease,transform .15s ease;min-width:0;position:relative}
+.opt:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.opt[aria-pressed="true"]{border-color:var(--orange)}
+.opt[aria-pressed="true"]::after{content:"";position:absolute;top:14px;right:14px;width:12px;height:12px;background:var(--orange);border-radius:50%}
+.opt[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.opt .code{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.opt h4{font-size:19px;padding-right:22px}
+.opt .meta{font-size:14px;color:var(--fg);display:grid;gap:4px}
+.opt .price{margin-top:4px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.opt .price b{color:var(--heading);font-size:17px;font-variant-numeric:tabular-nums}
+.opt ul{margin:0;padding-left:18px;font-size:14px;display:grid;gap:3px}
+.config-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.config-nav .count{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.summary{position:sticky;top:calc(env(safe-area-inset-top,0px) + 88px);background:var(--black);color:var(--paper);padding:24px;display:grid;gap:14px;border-radius:var(--radius)}
+.summary h4{color:rgba(242,238,233,.6);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.summary .row{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:rgba(242,238,233,.85)}
+.summary .row b{font-variant-numeric:tabular-nums;color:var(--paper);font-weight:600;white-space:nowrap}
+.summary .row.empty{color:rgba(242,238,233,.45)}
+.summary .total{border-top:1px solid rgba(242,238,233,.18);padding-top:14px;display:grid;gap:4px}
+.summary .total small{font-size:12px;color:rgba(242,238,233,.6)}
+.summary .total .big{font-size:30px;font-weight:800;color:var(--paper);font-variant-numeric:tabular-nums;line-height:1}
+.summary .est{background:rgba(242,238,233,.08);padding:12px 14px;border-radius:var(--radius);display:grid;gap:3px}
+.summary .est small{font-size:12px;color:rgba(242,238,233,.6)}
+.summary .est b{font-size:20px;color:var(--orange);font-variant-numeric:tabular-nums}
+.summary .note{font-size:12px;color:rgba(242,238,233,.5);line-height:1.4}
+@media (max-width:900px){.config{grid-template-columns:1fr}.summary{position:static}}
+.result{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.result-card{border:1px solid var(--line);background:var(--surface);padding:24px;display:grid;gap:14px;align-content:start;min-width:0}
+.result-card h4{font-size:18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.kv{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 14px;font-size:15px}
+.kv dt{color:var(--muted);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-top:3px}
+.kv dd{margin:0;color:var(--heading);font-weight:600}
+.kv dd small{display:block;font-weight:400;color:var(--fg);font-size:14px}
+.result-price{background:var(--orange);color:var(--on-orange);border:0}
+.result-price h4{color:var(--on-orange);border-color:rgba(16,15,13,.2)}
+.result-price .row{display:flex;justify-content:space-between;gap:12px;font-size:15px;font-variant-numeric:tabular-nums}
+.result-price .row.sum{border-top:1px solid rgba(16,15,13,.2);padding-top:12px;font-weight:800;font-size:18px}
+.result-price .est{margin-top:8px;background:var(--black);color:var(--paper);padding:16px;border-radius:var(--radius);display:grid;gap:4px}
+.result-price .est small{color:rgba(242,238,233,.6);font-size:12px}
+.result-price .est b{font-size:28px;font-variant-numeric:tabular-nums;line-height:1}
+.result-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.result-actions .hint{font-size:14px;color:var(--muted);flex-basis:100%}
+@media (max-width:760px){.result{grid-template-columns:1fr}}
+.disclaimer{margin-top:22px;font-size:13px;color:var(--muted);max-width:70ch}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.contact-list{display:grid;gap:0}
+.contact-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:18px 0;border-top:1px solid var(--line)}
+.contact-item:last-child{border-bottom:1px solid var(--line)}
+.contact-item small{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px}
+.contact-item .val{font-weight:700;color:var(--heading);font-size:18px;word-break:break-word;user-select:all}
+.contact-item .val a{text-decoration:none}
+.copy{border:1px solid var(--line-strong);background:transparent;color:var(--heading);font-size:13px;font-weight:700;padding:8px 12px;border-radius:var(--radius);cursor:pointer;white-space:nowrap}
+.copy:hover{background:var(--bg-alt)}
+.form{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);padding:clamp(20px,3vw,32px)}
+.form h3{font-size:22px}
+.field{display:grid;gap:6px}
+.field label{font-size:13px;font-weight:700;color:var(--heading)}
+.field input,.field textarea{font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);color:var(--fg);width:100%;min-width:0}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(226,63,37,.2)}
+.field textarea{min-height:140px;resize:vertical}
+.form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.form-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.form-foot .hint{font-size:13px;color:var(--muted);flex-basis:100%}
+.sent{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+.sent pre{white-space:pre-wrap;word-break:break-word;font:inherit;font-size:14px;background:var(--bg-alt);padding:14px;border-radius:var(--radius);margin:0;color:var(--fg)}
+.sent .actions{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+@media (max-width:520px){.form-row{grid-template-columns:1fr}}
+
+/* Footer */
+.site-footer{background:var(--black);color:rgba(242,238,233,.7);padding-block:40px;font-size:14px}
+.site-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px 32px;align-items:center}
+.site-footer .brand{color:var(--paper)}
+.site-footer .brand svg{height:28px}
+.site-footer a{color:var(--paper);text-decoration:none;font-weight:600}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--black);color:var(--paper);padding:12px 18px;border-radius:var(--radius);font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:50;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="TAF, αρχική"><svg role="img" aria-label="TAF – Three-Minded Construction" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4069.69 1271.72">
+<g fill="currentColor" transform="translate(78.26,78.26)">
+<path d="M 1623.523 1115.191 L 1346.941 1115.191 L 1346.941 344.574 L 1623.523 344.574 Z M 1623.523 1115.191"/>
+<path d="M 497.863 501.102 L 0.000 501.102 L 0.000 224.520 L 497.863 224.520 Z M 497.863 501.102"/>
+<path d="M 1346.941 343.738 L 1346.941 0.000 L 497.863 501.969 L 497.863 814.367 Z M 1346.941 343.738"/>
+<path d="M 2242.770 86.773 L 2101.120 86.773 L 2101.120 478.544 L 2010.516 478.544 L 2010.516 86.773 L 1868.866 86.773 L 1868.866 0.000 L 2242.770 0.000 Z M 2242.770 86.773"/>
+<path d="M 2435.472 304.993 L 2552.878 304.993 L 2496.727 109.744 L 2491.622 109.744 Z M 2445.042 0.000 L 2543.308 0.000 L 2711.755 478.544 L 2614.128 478.544 L 2584.140 391.766 L 2404.210 391.766 L 2374.217 478.544 L 2276.595 478.544 Z M 2445.042 0.000"/>
+<path d="M 3166.684 86.773 L 2917.203 86.773 L 2917.203 195.244 L 3123.300 195.244 L 3123.300 282.022 L 2917.203 282.022 L 2917.203 478.544 L 2826.599 478.544 L 2826.599 0.000 L 3166.684 0.000 Z M 3166.684 86.773"/>
+<path d="M 1868.866 646.035 L 2010.245 646.035 L 2010.245 667.594 L 1951.247 667.594 L 1951.247 815.520 L 1926.895 815.520 L 1926.895 667.594 L 1868.866 667.594 Z M 1868.866 646.035"/>
+<path d="M 2165.375 646.276 L 2189.605 646.276 L 2189.605 815.520 L 2165.375 815.520 L 2165.375 741.862 L 2070.271 741.862 L 2070.271 815.520 L 2046.042 815.520 L 2046.042 646.276 L 2070.271 646.276 L 2070.271 719.447 L 2165.375 719.447 Z M 2165.375 646.276"/>
+<path d="M 2272.046 666.871 L 2264.777 666.871 L 2264.777 720.298 L 2273.983 720.298 C 2286.258 720.298 2294.677 719.245 2299.241 717.145 C 2303.804 715.045 2307.360 711.878 2309.902 707.634 C 2312.445 703.395 2313.719 698.571 2313.719 693.162 C 2313.719 687.831 2312.302 683.002 2309.479 678.684 C 2306.652 674.361 2302.673 671.312 2297.544 669.537 C 2292.415 667.761 2283.917 666.871 2272.046 666.871 M 2240.543 815.520 L 2240.543 646.276 L 2282.948 646.276 C 2300.067 646.276 2313.660 650.515 2323.711 658.998 C 2333.768 667.476 2338.794 678.944 2338.794 693.403 C 2338.794 703.258 2336.330 711.775 2331.408 718.965 C 2326.480 726.155 2319.413 731.525 2310.202 735.075 C 2315.617 738.631 2320.903 743.475 2326.077 749.612 C 2331.245 755.754 2338.514 766.455 2347.882 781.715 C 2353.778 791.329 2358.499 798.558 2362.055 803.402 L 2371.020 815.520 L 2342.187 815.520 L 2334.806 804.366 C 2334.565 803.963 2334.083 803.274 2333.355 802.306 L 2328.634 795.637 L 2321.135 783.279 L 2313.030 770.065 C 2308.029 763.111 2303.445 757.584 2299.280 753.473 C 2295.115 749.361 2291.358 746.396 2287.999 744.581 C 2284.645 742.772 2279.004 741.862 2271.082 741.862 L 2264.777 741.862 L 2264.777 815.520 Z M 2240.543 815.520"/>
+<path d="M 2402.577 646.276 L 2498.527 646.276 L 2498.527 667.840 L 2426.812 667.840 L 2426.812 719.447 L 2496.107 719.447 L 2496.107 741.134 L 2426.812 741.134 L 2426.812 793.714 L 2500.828 793.714 L 2500.828 815.274 L 2402.577 815.274 Z M 2402.577 646.276"/>
+<path d="M 2539.536 646.276 L 2635.486 646.276 L 2635.486 667.840 L 2563.766 667.840 L 2563.766 719.447 L 2633.061 719.447 L 2633.061 741.134 L 2563.766 741.134 L 2563.766 793.714 L 2637.787 793.714 L 2637.787 815.274 L 2539.536 815.274 Z M 2539.536 646.276"/>
+<path d="M 2749.607 748.766 L 2809.937 748.766 L 2809.937 772.391 L 2749.607 772.391 Z M 2749.607 748.766"/>
+<path d="M 3067.858 646.276 L 3090.514 646.276 L 3090.514 815.520 L 3066.161 815.520 L 3066.161 683.833 L 3014.131 749.253 L 3009.646 749.253 L 2957.007 683.833 L 2957.007 815.520 L 2932.777 815.520 L 2932.777 646.276 L 2955.719 646.276 L 3011.953 715.783 Z M 3067.858 646.276"/>
+<path d="M 3140.124 646.276 L 3164.353 646.276 L 3164.353 815.520 L 3140.124 815.520 Z M 3140.124 646.276"/>
+<path d="M 3349.285 646.276 L 3372.304 646.276 L 3372.304 815.520 L 3351.463 815.520 L 3238.311 685.175 L 3238.311 815.520 L 3215.537 815.520 L 3215.537 646.276 L 3235.164 646.276 L 3349.285 777.727 Z M 3349.285 646.276"/>
+<path d="M 3476.187 667.840 L 3445.898 667.840 L 3445.898 793.709 L 3476.914 793.709 C 3489.027 793.709 3498.434 792.883 3505.137 791.226 C 3511.845 789.574 3517.437 787.474 3521.921 784.931 C 3526.402 782.384 3530.498 779.256 3534.216 775.538 C 3546.166 763.426 3552.146 748.122 3552.146 729.627 C 3552.146 711.451 3546.009 696.633 3533.729 685.165 C 3529.210 680.882 3524.016 677.371 3518.164 674.622 C 3512.307 671.878 3506.755 670.063 3501.503 669.173 C 3496.256 668.283 3487.817 667.840 3476.187 667.840 M 3421.669 815.274 L 3421.669 646.276 L 3478.729 646.276 C 3501.749 646.276 3519.959 649.728 3533.370 656.633 C 3546.776 663.537 3557.432 673.697 3565.350 687.103 C 3573.263 700.509 3577.221 715.129 3577.221 730.959 C 3577.221 742.265 3575.043 753.089 3570.681 763.426 C 3566.319 773.763 3560.098 782.851 3552.023 790.685 C 3543.786 798.760 3534.216 804.858 3523.313 808.974 C 3516.930 811.482 3511.078 813.154 3505.747 814.005 C 3500.416 814.851 3490.241 815.274 3475.218 815.274 Z M 3421.669 815.274"/>
+<path d="M 3620.409 646.276 L 3716.359 646.276 L 3716.359 667.840 L 3644.643 667.840 L 3644.643 719.447 L 3713.939 719.447 L 3713.939 741.134 L 3644.643 741.134 L 3644.643 793.714 L 3718.660 793.714 L 3718.660 815.274 L 3620.409 815.274 Z M 3620.409 646.276"/>
+<path d="M 3812.127 667.840 L 3781.838 667.840 L 3781.838 793.709 L 3812.854 793.709 C 3824.967 793.709 3834.374 792.883 3841.082 791.226 C 3847.785 789.574 3853.377 787.474 3857.862 784.931 C 3862.342 782.384 3866.443 779.256 3870.156 775.538 C 3882.111 763.426 3888.086 748.122 3888.086 729.627 C 3888.086 711.451 3881.949 696.633 3869.674 685.165 C 3865.150 680.882 3859.961 677.371 3854.104 674.622 C 3848.247 671.878 3842.695 670.063 3837.448 669.173 C 3832.196 668.283 3823.757 667.840 3812.127 667.840 M 3757.609 815.274 L 3757.609 646.276 L 3814.674 646.276 C 3837.689 646.276 3855.899 649.728 3869.310 656.633 C 3882.716 663.537 3893.377 673.697 3901.295 687.103 C 3909.208 700.509 3913.166 715.129 3913.166 730.959 C 3913.166 742.265 3910.983 753.089 3906.621 763.426 C 3902.259 773.763 3896.043 782.851 3887.968 790.685 C 3879.726 798.760 3870.156 804.858 3859.253 808.974 C 3852.875 811.482 3847.018 813.154 3841.687 814.005 C 3836.356 814.851 3826.182 815.274 3811.158 815.274 Z M 3757.609 815.274"/>
+<path d="M 2029.144 1074.000 L 2029.144 1100.650 C 2011.376 1110.343 1990.860 1115.191 1967.599 1115.191 C 1948.700 1115.191 1932.668 1111.395 1919.503 1103.802 C 1906.339 1096.214 1895.923 1085.749 1888.246 1072.427 C 1880.575 1059.100 1876.739 1044.681 1876.739 1029.175 C 1876.739 1004.542 1885.522 983.824 1903.088 967.025 C 1920.654 950.226 1942.322 941.827 1968.086 941.827 C 1985.853 941.827 2005.598 946.474 2027.325 955.759 L 2027.325 981.808 C 2007.536 970.502 1988.194 964.847 1969.295 964.847 C 1949.915 964.847 1933.819 970.964 1921.018 983.200 C 1908.217 995.435 1901.819 1010.758 1901.819 1029.175 C 1901.819 1047.750 1908.114 1063.014 1920.718 1074.969 C 1933.312 1086.924 1949.428 1092.899 1969.054 1092.899 C 1989.566 1092.899 2009.596 1086.600 2029.144 1074.000"/>
+<path d="M 2153.878 964.601 C 2134.512 964.601 2118.598 970.659 2106.131 982.777 C 2093.665 994.889 2087.429 1010.355 2087.429 1029.175 C 2087.429 1047.430 2093.680 1062.611 2106.190 1074.723 C 2118.696 1086.841 2134.349 1092.899 2153.150 1092.899 C 2172.029 1092.899 2187.785 1086.718 2200.419 1074.359 C 2213.043 1062.006 2219.357 1046.619 2219.357 1028.207 C 2219.357 1010.277 2213.043 995.194 2200.419 982.959 C 2187.785 970.723 2172.275 964.601 2153.878 964.601 M 2152.909 941.586 C 2179.056 941.586 2200.832 949.862 2218.226 966.420 C 2235.615 982.978 2244.315 1003.736 2244.315 1028.689 C 2244.315 1053.646 2235.536 1074.300 2217.980 1090.657 C 2200.429 1107.013 2178.294 1115.191 2151.576 1115.191 C 2126.073 1115.191 2104.823 1107.013 2087.837 1090.657 C 2070.847 1074.300 2062.354 1053.808 2062.354 1029.175 C 2062.354 1003.898 2070.906 982.978 2088.019 966.420 C 2105.128 949.862 2126.756 941.586 2152.909 941.586"/>
+<path d="M 2419.509 944.010 L 2442.524 944.010 L 2442.524 1113.249 L 2421.687 1113.249 L 2308.535 982.909 L 2308.535 1113.249 L 2285.761 1113.249 L 2285.761 944.010 L 2305.388 944.010 L 2419.509 1075.461 Z M 2419.509 944.010"/>
+<path d="M 2531.584 1042.340 L 2513.167 1031.152 C 2501.615 1024.100 2493.403 1017.161 2488.514 1010.336 C 2483.626 1003.515 2481.187 995.656 2481.187 986.775 C 2481.187 973.448 2485.810 962.624 2495.055 954.308 C 2504.305 945.987 2516.319 941.827 2531.097 941.827 C 2545.231 941.827 2558.194 945.795 2569.986 953.728 L 2569.986 981.232 C 2557.790 969.499 2544.670 963.637 2530.615 963.637 C 2522.698 963.637 2516.196 965.466 2511.111 969.125 C 2506.022 972.789 2503.479 977.470 2503.479 983.180 C 2503.479 988.250 2505.353 993.001 2509.100 997.422 C 2512.847 1001.848 2518.872 1006.495 2527.178 1011.363 L 2545.688 1022.310 C 2566.328 1034.639 2576.650 1050.336 2576.650 1069.397 C 2576.650 1082.966 2572.106 1093.986 2563.023 1102.469 C 2553.935 1110.947 2542.123 1115.191 2527.586 1115.191 C 2510.865 1115.191 2495.640 1110.052 2481.915 1099.774 L 2481.915 1069.004 C 2494.996 1085.582 2510.138 1093.868 2527.345 1093.868 C 2534.933 1093.868 2541.257 1091.754 2546.303 1087.529 C 2551.348 1083.305 2553.876 1078.013 2553.876 1071.655 C 2553.876 1061.352 2546.440 1051.585 2531.584 1042.340"/>
+<path d="M 2599.803 943.764 L 2741.183 943.764 L 2741.183 965.328 L 2682.184 965.328 L 2682.184 1113.254 L 2657.832 1113.254 L 2657.832 965.328 L 2599.803 965.328 Z M 2599.803 943.764"/>
+<path d="M 2807.223 964.601 L 2799.954 964.601 L 2799.954 1018.027 L 2809.160 1018.027 C 2821.435 1018.027 2829.854 1016.979 2834.418 1014.880 C 2838.981 1012.780 2842.537 1009.608 2845.079 1005.369 C 2847.622 1001.130 2848.896 996.305 2848.896 990.891 C 2848.896 985.560 2847.479 980.736 2844.656 976.413 C 2841.829 972.095 2837.850 969.046 2832.721 967.266 C 2827.592 965.491 2819.094 964.601 2807.223 964.601 M 2775.725 1113.249 L 2775.725 944.010 L 2818.125 944.010 C 2835.249 944.010 2848.837 948.249 2858.888 956.727 C 2868.945 965.210 2873.976 976.679 2873.976 991.137 C 2873.976 1000.987 2871.507 1009.509 2866.585 1016.694 C 2861.657 1023.884 2854.590 1029.254 2845.384 1032.810 C 2850.794 1036.365 2856.085 1041.209 2861.254 1047.346 C 2866.422 1053.484 2873.691 1064.185 2883.059 1079.449 C 2888.955 1089.064 2893.676 1096.288 2897.232 1101.137 L 2906.197 1113.249 L 2877.364 1113.249 L 2869.983 1102.100 C 2869.742 1101.697 2869.260 1101.009 2868.532 1100.040 L 2863.816 1093.371 L 2856.312 1081.008 L 2848.207 1067.794 C 2843.206 1060.846 2838.622 1055.318 2834.457 1051.207 C 2830.297 1047.091 2826.535 1044.130 2823.181 1042.316 C 2819.822 1040.501 2814.186 1039.591 2806.259 1039.591 L 2799.954 1039.591 L 2799.954 1113.249 Z M 2775.725 1113.249"/>
+<path d="M 3046.136 944.010 L 3070.489 944.010 L 3070.489 1040.078 C 3070.489 1053.080 3069.539 1062.896 3067.641 1069.516 C 3065.743 1076.140 3063.402 1081.652 3060.614 1086.054 C 3057.830 1090.455 3054.417 1094.394 3050.380 1097.866 C 3036.969 1109.413 3019.442 1115.191 2997.800 1115.191 C 2975.748 1115.191 2958.064 1109.457 2944.737 1097.984 C 2940.700 1094.434 2937.287 1090.455 2934.499 1086.054 C 2931.715 1081.652 2929.414 1076.263 2927.594 1069.879 C 2925.779 1063.501 2924.870 1053.484 2924.870 1039.837 L 2924.870 944.010 L 2949.222 944.010 L 2949.222 1040.078 C 2949.222 1055.992 2951.037 1067.052 2954.671 1073.273 C 2958.305 1079.494 2963.838 1084.480 2971.268 1088.232 C 2978.699 1091.990 2987.462 1093.868 2997.559 1093.868 C 3011.933 1093.868 3023.642 1090.111 3032.691 1082.602 C 3037.456 1078.564 3040.889 1073.799 3042.989 1068.306 C 3045.088 1062.813 3046.136 1053.405 3046.136 1040.078 Z M 3046.136 944.010"/>
+<path d="M 3260.824 1074.000 L 3260.824 1100.650 C 3243.057 1110.343 3222.545 1115.191 3199.284 1115.191 C 3180.385 1115.191 3164.348 1111.395 3151.189 1103.802 C 3138.019 1096.214 3127.603 1085.749 3119.931 1072.427 C 3112.255 1059.100 3108.424 1044.681 3108.424 1029.175 C 3108.424 1004.542 3117.207 983.824 3134.773 967.025 C 3152.339 950.226 3174.002 941.827 3199.766 941.827 C 3217.534 941.827 3237.283 946.474 3259.010 955.759 L 3259.010 981.808 C 3239.221 970.502 3219.879 964.847 3200.981 964.847 C 3181.595 964.847 3165.499 970.964 3152.698 983.200 C 3139.897 995.435 3133.499 1010.758 3133.499 1029.175 C 3133.499 1047.750 3139.799 1063.014 3152.398 1074.969 C 3164.997 1086.924 3181.108 1092.899 3200.735 1092.899 C 3221.251 1092.899 3241.281 1086.600 3260.824 1074.000"/>
+<path d="M 3287.129 943.764 L 3428.509 943.764 L 3428.509 965.328 L 3369.506 965.328 L 3369.506 1113.254 L 3345.159 1113.254 L 3345.159 965.328 L 3287.129 965.328 Z M 3287.129 943.764"/>
+<path d="M 3462.564 944.005 L 3486.794 944.005 L 3486.794 1113.249 L 3462.564 1113.249 Z M 3462.564 944.005"/>
+<path d="M 3619.283 964.601 C 3599.917 964.601 3583.998 970.659 3571.532 982.777 C 3559.065 994.889 3552.834 1010.355 3552.834 1029.175 C 3552.834 1047.430 3559.085 1062.611 3571.591 1074.723 C 3584.101 1086.841 3599.754 1092.899 3618.555 1092.899 C 3637.434 1092.899 3653.190 1086.718 3665.819 1074.359 C 3678.448 1062.006 3684.762 1046.619 3684.762 1028.207 C 3684.762 1010.277 3678.448 995.194 3665.819 982.959 C 3653.190 970.723 3637.675 964.601 3619.283 964.601 M 3618.314 941.586 C 3644.462 941.586 3666.232 949.862 3683.626 966.420 C 3701.020 982.978 3709.720 1003.736 3709.720 1028.689 C 3709.720 1053.646 3700.942 1074.300 3683.385 1090.657 C 3665.829 1107.013 3643.699 1115.191 3616.981 1115.191 C 3591.478 1115.191 3570.228 1107.013 3553.238 1090.657 C 3536.247 1074.300 3527.754 1053.808 3527.754 1029.175 C 3527.754 1003.898 3536.311 982.978 3553.420 966.420 C 3570.528 949.862 3592.161 941.586 3618.314 941.586"/>
+<path d="M 3884.909 944.010 L 3907.929 944.010 L 3907.929 1113.249 L 3887.093 1113.249 L 3773.940 982.909 L 3773.940 1113.249 L 3751.162 1113.249 L 3751.162 944.010 L 3770.788 944.010 L 3884.909 1075.461 Z M 3884.909 944.010"/>
+</g></svg></a>
+    <nav class="nav" aria-label="Κύρια πλοήγηση">
+      <a href="#about">Ποιοι είμαστε</a>
+      <a href="#projects">Έργα</a>
+      <a href="#configurator">Χτίσε το σπίτι σου</a>
+      <a href="#contact" class="cta">Επικοινωνία</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-pattern" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <p class="tagline">Three-Minded Construction · Ξάνθη</p>
+        <h1 id="hero-title">Ανέγερση πολυτελούς πολυώροφης οικοδομής</h1>
+        <p class="lead">Τρία τεχνικά γραφεία, μία ομάδα. Μελετάμε, κατασκευάζουμε και πουλάμε διαμερίσματα με το σύστημα της αντιπαροχής, από το οικόπεδο μέχρι το κλειδί.</p>
+        <div class="hero-actions">
+          <a class="btn btn-black" href="#configurator">Χτίσε το σπίτι σου</a>
+          <a class="btn btn-outline-black" href="#projects">Δες τα έργα</a>
+        </div>
+        <div class="hero-meta">
+          <span>Μελέτη</span><span>Κατασκευή</span><span>Πώληση διαμερισμάτων με αντιπαροχή</span>
+        </div>
+      </div>
+      <div class="hero-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1688.46 1180.13">
+<g fill="currentColor" transform="translate(32.47,32.47)">
+<path d="M 1623.523 1115.191 L 1346.941 1115.191 L 1346.941 344.574 L 1623.523 344.574 Z M 1623.523 1115.191"/>
+<path d="M 497.863 501.102 L 0.000 501.102 L 0.000 224.520 L 497.863 224.520 Z M 497.863 501.102"/>
+<path d="M 1346.941 343.738 L 1346.941 0.000 L 497.863 501.969 L 497.863 814.367 Z M 1346.941 343.738"/>
+</g></svg></div>
+    </div>
+  </section>
+
+  <section id="about" class="band" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Ποιοι είμαστε</span>
+        <h2 id="about-title">Three-Minded: τρία γραφεία, μία κατασκευή</h2>
+        <p class="lead">Το σήμα του TAF χτίζεται από τρία στοιχεία. Έτσι δουλεύουμε κι εμείς: τρία τεχνικά γραφεία της Ξάνθης ενώνουν μελέτη, κατασκευή και πωλήσεις σε ένα σχήμα, ώστε κάθε οικοδομή να έχει έναν υπεύθυνο από την αρχή μέχρι το τέλος.</p>
+      </div>
+      <div class="about-grid">
+        <article class="pillar">
+          <span class="num">T</span>
+          <h3>Μελέτη</h3>
+          <p>Αρχιτεκτονική και στατική μελέτη, πολεοδομικός έλεγχος και έκδοση οικοδομικής άδειας μέσω e-Άδειες. Σχεδιάζουμε κατόψεις που αξιοποιούν κάθε τετραγωνικό του οικοπέδου.</p>
+        </article>
+        <article class="pillar">
+          <span class="num">A</span>
+          <h3>Κατασκευή</h3>
+          <p>Επίβλεψη και κατασκευή με δικά μας συνεργεία, ενεργειακά κουφώματα, θερμομόνωση και σύγχρονες εγκαταστάσεις. Παράδοση με το κλειδί στο χέρι.</p>
+        </article>
+        <article class="pillar">
+          <span class="num">F</span>
+          <h3>Πώληση &amp; αντιπαροχή</h3>
+          <p>Ο ιδιοκτήτης δίνει το οικόπεδο και παίρνει έτοιμα διαμερίσματα. Εμείς αναλαμβάνουμε συμβόλαια, άδεια, κατασκευή και τη διάθεση των υπόλοιπων διαμερισμάτων.</p>
+        </article>
+      </div>
+
+      <div class="process">
+        <div>
+          <span class="eyebrow">Αντιπαροχή</span>
+          <h3>Πώς γίνεται, βήμα βήμα</h3>
+          <p>Έχεις οικόπεδο ή παλιό σπίτι σε κεντρικό σημείο της Ξάνθης; Η αντιπαροχή είναι ο τρόπος να αποκτήσεις καινούργια διαμερίσματα χωρίς να βάλεις χρήματα.</p>
+        </div>
+        <ol class="steps">
+          <li><div><strong>Αξιολόγηση οικοπέδου</strong><span>Ελέγχουμε όρους δόμησης, κάλυψη και ύψος και υπολογίζουμε τι μπορεί να χτιστεί.</span></div></li>
+          <li><div><strong>Πρόταση &amp; συμφωνία</strong><span>Προμελέτη, ποσοστά αντιπαροχής και ιδιωτικό συμφωνητικό με ξεκάθαρους όρους.</span></div></li>
+          <li><div><strong>Συμβόλαια &amp; άδεια</strong><span>Εργολαβικό και προσύμφωνο στον συμβολαιογράφο, έκδοση οικοδομικής άδειας.</span></div></li>
+          <li><div><strong>Κατεδάφιση &amp; κατασκευή</strong><span>Κατεδάφιση υφισταμένων και ανέγερση της νέας οικοδομής με τακτική ενημέρωση προόδου.</span></div></li>
+          <li><div><strong>Παράδοση</strong><span>Παραλαμβάνεις τα διαμερίσματά σου έτοιμα για χρήση, με όλα τα πιστοποιητικά.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="band band-alt" aria-labelledby="projects-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Έργα</span>
+        <h2 id="projects-title">Οι οικοδομές μας στην Ξάνθη</h2>
+        <p class="lead">Δύο νέες πολυώροφες οικοδομές σε κεντρικά οικόπεδα της πόλης, και οι δύο σε φάση μελέτης και προετοιμασίας άδειας.</p>
+      </div>
+      <div class="projects">
+        <article class="project">
+          <div class="project-visual" aria-hidden="true">
+            <svg class="skyline" viewBox="0 0 640 360" preserveAspectRatio="xMidYMax slice"><rect width="640" height="360" fill="#100F0D"/><g fill="#1E1C19"><rect x="40" y="150" width="120" height="210"/><rect x="480" y="120" width="130" height="240"/></g><g fill="#E23F25"><rect x="200" y="90" width="240" height="270"/></g><g fill="#100F0D"><rect x="222" y="112" width="40" height="28"/><rect x="300" y="112" width="40" height="28"/><rect x="378" y="112" width="40" height="28"/><rect x="222" y="162" width="40" height="28"/><rect x="300" y="162" width="40" height="28"/><rect x="378" y="162" width="40" height="28"/><rect x="222" y="212" width="40" height="28"/><rect x="300" y="212" width="40" height="28"/><rect x="378" y="212" width="40" height="28"/><rect x="222" y="262" width="40" height="28"/><rect x="300" y="262" width="40" height="28"/><rect x="378" y="262" width="40" height="28"/><rect x="300" y="312" width="40" height="48"/></g></svg>
+            <span class="chip">Σε μελέτη</span>
+          </div>
+          <div class="project-body">
+            <h3>Οδυσσέως</h3>
+            <p class="addr">Οδυσσέως 40–42 &amp; Ζαλόγγου, Ξάνθη</p>
+            <p>Συνένωση δύο οικοπέδων σε γωνιακή θέση, κατεδάφιση των παλαιών κτισμάτων και ανέγερση νέας πολυώροφης οικοδομής με διαμερίσματα 1 έως 3 υπνοδωματίων.</p>
+            <div class="facts">
+              <div class="fact"><small>Τύπος</small><span>Πολυώροφη κατοικία</span></div>
+              <div class="fact"><small>Στάδιο</small><span>Προμελέτη &amp; άδεια</span></div>
+              <div class="fact"><small>Σχήμα</small><span>Αντιπαροχή</span></div>
+            </div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-visual" aria-hidden="true">
+            <svg class="skyline" viewBox="0 0 640 360" preserveAspectRatio="xMidYMax slice"><rect width="640" height="360" fill="#100F0D"/><g fill="#1E1C19"><rect x="30" y="200" width="150" height="160"/><rect x="470" y="170" width="140" height="190"/></g><g fill="#E23F25"><rect x="210" y="40" width="220" height="320"/></g><g fill="#100F0D"><rect x="232" y="62" width="36" height="26"/><rect x="302" y="62" width="36" height="26"/><rect x="372" y="62" width="36" height="26"/><rect x="232" y="108" width="36" height="26"/><rect x="302" y="108" width="36" height="26"/><rect x="372" y="108" width="36" height="26"/><rect x="232" y="154" width="36" height="26"/><rect x="302" y="154" width="36" height="26"/><rect x="372" y="154" width="36" height="26"/><rect x="232" y="200" width="36" height="26"/><rect x="302" y="200" width="36" height="26"/><rect x="372" y="200" width="36" height="26"/><rect x="232" y="246" width="36" height="26"/><rect x="302" y="246" width="36" height="26"/><rect x="372" y="246" width="36" height="26"/><rect x="232" y="292" width="36" height="26"/><rect x="372" y="292" width="36" height="26"/><rect x="302" y="312" width="36" height="48"/></g></svg>
+            <span class="chip">Σε μελέτη</span>
+          </div>
+          <div class="project-body">
+            <h3>Τραπεζούντος</h3>
+            <p class="addr">Τραπεζούντος 12–14, Ξάνθη</p>
+            <p>Νέα εξαώροφη οικοδομή με διαμερίσματα δύο υπνοδωματίων στους τυπικούς ορόφους και μεζονέτες στους τελευταίους. Μελετώνται εναλλακτικές λύσεις κατόψεων και κοινόχρηστων χώρων.</p>
+            <div class="facts">
+              <div class="fact"><small>Τύπος</small><span>Πολυώροφη κατοικία</span></div>
+              <div class="fact"><small>Στάδιο</small><span>Προμελέτη</span></div>
+              <div class="fact"><small>Σχήμα</small><span>Αντιπαροχή</span></div>
+            </div>
+          </div>
+        </article>
+        <article class="project project-plot">
+          <span class="eyebrow">Αναζητούμε οικόπεδα</span>
+          <h3>Έχεις οικόπεδο στην Ξάνθη;</h3>
+          <p>Ψάχνουμε οικόπεδα και παλιές κατοικίες για αντιπαροχή σε κεντρικές περιοχές της πόλης. Στείλε μας τη διεύθυνση και θα σου απαντήσουμε με μια πρώτη εκτίμηση του τι μπορεί να χτιστεί.</p>
+          <div class="cta"><a class="btn btn-orange" href="#contact">Στείλε τα στοιχεία του οικοπέδου</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="configurator" class="band" aria-labelledby="config-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Χτίσε το σπίτι σου</span>
+        <h2 id="config-title">Διαμόρφωσε το διαμέρισμά σου σε 4 βήματα</h2>
+        <p class="lead">Διάλεξε μέγεθος, πακέτο εξοπλισμού, όροφο και οικοδομή. Η τιμή υπολογίζεται ανά τετραγωνικό και προσαρμόζεται ζωντανά.</p>
+      </div>
+
+      <div class="config">
+        <div class="config-main">
+          <div class="stepper" id="stepper" role="tablist" aria-label="Βήματα">
+            <button type="button" data-step="1" class="active" role="tab" aria-selected="true"><i></i><span>1 · Μέγεθος</span></button>
+            <button type="button" data-step="2" role="tab" aria-selected="false" disabled><i></i><span>2 · Πακέτο</span></button>
+            <button type="button" data-step="3" role="tab" aria-selected="false" disabled><i></i><span>3 · Όροφος</span></button>
+            <button type="button" data-step="4" role="tab" aria-selected="false" disabled><i></i><span>4 · Οικοδομή</span></button>
+            <button type="button" data-step="5" role="tab" aria-selected="false" disabled><i></i><span>Αποτέλεσμα</span></button>
+          </div>
+
+          <div class="step active" data-step="1">
+            <div class="step-title"><h3>Επίλεξε μέγεθος</h3><p>Πόσα υπνοδωμάτια χρειάζεσαι;</p></div>
+            <div class="opts" id="opts-size"></div>
+          </div>
+          <div class="step" data-step="2">
+            <div class="step-title"><h3>Επίλεξε πακέτο εξοπλισμού</h3><p>Τι επίπεδο φινιρίσματος θέλεις;</p></div>
+            <div class="opts" id="opts-package"></div>
+          </div>
+          <div class="step" data-step="3">
+            <div class="step-title"><h3>Επίλεξε όροφο</h3><p>Ψηλότερα σημαίνει περισσότερο φως και θέα.</p></div>
+            <div class="opts" id="opts-floor"></div>
+          </div>
+          <div class="step" data-step="4">
+            <div class="step-title"><h3>Επίλεξε οικοδομή</h3><p>Σε ποια από τις οικοδομές μας θέλεις να μείνεις;</p></div>
+            <div class="opts" id="opts-building"></div>
+          </div>
+          <div class="step" data-step="5">
+            <div class="step-title"><h3>Το σπίτι σου</h3><p>Η σύνοψη των επιλογών σου και η ενδεικτική κοστολόγηση.</p></div>
+            <div class="result" id="result"></div>
+          </div>
+
+          <div class="config-nav" id="config-nav">
+            <button type="button" class="btn btn-ghost" id="btn-back">← Πίσω</button>
+            <span class="count" id="step-count">Βήμα 1 από 4</span>
+            <button type="button" class="btn btn-orange" id="btn-next" disabled>Επόμενο →</button>
+          </div>
+        </div>
+
+        <aside class="summary" aria-live="polite" id="summary">
+          <h4>Υπολογισμός τιμής</h4>
+          <div id="summary-rows"></div>
+          <div class="total">
+            <small>Τιμή ανά τ.μ.</small>
+            <span class="big" id="sum-sqm">—</span>
+          </div>
+          <div class="est">
+            <small>Ενδεικτικό σύνολο <span id="sum-avg"></span></small>
+            <b id="sum-total">—</b>
+          </div>
+          <p class="note">Ενδεικτικές τιμές για παρουσίαση. Η τελική προσφορά διαμορφώνεται μετά από επικοινωνία και εξαρτάται από το ακριβές εμβαδόν και τις επιλογές σου.</p>
+        </aside>
+      </div>
+      <p class="disclaimer">Οι τιμές και τα πακέτα του εργαλείου είναι ενδεικτικά παραδείγματα για την παρουσίαση της σελίδας και δεν αποτελούν προσφορά.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="band band-alt" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <div class="sec-head">
+            <span class="eyebrow">Επικοινωνία</span>
+            <h2 id="contact-title">Ας μιλήσουμε για το σπίτι σου</h2>
+            <p class="lead">Για διαμέρισμα, για οικόπεδο προς αντιπαροχή ή για μια πρώτη ενημέρωση. Απαντάμε σε όλα τα μηνύματα.</p>
+          </div>
+          <div class="contact-list">
+            <div class="contact-item">
+              <div><small>Τηλέφωνο</small><div class="val"><a href="tel:+302541200831">+30 2541 200 831</a></div></div>
+              <button type="button" class="copy" data-copy="+30 2541 200 831">Αντιγραφή</button>
+            </div>
+            <div class="contact-item">
+              <div><small>Email</small><div class="val"><a href="mailto:info@thetafproject.gr">info@thetafproject.gr</a></div></div>
+              <button type="button" class="copy" data-copy="info@thetafproject.gr">Αντιγραφή</button>
+            </div>
+            <div class="contact-item">
+              <div><small>Ιστοσελίδα</small><div class="val"><a href="https://www.thetafproject.gr">www.thetafproject.gr</a></div></div>
+              <button type="button" class="copy" data-copy="https://www.thetafproject.gr">Αντιγραφή</button>
+            </div>
+            <div class="contact-item">
+              <div><small>Έδρα</small><div class="val">Ξάνθη</div></div>
+              <span></span>
+            </div>
+          </div>
+        </div>
+
+        <form class="form" id="contact-form" novalidate>
+          <h3>Στείλε μας μήνυμα</h3>
+          <div class="form-row">
+            <div class="field"><label for="f-name">Ονοματεπώνυμο</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="f-phone">Τηλέφωνο</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+          </div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="f-msg">Μήνυμα</label><textarea id="f-msg" name="message" placeholder="Π.χ. ενδιαφέρομαι για διαμέρισμα 2 υπνοδωματίων, ή έχω οικόπεδο στην οδό…" required></textarea></div>
+          <div class="form-foot">
+            <button type="submit" class="btn btn-orange">Ετοίμασε το μήνυμα</button>
+            <p class="hint">Το μήνυμα ετοιμάζεται εδώ και το στέλνεις από το email σου στο info@thetafproject.gr.</p>
+          </div>
+          <div class="sent" id="sent" hidden>
+            <strong>Το μήνυμά σου είναι έτοιμο.</strong>
+            <pre id="sent-text"></pre>
+            <div class="actions">
+              <button type="button" class="btn btn-black" id="btn-copy-msg">Αντιγραφή μηνύματος</button>
+              <a class="btn btn-ghost" id="mail-link" href="mailto:info@thetafproject.gr">Άνοιγμα στο email</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="TAF"><svg role="img" aria-label="TAF – Three-Minded Construction" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4069.69 1271.72">
+<g fill="currentColor" transform="translate(78.26,78.26)">
+<path d="M 1623.523 1115.191 L 1346.941 1115.191 L 1346.941 344.574 L 1623.523 344.574 Z M 1623.523 1115.191"/>
+<path d="M 497.863 501.102 L 0.000 501.102 L 0.000 224.520 L 497.863 224.520 Z M 497.863 501.102"/>
+<path d="M 1346.941 343.738 L 1346.941 0.000 L 497.863 501.969 L 497.863 814.367 Z M 1346.941 343.738"/>
+<path d="M 2242.770 86.773 L 2101.120 86.773 L 2101.120 478.544 L 2010.516 478.544 L 2010.516 86.773 L 1868.866 86.773 L 1868.866 0.000 L 2242.770 0.000 Z M 2242.770 86.773"/>
+<path d="M 2435.472 304.993 L 2552.878 304.993 L 2496.727 109.744 L 2491.622 109.744 Z M 2445.042 0.000 L 2543.308 0.000 L 2711.755 478.544 L 2614.128 478.544 L 2584.140 391.766 L 2404.210 391.766 L 2374.217 478.544 L 2276.595 478.544 Z M 2445.042 0.000"/>
+<path d="M 3166.684 86.773 L 2917.203 86.773 L 2917.203 195.244 L 3123.300 195.244 L 3123.300 282.022 L 2917.203 282.022 L 2917.203 478.544 L 2826.599 478.544 L 2826.599 0.000 L 3166.684 0.000 Z M 3166.684 86.773"/>
+<path d="M 1868.866 646.035 L 2010.245 646.035 L 2010.245 667.594 L 1951.247 667.594 L 1951.247 815.520 L 1926.895 815.520 L 1926.895 667.594 L 1868.866 667.594 Z M 1868.866 646.035"/>
+<path d="M 2165.375 646.276 L 2189.605 646.276 L 2189.605 815.520 L 2165.375 815.520 L 2165.375 741.862 L 2070.271 741.862 L 2070.271 815.520 L 2046.042 815.520 L 2046.042 646.276 L 2070.271 646.276 L 2070.271 719.447 L 2165.375 719.447 Z M 2165.375 646.276"/>
+<path d="M 2272.046 666.871 L 2264.777 666.871 L 2264.777 720.298 L 2273.983 720.298 C 2286.258 720.298 2294.677 719.245 2299.241 717.145 C 2303.804 715.045 2307.360 711.878 2309.902 707.634 C 2312.445 703.395 2313.719 698.571 2313.719 693.162 C 2313.719 687.831 2312.302 683.002 2309.479 678.684 C 2306.652 674.361 2302.673 671.312 2297.544 669.537 C 2292.415 667.761 2283.917 666.871 2272.046 666.871 M 2240.543 815.520 L 2240.543 646.276 L 2282.948 646.276 C 2300.067 646.276 2313.660 650.515 2323.711 658.998 C 2333.768 667.476 2338.794 678.944 2338.794 693.403 C 2338.794 703.258 2336.330 711.775 2331.408 718.965 C 2326.480 726.155 2319.413 731.525 2310.202 735.075 C 2315.617 738.631 2320.903 743.475 2326.077 749.612 C 2331.245 755.754 2338.514 766.455 2347.882 781.715 C 2353.778 791.329 2358.499 798.558 2362.055 803.402 L 2371.020 815.520 L 2342.187 815.520 L 2334.806 804.366 C 2334.565 803.963 2334.083 803.274 2333.355 802.306 L 2328.634 795.637 L 2321.135 783.279 L 2313.030 770.065 C 2308.029 763.111 2303.445 757.584 2299.280 753.473 C 2295.115 749.361 2291.358 746.396 2287.999 744.581 C 2284.645 742.772 2279.004 741.862 2271.082 741.862 L 2264.777 741.862 L 2264.777 815.520 Z M 2240.543 815.520"/>
+<path d="M 2402.577 646.276 L 2498.527 646.276 L 2498.527 667.840 L 2426.812 667.840 L 2426.812 719.447 L 2496.107 719.447 L 2496.107 741.134 L 2426.812 741.134 L 2426.812 793.714 L 2500.828 793.714 L 2500.828 815.274 L 2402.577 815.274 Z M 2402.577 646.276"/>
+<path d="M 2539.536 646.276 L 2635.486 646.276 L 2635.486 667.840 L 2563.766 667.840 L 2563.766 719.447 L 2633.061 719.447 L 2633.061 741.134 L 2563.766 741.134 L 2563.766 793.714 L 2637.787 793.714 L 2637.787 815.274 L 2539.536 815.274 Z M 2539.536 646.276"/>
+<path d="M 2749.607 748.766 L 2809.937 748.766 L 2809.937 772.391 L 2749.607 772.391 Z M 2749.607 748.766"/>
+<path d="M 3067.858 646.276 L 3090.514 646.276 L 3090.514 815.520 L 3066.161 815.520 L 3066.161 683.833 L 3014.131 749.253 L 3009.646 749.253 L 2957.007 683.833 L 2957.007 815.520 L 2932.777 815.520 L 2932.777 646.276 L 2955.719 646.276 L 3011.953 715.783 Z M 3067.858 646.276"/>
+<path d="M 3140.124 646.276 L 3164.353 646.276 L 3164.353 815.520 L 3140.124 815.520 Z M 3140.124 646.276"/>
+<path d="M 3349.285 646.276 L 3372.304 646.276 L 3372.304 815.520 L 3351.463 815.520 L 3238.311 685.175 L 3238.311 815.520 L 3215.537 815.520 L 3215.537 646.276 L 3235.164 646.276 L 3349.285 777.727 Z M 3349.285 646.276"/>
+<path d="M 3476.187 667.840 L 3445.898 667.840 L 3445.898 793.709 L 3476.914 793.709 C 3489.027 793.709 3498.434 792.883 3505.137 791.226 C 3511.845 789.574 3517.437 787.474 3521.921 784.931 C 3526.402 782.384 3530.498 779.256 3534.216 775.538 C 3546.166 763.426 3552.146 748.122 3552.146 729.627 C 3552.146 711.451 3546.009 696.633 3533.729 685.165 C 3529.210 680.882 3524.016 677.371 3518.164 674.622 C 3512.307 671.878 3506.755 670.063 3501.503 669.173 C 3496.256 668.283 3487.817 667.840 3476.187 667.840 M 3421.669 815.274 L 3421.669 646.276 L 3478.729 646.276 C 3501.749 646.276 3519.959 649.728 3533.370 656.633 C 3546.776 663.537 3557.432 673.697 3565.350 687.103 C 3573.263 700.509 3577.221 715.129 3577.221 730.959 C 3577.221 742.265 3575.043 753.089 3570.681 763.426 C 3566.319 773.763 3560.098 782.851 3552.023 790.685 C 3543.786 798.760 3534.216 804.858 3523.313 808.974 C 3516.930 811.482 3511.078 813.154 3505.747 814.005 C 3500.416 814.851 3490.241 815.274 3475.218 815.274 Z M 3421.669 815.274"/>
+<path d="M 3620.409 646.276 L 3716.359 646.276 L 3716.359 667.840 L 3644.643 667.840 L 3644.643 719.447 L 3713.939 719.447 L 3713.939 741.134 L 3644.643 741.134 L 3644.643 793.714 L 3718.660 793.714 L 3718.660 815.274 L 3620.409 815.274 Z M 3620.409 646.276"/>
+<path d="M 3812.127 667.840 L 3781.838 667.840 L 3781.838 793.709 L 3812.854 793.709 C 3824.967 793.709 3834.374 792.883 3841.082 791.226 C 3847.785 789.574 3853.377 787.474 3857.862 784.931 C 3862.342 782.384 3866.443 779.256 3870.156 775.538 C 3882.111 763.426 3888.086 748.122 3888.086 729.627 C 3888.086 711.451 3881.949 696.633 3869.674 685.165 C 3865.150 680.882 3859.961 677.371 3854.104 674.622 C 3848.247 671.878 3842.695 670.063 3837.448 669.173 C 3832.196 668.283 3823.757 667.840 3812.127 667.840 M 3757.609 815.274 L 3757.609 646.276 L 3814.674 646.276 C 3837.689 646.276 3855.899 649.728 3869.310 656.633 C 3882.716 663.537 3893.377 673.697 3901.295 687.103 C 3909.208 700.509 3913.166 715.129 3913.166 730.959 C 3913.166 742.265 3910.983 753.089 3906.621 763.426 C 3902.259 773.763 3896.043 782.851 3887.968 790.685 C 3879.726 798.760 3870.156 804.858 3859.253 808.974 C 3852.875 811.482 3847.018 813.154 3841.687 814.005 C 3836.356 814.851 3826.182 815.274 3811.158 815.274 Z M 3757.609 815.274"/>
+<path d="M 2029.144 1074.000 L 2029.144 1100.650 C 2011.376 1110.343 1990.860 1115.191 1967.599 1115.191 C 1948.700 1115.191 1932.668 1111.395 1919.503 1103.802 C 1906.339 1096.214 1895.923 1085.749 1888.246 1072.427 C 1880.575 1059.100 1876.739 1044.681 1876.739 1029.175 C 1876.739 1004.542 1885.522 983.824 1903.088 967.025 C 1920.654 950.226 1942.322 941.827 1968.086 941.827 C 1985.853 941.827 2005.598 946.474 2027.325 955.759 L 2027.325 981.808 C 2007.536 970.502 1988.194 964.847 1969.295 964.847 C 1949.915 964.847 1933.819 970.964 1921.018 983.200 C 1908.217 995.435 1901.819 1010.758 1901.819 1029.175 C 1901.819 1047.750 1908.114 1063.014 1920.718 1074.969 C 1933.312 1086.924 1949.428 1092.899 1969.054 1092.899 C 1989.566 1092.899 2009.596 1086.600 2029.144 1074.000"/>
+<path d="M 2153.878 964.601 C 2134.512 964.601 2118.598 970.659 2106.131 982.777 C 2093.665 994.889 2087.429 1010.355 2087.429 1029.175 C 2087.429 1047.430 2093.680 1062.611 2106.190 1074.723 C 2118.696 1086.841 2134.349 1092.899 2153.150 1092.899 C 2172.029 1092.899 2187.785 1086.718 2200.419 1074.359 C 2213.043 1062.006 2219.357 1046.619 2219.357 1028.207 C 2219.357 1010.277 2213.043 995.194 2200.419 982.959 C 2187.785 970.723 2172.275 964.601 2153.878 964.601 M 2152.909 941.586 C 2179.056 941.586 2200.832 949.862 2218.226 966.420 C 2235.615 982.978 2244.315 1003.736 2244.315 1028.689 C 2244.315 1053.646 2235.536 1074.300 2217.980 1090.657 C 2200.429 1107.013 2178.294 1115.191 2151.576 1115.191 C 2126.073 1115.191 2104.823 1107.013 2087.837 1090.657 C 2070.847 1074.300 2062.354 1053.808 2062.354 1029.175 C 2062.354 1003.898 2070.906 982.978 2088.019 966.420 C 2105.128 949.862 2126.756 941.586 2152.909 941.586"/>
+<path d="M 2419.509 944.010 L 2442.524 944.010 L 2442.524 1113.249 L 2421.687 1113.249 L 2308.535 982.909 L 2308.535 1113.249 L 2285.761 1113.249 L 2285.761 944.010 L 2305.388 944.010 L 2419.509 1075.461 Z M 2419.509 944.010"/>
+<path d="M 2531.584 1042.340 L 2513.167 1031.152 C 2501.615 1024.100 2493.403 1017.161 2488.514 1010.336 C 2483.626 1003.515 2481.187 995.656 2481.187 986.775 C 2481.187 973.448 2485.810 962.624 2495.055 954.308 C 2504.305 945.987 2516.319 941.827 2531.097 941.827 C 2545.231 941.827 2558.194 945.795 2569.986 953.728 L 2569.986 981.232 C 2557.790 969.499 2544.670 963.637 2530.615 963.637 C 2522.698 963.637 2516.196 965.466 2511.111 969.125 C 2506.022 972.789 2503.479 977.470 2503.479 983.180 C 2503.479 988.250 2505.353 993.001 2509.100 997.422 C 2512.847 1001.848 2518.872 1006.495 2527.178 1011.363 L 2545.688 1022.310 C 2566.328 1034.639 2576.650 1050.336 2576.650 1069.397 C 2576.650 1082.966 2572.106 1093.986 2563.023 1102.469 C 2553.935 1110.947 2542.123 1115.191 2527.586 1115.191 C 2510.865 1115.191 2495.640 1110.052 2481.915 1099.774 L 2481.915 1069.004 C 2494.996 1085.582 2510.138 1093.868 2527.345 1093.868 C 2534.933 1093.868 2541.257 1091.754 2546.303 1087.529 C 2551.348 1083.305 2553.876 1078.013 2553.876 1071.655 C 2553.876 1061.352 2546.440 1051.585 2531.584 1042.340"/>
+<path d="M 2599.803 943.764 L 2741.183 943.764 L 2741.183 965.328 L 2682.184 965.328 L 2682.184 1113.254 L 2657.832 1113.254 L 2657.832 965.328 L 2599.803 965.328 Z M 2599.803 943.764"/>
+<path d="M 2807.223 964.601 L 2799.954 964.601 L 2799.954 1018.027 L 2809.160 1018.027 C 2821.435 1018.027 2829.854 1016.979 2834.418 1014.880 C 2838.981 1012.780 2842.537 1009.608 2845.079 1005.369 C 2847.622 1001.130 2848.896 996.305 2848.896 990.891 C 2848.896 985.560 2847.479 980.736 2844.656 976.413 C 2841.829 972.095 2837.850 969.046 2832.721 967.266 C 2827.592 965.491 2819.094 964.601 2807.223 964.601 M 2775.725 1113.249 L 2775.725 944.010 L 2818.125 944.010 C 2835.249 944.010 2848.837 948.249 2858.888 956.727 C 2868.945 965.210 2873.976 976.679 2873.976 991.137 C 2873.976 1000.987 2871.507 1009.509 2866.585 1016.694 C 2861.657 1023.884 2854.590 1029.254 2845.384 1032.810 C 2850.794 1036.365 2856.085 1041.209 2861.254 1047.346 C 2866.422 1053.484 2873.691 1064.185 2883.059 1079.449 C 2888.955 1089.064 2893.676 1096.288 2897.232 1101.137 L 2906.197 1113.249 L 2877.364 1113.249 L 2869.983 1102.100 C 2869.742 1101.697 2869.260 1101.009 2868.532 1100.040 L 2863.816 1093.371 L 2856.312 1081.008 L 2848.207 1067.794 C 2843.206 1060.846 2838.622 1055.318 2834.457 1051.207 C 2830.297 1047.091 2826.535 1044.130 2823.181 1042.316 C 2819.822 1040.501 2814.186 1039.591 2806.259 1039.591 L 2799.954 1039.591 L 2799.954 1113.249 Z M 2775.725 1113.249"/>
+<path d="M 3046.136 944.010 L 3070.489 944.010 L 3070.489 1040.078 C 3070.489 1053.080 3069.539 1062.896 3067.641 1069.516 C 3065.743 1076.140 3063.402 1081.652 3060.614 1086.054 C 3057.830 1090.455 3054.417 1094.394 3050.380 1097.866 C 3036.969 1109.413 3019.442 1115.191 2997.800 1115.191 C 2975.748 1115.191 2958.064 1109.457 2944.737 1097.984 C 2940.700 1094.434 2937.287 1090.455 2934.499 1086.054 C 2931.715 1081.652 2929.414 1076.263 2927.594 1069.879 C 2925.779 1063.501 2924.870 1053.484 2924.870 1039.837 L 2924.870 944.010 L 2949.222 944.010 L 2949.222 1040.078 C 2949.222 1055.992 2951.037 1067.052 2954.671 1073.273 C 2958.305 1079.494 2963.838 1084.480 2971.268 1088.232 C 2978.699 1091.990 2987.462 1093.868 2997.559 1093.868 C 3011.933 1093.868 3023.642 1090.111 3032.691 1082.602 C 3037.456 1078.564 3040.889 1073.799 3042.989 1068.306 C 3045.088 1062.813 3046.136 1053.405 3046.136 1040.078 Z M 3046.136 944.010"/>
+<path d="M 3260.824 1074.000 L 3260.824 1100.650 C 3243.057 1110.343 3222.545 1115.191 3199.284 1115.191 C 3180.385 1115.191 3164.348 1111.395 3151.189 1103.802 C 3138.019 1096.214 3127.603 1085.749 3119.931 1072.427 C 3112.255 1059.100 3108.424 1044.681 3108.424 1029.175 C 3108.424 1004.542 3117.207 983.824 3134.773 967.025 C 3152.339 950.226 3174.002 941.827 3199.766 941.827 C 3217.534 941.827 3237.283 946.474 3259.010 955.759 L 3259.010 981.808 C 3239.221 970.502 3219.879 964.847 3200.981 964.847 C 3181.595 964.847 3165.499 970.964 3152.698 983.200 C 3139.897 995.435 3133.499 1010.758 3133.499 1029.175 C 3133.499 1047.750 3139.799 1063.014 3152.398 1074.969 C 3164.997 1086.924 3181.108 1092.899 3200.735 1092.899 C 3221.251 1092.899 3241.281 1086.600 3260.824 1074.000"/>
+<path d="M 3287.129 943.764 L 3428.509 943.764 L 3428.509 965.328 L 3369.506 965.328 L 3369.506 1113.254 L 3345.159 1113.254 L 3345.159 965.328 L 3287.129 965.328 Z M 3287.129 943.764"/>
+<path d="M 3462.564 944.005 L 3486.794 944.005 L 3486.794 1113.249 L 3462.564 1113.249 Z M 3462.564 944.005"/>
+<path d="M 3619.283 964.601 C 3599.917 964.601 3583.998 970.659 3571.532 982.777 C 3559.065 994.889 3552.834 1010.355 3552.834 1029.175 C 3552.834 1047.430 3559.085 1062.611 3571.591 1074.723 C 3584.101 1086.841 3599.754 1092.899 3618.555 1092.899 C 3637.434 1092.899 3653.190 1086.718 3665.819 1074.359 C 3678.448 1062.006 3684.762 1046.619 3684.762 1028.207 C 3684.762 1010.277 3678.448 995.194 3665.819 982.959 C 3653.190 970.723 3637.675 964.601 3619.283 964.601 M 3618.314 941.586 C 3644.462 941.586 3666.232 949.862 3683.626 966.420 C 3701.020 982.978 3709.720 1003.736 3709.720 1028.689 C 3709.720 1053.646 3700.942 1074.300 3683.385 1090.657 C 3665.829 1107.013 3643.699 1115.191 3616.981 1115.191 C 3591.478 1115.191 3570.228 1107.013 3553.238 1090.657 C 3536.247 1074.300 3527.754 1053.808 3527.754 1029.175 C 3527.754 1003.898 3536.311 982.978 3553.420 966.420 C 3570.528 949.862 3592.161 941.586 3618.314 941.586"/>
+<path d="M 3884.909 944.010 L 3907.929 944.010 L 3907.929 1113.249 L 3887.093 1113.249 L 3773.940 982.909 L 3773.940 1113.249 L 3751.162 1113.249 L 3751.162 944.010 L 3770.788 944.010 L 3884.909 1075.461 Z M 3884.909 944.010"/>
+</g></svg></a>
+    <div>TAF · Three-Minded Construction · Ξάνθη</div>
+    <div><a href="https://www.thetafproject.gr">www.thetafproject.gr</a> · <a href="mailto:info@thetafproject.gr">info@thetafproject.gr</a> · <a href="tel:+302541200831">+30 2541 200 831</a></div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  // Example catalogue (same shape as the configurator's data model: sizes, packages, floors, buildings).
+  var SIZES=[
+    {id:'s1',code:'1Y',name:'Δυάρι',bedrooms:1,min_sqm:45,max_sqm:60,base_price_per_sqm:1900},
+    {id:'s2',code:'2Y',name:'Τριάρι',bedrooms:2,min_sqm:70,max_sqm:90,base_price_per_sqm:1850},
+    {id:'s3',code:'3Y',name:'Τεσσάρι / Μεζονέτα',bedrooms:3,min_sqm:100,max_sqm:130,base_price_per_sqm:1800}
+  ];
+  var PACKAGES=[
+    {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι',price_addition_per_sqm:0,features:['Κουφώματα αλουμινίου με θερμοδιακοπή','Ενεργειακοί υαλοπίνακες','Αντλία θερμότητας','Πλακίδια και πόρτες επιλογής']},
+    {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,features:['Ενδοδαπέδια θέρμανση','Ξύλινα δάπεδα στα υπνοδωμάτια','Κουζίνα με εντοιχιζόμενες συσκευές','Ηλεκτρικά ρολά']},
+    {id:'p3',code:'Signature',name:'Signature',description:'Υλικά και συστήματα κατά παραγγελία',price_addition_per_sqm:350,features:['Κουζίνα κατά παραγγελία','Μάρμαρο σε μπάνια','Smart home (φωτισμός, θέρμανση, ασφάλεια)','Συσκευές A+++']}
+  ];
+  var FLOORS=[
+    {id:'f1',level:1,name:'1ος όροφος',description:'Εύκολη πρόσβαση, μεγάλες βεράντες',price_addition_per_sqm:0},
+    {id:'f2',level:2,name:'2ος – 3ος όροφος',description:'Ήσυχοι τυπικοί όροφοι',price_addition_per_sqm:50},
+    {id:'f4',level:4,name:'4ος – 5ος όροφος',description:'Περισσότερο φως και θέα',price_addition_per_sqm:100},
+    {id:'f6',level:6,name:'Ρετιρέ',description:'Μεζονέτα με θέα στην πόλη',price_addition_per_sqm:200}
+  ];
+  var BUILDINGS=[
+    {id:'b1',name:'Οδυσσέως',address:'Οδυσσέως 40–42 & Ζαλόγγου, Ξάνθη',area:'Κέντρο Ξάνθης',completion_date:'Σε μελέτη',available_sizes:['1Y','2Y','3Y'],available_floors:[1,2,4]},
+    {id:'b2',name:'Τραπεζούντος',address:'Τραπεζούντος 12–14, Ξάνθη',area:'Κέντρο Ξάνθης',completion_date:'Σε μελέτη',available_sizes:['2Y','3Y'],available_floors:[1,2,4,6]}
+  ];
+  var sel={sizeId:null,packageId:null,floorId:null,buildingId:null};
+  var step=1, maxReached=1;
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var eur=function(n){return '€'+Math.round(n).toLocaleString('el-GR')};
+  var find=function(arr,id){for(var i=0;i<arr.length;i++) if(arr[i].id===id) return arr[i]; return null};
+
+  function calc(){
+    var s=find(SIZES,sel.sizeId), p=find(PACKAGES,sel.packageId), f=find(FLOORS,sel.floorId);
+    var base=s?s.base_price_per_sqm:0, pa=p?p.price_addition_per_sqm:0, fa=f?f.price_addition_per_sqm:0;
+    var per=base+pa+fa, avg=s?Math.round((s.min_sqm+s.max_sqm)/2):0;
+    return {s:s,p:p,f:f,b:find(BUILDINGS,sel.buildingId),base:base,pa:pa,fa:fa,per:per,avg:avg,total:per*avg};
+  }
+
+  function renderOptions(){
+    var c=calc();
+    $('#opts-size').innerHTML=SIZES.map(function(x){
+      return '<button type="button" class="opt" data-type="sizeId" data-id="'+x.id+'" aria-pressed="'+(sel.sizeId===x.id)+'">'
+        +'<span class="code">'+x.code+'</span><h4>'+x.name+'</h4>'
+        +'<div class="meta"><span>'+x.bedrooms+' υπνοδωμάτι'+(x.bedrooms>1?'α':'ο')+'</span><span>'+x.min_sqm+' – '+x.max_sqm+' τ.μ.</span></div>'
+        +'<div class="price">από <b>'+eur(x.base_price_per_sqm)+'/τ.μ.</b></div></button>';
+    }).join('');
+    $('#opts-package').innerHTML=PACKAGES.map(function(x){
+      return '<button type="button" class="opt" data-type="packageId" data-id="'+x.id+'" aria-pressed="'+(sel.packageId===x.id)+'">'
+        +'<span class="code">Πακέτο</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.description+'</span></div>'
+        +'<ul>'+x.features.map(function(f){return '<li>'+f+'</li>'}).join('')+'</ul>'
+        +'<div class="price">'+(x.price_addition_per_sqm?'<b>+'+eur(x.price_addition_per_sqm)+'/τ.μ.</b>':'<b>Χωρίς επιβάρυνση</b>')+'</div></button>';
+    }).join('');
+    $('#opts-floor').innerHTML=FLOORS.map(function(x){
+      return '<button type="button" class="opt" data-type="floorId" data-id="'+x.id+'" aria-pressed="'+(sel.floorId===x.id)+'">'
+        +'<span class="code">Όροφος</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.description+'</span></div>'
+        +'<div class="price">'+(x.price_addition_per_sqm?'<b>+'+eur(x.price_addition_per_sqm)+'/τ.μ.</b>':'<b>Χωρίς επιβάρυνση</b>')+'</div></button>';
+    }).join('');
+    $('#opts-building').innerHTML=BUILDINGS.map(function(x){
+      var sizeOk=!c.s||x.available_sizes.indexOf(c.s.code)>-1;
+      var floorOk=!c.f||x.available_floors.indexOf(c.f.level)>-1;
+      var ok=sizeOk&&floorOk;
+      var why=!sizeOk?'Δεν διατίθεται '+c.s.name.toLowerCase()+' σε αυτή την οικοδομή':(!floorOk?'Δεν υπάρχει '+c.f.name.toLowerCase()+' σε αυτή την οικοδομή':'');
+      return '<button type="button" class="opt" data-type="buildingId" data-id="'+x.id+'" aria-pressed="'+(sel.buildingId===x.id)+'"'+(ok?'':' disabled')+'>'
+        +'<span class="code">'+x.area+'</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.address+'</span><span>Παράδοση: '+x.completion_date+'</span>'
+        +'<span>Μεγέθη: '+x.available_sizes.join(', ')+' · Όροφοι έως '+Math.max.apply(null,x.available_floors)+'ο</span></div>'
+        +(ok?'':'<div class="price">'+why+'</div>')+'</button>';
+    }).join('');
+  }
+
+  function renderSummary(){
+    var c=calc();
+    var rows='';
+    rows+=c.s?'<div class="row"><span>Βάση · '+c.s.name+'</span><b>'+eur(c.base)+'/τ.μ.</b></div>':'<div class="row empty"><span>Μέγεθος</span><b>—</b></div>';
+    rows+=c.p?'<div class="row"><span>Πακέτο '+c.p.name+'</span><b>+'+eur(c.pa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Πακέτο</span><b>—</b></div>';
+    rows+=c.f?'<div class="row"><span>'+c.f.name+'</span><b>+'+eur(c.fa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Όροφος</span><b>—</b></div>';
+    rows+=c.b?'<div class="row"><span>Οικοδομή</span><b>'+c.b.name+'</b></div>':'<div class="row empty"><span>Οικοδομή</span><b>—</b></div>';
+    $('#summary-rows').innerHTML=rows;
+    $('#sum-sqm').textContent=c.s?eur(c.per):'—';
+    $('#sum-avg').textContent=c.s?'για ~'+c.avg+' τ.μ.':'';
+    $('#sum-total').textContent=c.s?eur(c.total):'—';
+  }
+
+  function renderResult(){
+    var c=calc();
+    if(!c.s||!c.p||!c.f||!c.b){ $('#result').innerHTML=''; return; }
+    $('#result').innerHTML=
+      '<div class="result-card"><h4>Σύνοψη επιλογών</h4><dl class="kv">'
+      +'<dt>Μέγεθος</dt><dd>'+c.s.name+'<small>'+c.s.bedrooms+' υπνοδωμάτι'+(c.s.bedrooms>1?'α':'ο')+' · '+c.s.min_sqm+' – '+c.s.max_sqm+' τ.μ.</small></dd>'
+      +'<dt>Πακέτο</dt><dd>'+c.p.name+'<small>'+c.p.description+'</small></dd>'
+      +'<dt>Όροφος</dt><dd>'+c.f.name+'<small>'+c.f.description+'</small></dd>'
+      +'<dt>Οικοδομή</dt><dd>'+c.b.name+'<small>'+c.b.address+'</small></dd>'
+      +'</dl></div>'
+      +'<div class="result-card result-price"><h4>Ενδεικτική κοστολόγηση</h4>'
+      +'<div class="row"><span>Βασική τιμή</span><span>'+eur(c.base)+'/τ.μ.</span></div>'
+      +'<div class="row"><span>Πακέτο '+c.p.name+'</span><span>+'+eur(c.pa)+'/τ.μ.</span></div>'
+      +'<div class="row"><span>'+c.f.name+'</span><span>+'+eur(c.fa)+'/τ.μ.</span></div>'
+      +'<div class="row sum"><span>Τιμή ανά τ.μ.</span><span>'+eur(c.per)+'</span></div>'
+      +'<div class="est"><small>Ενδεικτικό σύνολο για ~'+c.avg+' τ.μ.</small><b>'+eur(c.total)+'</b></div></div>'
+      +'<div class="result-actions"><button type="button" class="btn btn-black" id="btn-quote">Ζήτησε προσφορά για αυτό το σπίτι</button>'
+      +'<button type="button" class="btn btn-ghost" id="btn-reset">Νέα διαμόρφωση</button>'
+      +'<p class="hint">Η προσφορά θα συμπληρώσει τη φόρμα επικοινωνίας με τις επιλογές σου.</p></div>';
+    $('#btn-quote').addEventListener('click',function(){
+      var msg='Ενδιαφέρομαι για διαμέρισμα με τις εξής επιλογές:\n'
+        +'• Μέγεθος: '+c.s.name+' ('+c.s.min_sqm+'–'+c.s.max_sqm+' τ.μ.)\n'
+        +'• Πακέτο: '+c.p.name+'\n• Όροφος: '+c.f.name+'\n• Οικοδομή: '+c.b.name+', '+c.b.address+'\n'
+        +'Ενδεικτική τιμή: '+eur(c.per)+'/τ.μ. (~'+eur(c.total)+' για ~'+c.avg+' τ.μ.)\n\nΠαρακαλώ επικοινωνήστε μαζί μου για προσφορά.';
+      $('#f-msg').value=msg;
+      location.hash='#contact';
+      setTimeout(function(){ $('#f-name').focus(); },300);
+    });
+    $('#btn-reset').addEventListener('click',function(){
+      sel={sizeId:null,packageId:null,floorId:null,buildingId:null}; maxReached=1; go(1);
+    });
+  }
+
+  function canProceed(){
+    return [null,sel.sizeId,sel.packageId,sel.floorId,sel.buildingId][step]!==null;
+  }
+
+  var booted=false;
+  function go(n){
+    step=n; if(n>maxReached) maxReached=n;
+    if(booted){ var top=$('#stepper').getBoundingClientRect().top; if(top<80||top>window.innerHeight*0.6) $('#stepper').scrollIntoView({behavior:'smooth',block:'start'}); }
+    $$('.step').forEach(function(el){ el.classList.toggle('active', +el.getAttribute('data-step')===n); });
+    $$('#stepper button').forEach(function(b){
+      var k=+b.getAttribute('data-step');
+      b.classList.toggle('active',k===n); b.classList.toggle('done',k<n);
+      b.setAttribute('aria-selected',k===n?'true':'false');
+      b.disabled = k>maxReached;
+    });
+    $('#config-nav').hidden = n===5;
+    $('#summary').hidden = n===5;
+    $('#btn-back').disabled = n===1;
+    $('#step-count').textContent='Βήμα '+n+' από 4';
+    $('#btn-next').textContent = n===4?'Δες το αποτέλεσμα →':'Επόμενο →';
+    $('#btn-next').disabled=!canProceed();
+    renderOptions(); renderSummary(); if(n===5) renderResult();
+  }
+
+  document.addEventListener('click',function(e){
+    var opt=e.target.closest('.opt'); if(!opt||opt.disabled) return;
+    var type=opt.getAttribute('data-type'), id=opt.getAttribute('data-id');
+    sel[type]=id;
+    if(type==='sizeId'||type==='floorId'){
+      var c=calc();
+      if(c.b){
+        var sizeOk=!c.s||c.b.available_sizes.indexOf(c.s.code)>-1;
+        var floorOk=!c.f||c.b.available_floors.indexOf(c.f.level)>-1;
+        if(!sizeOk||!floorOk){ sel.buildingId=null; if(maxReached>4) maxReached=4; }
+      }
+    }
+    renderOptions(); renderSummary(); $('#btn-next').disabled=!canProceed();
+  });
+  $('#btn-next').addEventListener('click',function(){ if(canProceed()&&step<5) go(step+1); });
+  $('#btn-back').addEventListener('click',function(){ if(step>1) go(step-1); });
+  $('#stepper').addEventListener('click',function(e){ var b=e.target.closest('button'); if(b&&!b.disabled) go(+b.getAttribute('data-step')); });
+  go(1); booted=true;
+
+  // Contact helpers
+  var toastT;
+  function toast(msg){ var t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('show')},1800); }
+  function copyText(txt,fallbackEl){
+    var done=function(){toast('Αντιγράφηκε')};
+    var fail=function(){ if(fallbackEl){ var r=document.createRange(); r.selectNodeContents(fallbackEl); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r);} toast('Επίλεξε και αντίγραψε το κείμενο'); };
+    try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fail); } else fail(); }catch(err){ fail(); }
+  }
+  $$('.copy').forEach(function(b){ b.addEventListener('click',function(){ copyText(b.getAttribute('data-copy'), b.parentNode.querySelector('.val')); }); });
+  $('#contact-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=$('#f-name').value.trim(), phone=$('#f-phone').value.trim(), email=$('#f-email').value.trim(), msg=$('#f-msg').value.trim();
+    if(!name||!email||!msg){ toast('Συμπλήρωσε όνομα, email και μήνυμα'); return; }
+    var body=msg+'\n\n— '+name+(phone?'\nΤηλ: '+phone:'')+'\nEmail: '+email;
+    $('#sent-text').textContent=body;
+    $('#mail-link').href='mailto:info@thetafproject.gr?subject='+encodeURIComponent('Ενδιαφέρον για TAF – '+name)+'&body='+encodeURIComponent(body);
+    $('#sent').hidden=false;
+    $('#sent').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+  $('#btn-copy-msg').addEventListener('click',function(){ copyText($('#sent-text').textContent, $('#sent-text')); });
+})();
+</script>
+</body>
+</html>
