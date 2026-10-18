@@ -212,6 +212,17 @@ img,svg{max-width:100%}
 .result-actions .hint{font-size:14px;color:var(--muted);flex-basis:100%}
 @media (max-width:760px){.result{grid-template-columns:1fr}}
 .disclaimer{margin-top:22px;font-size:13px;color:var(--muted);max-width:70ch}
+.earlybird{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--black);color:var(--paper);padding:18px 22px;border-radius:var(--radius);margin-bottom:28px;cursor:pointer;border:2px solid transparent}
+.earlybird:has(input:checked){border-color:var(--orange)}
+.earlybird input{width:22px;height:22px;accent-color:var(--orange);margin:0;cursor:pointer}
+.eb-text{display:grid;gap:4px;min-width:0}
+.eb-text strong{color:var(--paper);font-size:17px}
+.eb-text span{font-size:14px;color:rgba(242,238,233,.75)}
+.eb-text b{color:var(--orange)}
+.eb-badge{background:var(--orange);color:var(--on-orange);font-weight:800;font-size:18px;padding:8px 12px;border-radius:var(--radius);font-variant-numeric:tabular-nums;white-space:nowrap}
+.summary .row.eb{color:var(--orange)}
+.summary .row.eb b{color:var(--orange)}
+@media (max-width:520px){.earlybird{grid-template-columns:auto minmax(0,1fr)}.eb-badge{grid-column:2;justify-self:start}}
 
 /* Contact */
 .contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:start}
@@ -227,8 +238,11 @@ img,svg{max-width:100%}
 .form h3{font-size:22px}
 .field{display:grid;gap:6px}
 .field label{font-size:13px;font-weight:700;color:var(--heading)}
-.field input,.field textarea{font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);color:var(--fg);width:100%;min-width:0}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(226,63,37,.2)}
+.field input,.field textarea,.field select{font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);color:var(--fg);width:100%;min-width:0}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(226,63,37,.2)}
+.sent.ok{border-top:0;background:var(--orange);color:var(--on-orange);padding:18px;border-radius:var(--radius)}
+.sent.ok strong{font-size:18px}
+.sent.ok p{color:var(--on-orange-soft)}
 .field textarea{min-height:140px;resize:vertical}
 .form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .form-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
@@ -305,7 +319,7 @@ img,svg{max-width:100%}
         <p class="lead">Τρία τεχνικά γραφεία, μία ομάδα. Μελετάμε, κατασκευάζουμε και πουλάμε διαμερίσματα με το σύστημα της αντιπαροχής, από το οικόπεδο μέχρι το κλειδί.</p>
         <div class="hero-actions">
           <a class="btn btn-black" href="#configurator">Χτίσε το σπίτι σου</a>
-          <a class="btn btn-outline-black" href="#projects">Δες τα έργα</a>
+          <a class="btn btn-outline-black" href="#contact">Ζήτησε διαμέρισμα</a>
         </div>
         <div class="hero-meta">
           <span>Μελέτη</span><span>Κατασκευή</span><span>Πώληση διαμερισμάτων με αντιπαροχή</span>
@@ -417,8 +431,17 @@ img,svg{max-width:100%}
       <div class="sec-head">
         <span class="eyebrow">Χτίσε το σπίτι σου</span>
         <h2 id="config-title">Διαμόρφωσε το διαμέρισμά σου σε 4 βήματα</h2>
-        <p class="lead">Διάλεξε μέγεθος, πακέτο εξοπλισμού, όροφο και οικοδομή. Η τιμή υπολογίζεται ανά τετραγωνικό και προσαρμόζεται ζωντανά.</p>
+        <p class="lead">Διάλεξε μέγεθος, πακέτο εξοπλισμού, όροφο και οικοδομή. Οι τιμές ξεκινούν από 2.000 €/τ.μ. και υπολογίζονται ζωντανά.</p>
       </div>
+
+      <label class="earlybird" for="eb">
+        <input type="checkbox" id="eb" name="earlybird">
+        <span class="eb-text">
+          <strong>Early bird: αγορά πριν τα σχέδια</strong>
+          <span>Όσοι κλείσουν διαμέρισμα πριν την έκδοση των τελικών σχεδίων παίρνουν επιπλέον έκπτωση <b>10%</b> στην τιμή ανά τ.μ. Τσέκαρε για να τη δεις στον υπολογισμό.</span>
+        </span>
+        <span class="eb-badge">−10%</span>
+      </label>
 
       <div class="config">
         <div class="config-main">
@@ -472,7 +495,7 @@ img,svg{max-width:100%}
           <p class="note">Ενδεικτικές τιμές για παρουσίαση. Η τελική προσφορά διαμορφώνεται μετά από επικοινωνία και εξαρτάται από το ακριβές εμβαδόν και τις επιλογές σου.</p>
         </aside>
       </div>
-      <p class="disclaimer">Οι τιμές και τα πακέτα του εργαλείου είναι ενδεικτικά παραδείγματα για την παρουσίαση της σελίδας και δεν αποτελούν προσφορά.</p>
+      <p class="disclaimer">Οι τιμές ξεκινούν από 2.000 €/τ.μ. Οι επιβαρύνσεις πακέτου και ορόφου είναι ενδεικτικές. Η τελική τιμή και η έκπτωση early bird επιβεβαιώνονται στην προσφορά, μετά από επικοινωνία.</p>
     </div>
   </section>
 
@@ -506,24 +529,38 @@ img,svg{max-width:100%}
         </div>
 
         <form class="form" id="contact-form" novalidate>
-          <h3>Στείλε μας μήνυμα</h3>
+          <h3>Στείλε αίτημα</h3>
           <div class="form-row">
             <div class="field"><label for="f-name">Ονοματεπώνυμο</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
             <div class="field"><label for="f-phone">Τηλέφωνο</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
           </div>
-          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="form-row">
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="f-topic">Θέμα</label>
+              <select id="f-topic" name="topic">
+                <option>Διαμέρισμα</option>
+                <option>Οικόπεδο για αντιπαροχή</option>
+                <option>Άλλο</option>
+              </select>
+            </div>
+          </div>
           <div class="field"><label for="f-msg">Μήνυμα</label><textarea id="f-msg" name="message" placeholder="Π.χ. ενδιαφέρομαι για διαμέρισμα 2 υπνοδωματίων, ή έχω οικόπεδο στην οδό…" required></textarea></div>
+          <input type="checkbox" name="botcheck" id="f-botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
           <div class="form-foot">
-            <button type="submit" class="btn btn-orange">Ετοίμασε το μήνυμα</button>
-            <p class="hint">Το μήνυμα ετοιμάζεται εδώ και το στέλνεις από το email σου στο info@thetafproject.gr.</p>
+            <button type="submit" class="btn btn-orange" id="btn-send">Στείλε το αίτημα</button>
+            <p class="hint" id="form-hint">Το αίτημα φτάνει στο info@thetafproject.gr και απαντάμε εντός 1–2 εργάσιμων ημερών.</p>
           </div>
           <div class="sent" id="sent" hidden>
-            <strong>Το μήνυμά σου είναι έτοιμο.</strong>
+            <strong id="sent-title">Το μήνυμά σου είναι έτοιμο.</strong>
             <pre id="sent-text"></pre>
-            <div class="actions">
+            <div class="actions" id="sent-actions">
               <button type="button" class="btn btn-black" id="btn-copy-msg">Αντιγραφή μηνύματος</button>
               <a class="btn btn-ghost" id="mail-link" href="mailto:info@thetafproject.gr">Άνοιγμα στο email</a>
             </div>
+          </div>
+          <div class="sent ok" id="sent-ok" hidden>
+            <strong>Το αίτημά σου στάλθηκε.</strong>
+            <p>Θα επικοινωνήσουμε μαζί σου στο τηλέφωνο ή στο email που έδωσες.</p>
           </div>
         </form>
       </div>
@@ -576,10 +613,14 @@ img,svg{max-width:100%}
 (function(){
   // Example catalogue (same shape as the configurator's data model: sizes, packages, floors, buildings).
   var SIZES=[
-    {id:'s1',code:'1Y',name:'Δυάρι',bedrooms:1,min_sqm:45,max_sqm:60,base_price_per_sqm:1900},
-    {id:'s2',code:'2Y',name:'Τριάρι',bedrooms:2,min_sqm:70,max_sqm:90,base_price_per_sqm:1850},
-    {id:'s3',code:'3Y',name:'Τεσσάρι / Μεζονέτα',bedrooms:3,min_sqm:100,max_sqm:130,base_price_per_sqm:1800}
+    {id:'s1',code:'1Y',name:'Δυάρι',bedrooms:1,min_sqm:45,max_sqm:60,base_price_per_sqm:2000},
+    {id:'s2',code:'2Y',name:'Τριάρι',bedrooms:2,min_sqm:70,max_sqm:90,base_price_per_sqm:2000},
+    {id:'s3',code:'3Y',name:'Τεσσάρι / Μεζονέτα',bedrooms:3,min_sqm:100,max_sqm:130,base_price_per_sqm:2000}
   ];
+  // Early bird: purchase before the final plans are issued → extra discount on the total price per sqm.
+  var EARLY_BIRD={pct:10,label:'Early bird · αγορά πριν τα σχέδια'};
+  // Form delivery: paste the Web3Forms access key for info@thetafproject.gr here. Empty = prepare the message for the visitor's own email app.
+  var FORM_ACCESS_KEY='';
   var PACKAGES=[
     {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι',price_addition_per_sqm:0,features:['Κουφώματα αλουμινίου με θερμοδιακοπή','Ενεργειακοί υαλοπίνακες','Αντλία θερμότητας','Πλακίδια και πόρτες επιλογής']},
     {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,features:['Ενδοδαπέδια θέρμανση','Ξύλινα δάπεδα στα υπνοδωμάτια','Κουζίνα με εντοιχιζόμενες συσκευές','Ηλεκτρικά ρολά']},
@@ -595,7 +636,7 @@ img,svg{max-width:100%}
     {id:'b1',name:'Οδυσσέως',address:'Οδυσσέως 40–42 & Ζαλόγγου, Ξάνθη',area:'Κέντρο Ξάνθης',completion_date:'Σε μελέτη',available_sizes:['1Y','2Y','3Y'],available_floors:[1,2,4]},
     {id:'b2',name:'Τραπεζούντος',address:'Τραπεζούντος 12–14, Ξάνθη',area:'Κέντρο Ξάνθης',completion_date:'Σε μελέτη',available_sizes:['2Y','3Y'],available_floors:[1,2,4,6]}
   ];
-  var sel={sizeId:null,packageId:null,floorId:null,buildingId:null};
+  var sel={sizeId:null,packageId:null,floorId:null,buildingId:null,earlyBird:false};
   var step=1, maxReached=1;
   var $=function(s,r){return (r||document).querySelector(s)};
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
@@ -605,8 +646,9 @@ img,svg{max-width:100%}
   function calc(){
     var s=find(SIZES,sel.sizeId), p=find(PACKAGES,sel.packageId), f=find(FLOORS,sel.floorId);
     var base=s?s.base_price_per_sqm:0, pa=p?p.price_addition_per_sqm:0, fa=f?f.price_addition_per_sqm:0;
-    var per=base+pa+fa, avg=s?Math.round((s.min_sqm+s.max_sqm)/2):0;
-    return {s:s,p:p,f:f,b:find(BUILDINGS,sel.buildingId),base:base,pa:pa,fa:fa,per:per,avg:avg,total:per*avg};
+    var list=base+pa+fa, avg=s?Math.round((s.min_sqm+s.max_sqm)/2):0;
+    var eb=sel.earlyBird, disc=eb?Math.round(list*EARLY_BIRD.pct/100):0, per=list-disc;
+    return {s:s,p:p,f:f,b:find(BUILDINGS,sel.buildingId),base:base,pa:pa,fa:fa,list:list,eb:eb,disc:disc,per:per,avg:avg,total:per*avg};
   }
 
   function renderOptions(){
@@ -647,6 +689,7 @@ img,svg{max-width:100%}
     rows+=c.p?'<div class="row"><span>Πακέτο '+c.p.name+'</span><b>+'+eur(c.pa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Πακέτο</span><b>—</b></div>';
     rows+=c.f?'<div class="row"><span>'+c.f.name+'</span><b>+'+eur(c.fa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Όροφος</span><b>—</b></div>';
     rows+=c.b?'<div class="row"><span>Οικοδομή</span><b>'+c.b.name+'</b></div>':'<div class="row empty"><span>Οικοδομή</span><b>—</b></div>';
+    if(c.s&&c.eb) rows+='<div class="row eb"><span>Early bird −'+EARLY_BIRD.pct+'%</span><b>−'+eur(c.disc)+'/τ.μ.</b></div>';
     $('#summary-rows').innerHTML=rows;
     $('#sum-sqm').textContent=c.s?eur(c.per):'—';
     $('#sum-avg').textContent=c.s?'για ~'+c.avg+' τ.μ.':'';
@@ -667,22 +710,25 @@ img,svg{max-width:100%}
       +'<div class="row"><span>Βασική τιμή</span><span>'+eur(c.base)+'/τ.μ.</span></div>'
       +'<div class="row"><span>Πακέτο '+c.p.name+'</span><span>+'+eur(c.pa)+'/τ.μ.</span></div>'
       +'<div class="row"><span>'+c.f.name+'</span><span>+'+eur(c.fa)+'/τ.μ.</span></div>'
+      +(c.eb?'<div class="row"><span>'+EARLY_BIRD.label+' (−'+EARLY_BIRD.pct+'%)</span><span>−'+eur(c.disc)+'/τ.μ.</span></div>':'')
       +'<div class="row sum"><span>Τιμή ανά τ.μ.</span><span>'+eur(c.per)+'</span></div>'
       +'<div class="est"><small>Ενδεικτικό σύνολο για ~'+c.avg+' τ.μ.</small><b>'+eur(c.total)+'</b></div></div>'
-      +'<div class="result-actions"><button type="button" class="btn btn-black" id="btn-quote">Ζήτησε προσφορά για αυτό το σπίτι</button>'
+      +'<div class="result-actions"><button type="button" class="btn btn-black" id="btn-quote">Στείλε αίτημα για αυτό το διαμέρισμα</button>'
       +'<button type="button" class="btn btn-ghost" id="btn-reset">Νέα διαμόρφωση</button>'
-      +'<p class="hint">Η προσφορά θα συμπληρώσει τη φόρμα επικοινωνίας με τις επιλογές σου.</p></div>';
+      +'<p class="hint">Οι επιλογές σου θα συμπληρωθούν αυτόματα στο αίτημα. Το στέλνεις με ένα κλικ.</p></div>';
     $('#btn-quote').addEventListener('click',function(){
       var msg='Ενδιαφέρομαι για διαμέρισμα με τις εξής επιλογές:\n'
         +'• Μέγεθος: '+c.s.name+' ('+c.s.min_sqm+'–'+c.s.max_sqm+' τ.μ.)\n'
         +'• Πακέτο: '+c.p.name+'\n• Όροφος: '+c.f.name+'\n• Οικοδομή: '+c.b.name+', '+c.b.address+'\n'
+        +(c.eb?'• Early bird: ναι, αγορά πριν τα σχέδια (−'+EARLY_BIRD.pct+'%)\n':'')
         +'Ενδεικτική τιμή: '+eur(c.per)+'/τ.μ. (~'+eur(c.total)+' για ~'+c.avg+' τ.μ.)\n\nΠαρακαλώ επικοινωνήστε μαζί μου για προσφορά.';
       $('#f-msg').value=msg;
+      $('#f-topic').value='Διαμέρισμα';
       location.hash='#contact';
       setTimeout(function(){ $('#f-name').focus(); },300);
     });
     $('#btn-reset').addEventListener('click',function(){
-      sel={sizeId:null,packageId:null,floorId:null,buildingId:null}; maxReached=1; go(1);
+      sel={sizeId:null,packageId:null,floorId:null,buildingId:null,earlyBird:false}; $('#eb').checked=false; maxReached=1; go(1);
     });
   }
 
@@ -724,6 +770,7 @@ img,svg{max-width:100%}
     }
     renderOptions(); renderSummary(); $('#btn-next').disabled=!canProceed();
   });
+  $('#eb').addEventListener('change',function(){ sel.earlyBird=$('#eb').checked; renderSummary(); if(step===5) renderResult(); });
   $('#btn-next').addEventListener('click',function(){ if(canProceed()&&step<5) go(step+1); });
   $('#btn-back').addEventListener('click',function(){ if(step>1) go(step-1); });
   $('#stepper').addEventListener('click',function(e){ var b=e.target.closest('button'); if(b&&!b.disabled) go(+b.getAttribute('data-step')); });
@@ -738,15 +785,30 @@ img,svg{max-width:100%}
     try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fail); } else fail(); }catch(err){ fail(); }
   }
   $$('.copy').forEach(function(b){ b.addEventListener('click',function(){ copyText(b.getAttribute('data-copy'), b.parentNode.querySelector('.val')); }); });
+  function showFallback(name,body){
+    $('#sent-title').textContent=FORM_ACCESS_KEY?'Η αποστολή δεν ολοκληρώθηκε. Στείλε το μήνυμα από το email σου:':'Το μήνυμά σου είναι έτοιμο.';
+    $('#sent-text').textContent=body;
+    $('#mail-link').href='mailto:info@thetafproject.gr?subject='+encodeURIComponent('Αίτημα TAF – '+name)+'&body='+encodeURIComponent(body);
+    $('#sent-ok').hidden=true; $('#sent').hidden=false;
+    $('#sent').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
   $('#contact-form').addEventListener('submit',function(e){
     e.preventDefault();
-    var name=$('#f-name').value.trim(), phone=$('#f-phone').value.trim(), email=$('#f-email').value.trim(), msg=$('#f-msg').value.trim();
+    if($('#f-botcheck').checked) return;
+    var name=$('#f-name').value.trim(), phone=$('#f-phone').value.trim(), email=$('#f-email').value.trim(), msg=$('#f-msg').value.trim(), topic=$('#f-topic').value;
     if(!name||!email||!msg){ toast('Συμπλήρωσε όνομα, email και μήνυμα'); return; }
-    var body=msg+'\n\n— '+name+(phone?'\nΤηλ: '+phone:'')+'\nEmail: '+email;
-    $('#sent-text').textContent=body;
-    $('#mail-link').href='mailto:info@thetafproject.gr?subject='+encodeURIComponent('Ενδιαφέρον για TAF – '+name)+'&body='+encodeURIComponent(body);
-    $('#sent').hidden=false;
-    $('#sent').scrollIntoView({behavior:'smooth',block:'nearest'});
+    var body='Θέμα: '+topic+'\n\n'+msg+'\n\n— '+name+(phone?'\nΤηλ: '+phone:'')+'\nEmail: '+email;
+    if(!FORM_ACCESS_KEY){ showFallback(name,body); return; }
+    var btn=$('#btn-send'); btn.disabled=true; btn.textContent='Αποστολή…';
+    var payload={access_key:FORM_ACCESS_KEY,subject:'Αίτημα TAF – '+topic+' – '+name,from_name:'thetafproject.gr',name:name,email:email,phone:phone,topic:topic,message:msg,replyto:email};
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json()})
+      .then(function(d){
+        btn.disabled=false; btn.textContent='Στείλε το αίτημα';
+        if(d&&d.success){ $('#sent').hidden=true; $('#sent-ok').hidden=false; $('#sent-ok').scrollIntoView({behavior:'smooth',block:'nearest'}); $('#contact-form').reset(); }
+        else showFallback(name,body);
+      })
+      .catch(function(){ btn.disabled=false; btn.textContent='Στείλε το αίτημα'; showFallback(name,body); });
   });
   $('#btn-copy-msg').addEventListener('click',function(){ copyText($('#sent-text').textContent, $('#sent-text')); });
 })();
