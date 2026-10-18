@@ -305,6 +305,7 @@ img,svg{max-width:100%}
       <a href="#about">Ποιοι είμαστε</a>
       <a href="#projects">Έργα</a>
       <a href="#configurator">Χτίσε το σπίτι σου</a>
+      <a href="portal/">Αγοραστές</a>
       <a href="#contact" class="cta">Επικοινωνία</a>
     </nav>
   </div>
@@ -626,6 +627,13 @@ img,svg{max-width:100%}
     action:'https://docs.google.com/forms/d/e/1FAIpQLSf4UQ-kj3rSBgHBNulaTXjhx6hBBUNC-5seSp_2iB13-bGHTQ/formResponse',
     fields:{name:'entry.1208920075',phone:'entry.1338267596',email:'entry.1745684487',topic:'entry.2095418600',message:'entry.2062011125'}
   };
+  // Copy of each request into the buyer portal's "Αιτήματα" list (public insert-only table).
+  var PORTAL={url:'https://brnhkfagxiucciumxblt.supabase.co',key:'sb_publishable_yajiZquYvoeCRCivhA60yQ_DssNrSQD'};
+  function saveToPortal(rec){
+    try{
+      return fetch(PORTAL.url+'/rest/v1/requests',{method:'POST',headers:{'Content-Type':'application/json',apikey:PORTAL.key,Authorization:'Bearer '+PORTAL.key,Prefer:'return=minimal'},body:JSON.stringify(rec)}).catch(function(){});
+    }catch(e){ return Promise.resolve(); }
+  }
   var PACKAGES=[
     {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι',price_addition_per_sqm:0,features:['Κουφώματα αλουμινίου με θερμοδιακοπή','Ενεργειακοί υαλοπίνακες','Αντλία θερμότητας','Πλακίδια και πόρτες επιλογής']},
     {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,features:['Ενδοδαπέδια θέρμανση','Ξύλινα δάπεδα στα υπνοδωμάτια','Κουζίνα με εντοιχιζόμενες συσκευές','Ηλεκτρικά ρολά']},
@@ -803,6 +811,7 @@ img,svg{max-width:100%}
     var name=$('#f-name').value.trim(), phone=$('#f-phone').value.trim(), email=$('#f-email').value.trim(), msg=$('#f-msg').value.trim(), topic=$('#f-topic').value;
     if(!name||!email||!msg){ toast('Συμπλήρωσε όνομα, email και μήνυμα'); return; }
     var body='Θέμα: '+topic+'\n\n'+msg+'\n\n— '+name+(phone?'\nΤηλ: '+phone:'')+'\nEmail: '+email;
+    saveToPortal({name:name.slice(0,200),email:email.slice(0,200),phone:phone.slice(0,50)||null,topic:topic.slice(0,100),message:msg.slice(0,5000)});
     if(!GFORM.action){ showFallback(name,body); return; }
     var btn=$('#btn-send'); btn.disabled=true; btn.textContent='Αποστολή…';
     var fd=new FormData();

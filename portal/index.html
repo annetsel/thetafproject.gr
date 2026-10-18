@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TAF · Περιοχή αγοραστών</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#E23F25">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TAF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: black app bar + paper background; one 920px column of building cards; admin tools sit in tabs above. */
+:root{
+  --orange:#E23F25; --black:#100F0D; --paper:#F2EEE9; --ink:#2B2A28; --white:#FFFFFF;
+  --bg:#F2EEE9; --surface:#FFFFFF; --fg:#2B2A28; --heading:#100F0D; --muted:#7D7974;
+  --line:rgba(16,15,13,.12); --line-strong:rgba(16,15,13,.28);
+  --ok:#2E7D4F; --ok-bg:rgba(46,125,79,.12); --warn:#A86A00; --warn-bg:rgba(168,106,0,.12);
+  --on-orange:#100F0D;
+  --font:"Manrope",Arial,Helvetica,sans-serif; --radius:4px;
+  --gl:max(16px, env(safe-area-inset-left, 0px)); --gr:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#100F0D; --surface:#1A1816; --fg:#D9D4CD; --heading:#F2EEE9; --muted:#9C9893;
+    --line:rgba(242,238,233,.14); --line-strong:rgba(242,238,233,.32); --ok:#6CC79A; --ok-bg:rgba(108,199,154,.14);
+    --warn:#E3B04B; --warn-bg:rgba(227,176,75,.14); color-scheme:dark; }
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:env(safe-area-inset-bottom,0px)}
+h1,h2,h3,h4{color:var(--heading);margin:0;line-height:1.15;font-weight:800;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.wrap{max-width:920px;margin-inline:auto;padding-left:var(--gl);padding-right:var(--gr)}
+
+/* App bar */
+.bar{background:var(--black);color:var(--paper);position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
+.bar .brand{display:flex;align-items:center;gap:12px;color:var(--paper);text-decoration:none;min-width:0}
+.bar .brand svg{height:26px;width:auto;flex:none}
+.bar .brand span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,238,233,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .who{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(242,238,233,.75);min-width:0}
+.bar .who b{color:var(--paper);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:28ch}
+.linkbtn{background:none;border:1px solid rgba(242,238,233,.3);color:var(--paper);padding:6px 10px;border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap}
+.linkbtn:hover{background:rgba(242,238,233,.08)}
+@media (max-width:560px){.bar .who b{display:none}.bar .brand span{display:none}}
+
+main{padding-block:28px 64px}
+.stack{display:grid;gap:20px}
+
+/* Buttons & fields */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:var(--radius);font-weight:700;font-size:15px;border:2px solid transparent;cursor:pointer;line-height:1.1;text-decoration:none}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn-orange{background:var(--orange);color:var(--on-orange);border-color:var(--orange)}
+.btn-orange:hover{background:#c9351e;border-color:#c9351e}
+.btn-black{background:var(--black);color:var(--paper);border-color:var(--black)}
+.btn-ghost{background:transparent;color:var(--heading);border-color:var(--line-strong)}
+.btn-ghost:hover{background:var(--line)}
+.btn-sm{padding:7px 12px;font-size:13px}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;font-weight:700;color:var(--heading)}
+.field small{font-size:12px;color:var(--muted)}
+.field input,.field select,.field textarea{font-size:16px;padding:11px 12px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);color:var(--fg);width:100%;min-width:0}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(226,63,37,.2)}
+.field textarea{min-height:110px;resize:vertical}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:560px){.row2{grid-template-columns:1fr}}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,3vw,28px);display:grid;gap:16px;min-width:0}
+.card.narrow{max-width:460px;margin-inline:auto;width:100%}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.muted{color:var(--muted)}
+.note{font-size:14px;color:var(--muted)}
+.notice{padding:14px 16px;border-radius:var(--radius);background:var(--warn-bg);color:var(--fg);font-size:14px}
+.notice.ok{background:var(--ok-bg)}
+.notice.err{background:rgba(226,63,37,.12)}
+
+/* Building */
+.bhead{background:var(--orange);color:var(--on-orange);border-radius:var(--radius);padding:clamp(20px,3vw,30px);display:grid;gap:14px;position:relative;overflow:hidden}
+.bhead h2{color:var(--black);font-size:clamp(28px,5vw,40px)}
+.bhead .addr{font-weight:600;color:rgba(16,15,13,.72)}
+.bhead .unit{display:inline-block;background:var(--black);color:var(--paper);font-size:13px;font-weight:700;padding:5px 10px;border-radius:var(--radius);justify-self:start}
+.meter{display:grid;gap:6px}
+.meter .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-weight:700;color:var(--black)}
+.meter .top b{font-size:28px;font-variant-numeric:tabular-nums}
+.meter .track{height:10px;background:rgba(16,15,13,.18);border-radius:5px;overflow:hidden}
+.meter .fill{height:100%;background:var(--black);border-radius:5px;transition:width .4s ease}
+.bhead .meta{display:flex;flex-wrap:wrap;gap:6px 24px;font-size:14px;font-weight:600;color:rgba(16,15,13,.75)}
+
+.cols{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:20px;align-items:start}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+
+.stages{list-style:none;margin:0;padding:0;display:grid}
+.stages li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid var(--line);align-items:start}
+.stages li:first-child{border-top:0}
+.dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line-strong);display:grid;place-items:center;margin-top:1px;font-size:12px;font-weight:800;color:var(--muted)}
+.stages li.done .dot{background:var(--black);border-color:var(--black);color:var(--paper)}
+.stages li.in_progress .dot{border-color:var(--orange);background:var(--orange);color:var(--on-orange)}
+.stages .nm{font-weight:600;color:var(--heading)}
+.stages li.pending .nm{color:var(--muted);font-weight:500}
+.stages .st{font-size:12px;color:var(--muted)}
+.stages li.in_progress .st{color:var(--orange);font-weight:700}
+.stages select{font-size:13px;padding:4px 6px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);color:var(--fg);margin-top:4px}
+
+.feed{display:grid;gap:14px}
+.upd{border:1px solid var(--line);border-radius:var(--radius);padding:16px;display:grid;gap:10px;background:var(--surface)}
+.upd .when{font-size:12px;color:var(--muted);font-weight:600;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.upd .tag{background:var(--line);color:var(--heading);padding:2px 8px;border-radius:999px;font-weight:700}
+.upd h4{font-size:17px}
+.upd p{white-space:pre-wrap;font-size:15px}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.photos a{display:block;aspect-ratio:4/3;max-width:100%;background:var(--line);border-radius:var(--radius);overflow:hidden}
+.photos img{width:100%;height:100%;object-fit:cover}
+.empty{padding:22px;text-align:center;border:1px dashed var(--line-strong);border-radius:var(--radius);color:var(--muted);font-size:14px}
+
+/* Admin */
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;font-weight:700;font-size:14px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--heading);border-bottom-color:var(--orange)}
+.tabs .count{display:inline-block;min-width:20px;padding:0 6px;margin-left:6px;border-radius:999px;background:var(--orange);color:var(--on-orange);font-size:12px;line-height:20px;text-align:center}
+.list{display:grid;gap:10px}
+.item{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:grid;gap:10px;background:var(--surface)}
+.item .head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.item .head b{color:var(--heading);font-size:16px}
+.item .sub{font-size:14px;color:var(--muted);word-break:break-word}
+.item .acts{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.item .acts .field{flex:1 1 160px}
+.pill{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--line);color:var(--heading)}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.admin-box{border:2px dashed var(--line-strong);border-radius:var(--radius);padding:16px;display:grid;gap:12px}
+.admin-box h4{font-size:15px}
+.range-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.range-row input[type=range]{flex:1 1 200px;accent-color:var(--orange)}
+.range-row output{font-weight:800;font-variant-numeric:tabular-nums;min-width:4ch}
+.preview{display:flex;gap:6px;flex-wrap:wrap}
+.preview img{width:64px;height:48px;object-fit:cover;border-radius:3px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--black);color:var(--paper);padding:11px 16px;border-radius:var(--radius);font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1}
+.lightbox{position:fixed;inset:0;background:rgba(16,15,13,.92);display:grid;place-items:center;z-index:60;padding:20px;cursor:zoom-out}
+.lightbox img{max-height:90vh;max-width:100%;object-fit:contain;border-radius:var(--radius)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="TAF, αρχική σελίδα"><svg role="img" aria-label="TAF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4069.69 1271.72">
+<g fill="currentColor" transform="translate(78.26,78.26)">
+<path d="M 1623.523 1115.191 L 1346.941 1115.191 L 1346.941 344.574 L 1623.523 344.574 Z M 1623.523 1115.191"/>
+<path d="M 497.863 501.102 L 0.000 501.102 L 0.000 224.520 L 497.863 224.520 Z M 497.863 501.102"/>
+<path d="M 1346.941 343.738 L 1346.941 0.000 L 497.863 501.969 L 497.863 814.367 Z M 1346.941 343.738"/>
+<path d="M 2242.770 86.773 L 2101.120 86.773 L 2101.120 478.544 L 2010.516 478.544 L 2010.516 86.773 L 1868.866 86.773 L 1868.866 0.000 L 2242.770 0.000 Z M 2242.770 86.773"/>
+<path d="M 2435.472 304.993 L 2552.878 304.993 L 2496.727 109.744 L 2491.622 109.744 Z M 2445.042 0.000 L 2543.308 0.000 L 2711.755 478.544 L 2614.128 478.544 L 2584.140 391.766 L 2404.210 391.766 L 2374.217 478.544 L 2276.595 478.544 Z M 2445.042 0.000"/>
+<path d="M 3166.684 86.773 L 2917.203 86.773 L 2917.203 195.244 L 3123.300 195.244 L 3123.300 282.022 L 2917.203 282.022 L 2917.203 478.544 L 2826.599 478.544 L 2826.599 0.000 L 3166.684 0.000 Z M 3166.684 86.773"/>
+<path d="M 1868.866 646.035 L 2010.245 646.035 L 2010.245 667.594 L 1951.247 667.594 L 1951.247 815.520 L 1926.895 815.520 L 1926.895 667.594 L 1868.866 667.594 Z M 1868.866 646.035"/>
+<path d="M 2165.375 646.276 L 2189.605 646.276 L 2189.605 815.520 L 2165.375 815.520 L 2165.375 741.862 L 2070.271 741.862 L 2070.271 815.520 L 2046.042 815.520 L 2046.042 646.276 L 2070.271 646.276 L 2070.271 719.447 L 2165.375 719.447 Z M 2165.375 646.276"/>
+<path d="M 2272.046 666.871 L 2264.777 666.871 L 2264.777 720.298 L 2273.983 720.298 C 2286.258 720.298 2294.677 719.245 2299.241 717.145 C 2303.804 715.045 2307.360 711.878 2309.902 707.634 C 2312.445 703.395 2313.719 698.571 2313.719 693.162 C 2313.719 687.831 2312.302 683.002 2309.479 678.684 C 2306.652 674.361 2302.673 671.312 2297.544 669.537 C 2292.415 667.761 2283.917 666.871 2272.046 666.871 M 2240.543 815.520 L 2240.543 646.276 L 2282.948 646.276 C 2300.067 646.276 2313.660 650.515 2323.711 658.998 C 2333.768 667.476 2338.794 678.944 2338.794 693.403 C 2338.794 703.258 2336.330 711.775 2331.408 718.965 C 2326.480 726.155 2319.413 731.525 2310.202 735.075 C 2315.617 738.631 2320.903 743.475 2326.077 749.612 C 2331.245 755.754 2338.514 766.455 2347.882 781.715 C 2353.778 791.329 2358.499 798.558 2362.055 803.402 L 2371.020 815.520 L 2342.187 815.520 L 2334.806 804.366 C 2334.565 803.963 2334.083 803.274 2333.355 802.306 L 2328.634 795.637 L 2321.135 783.279 L 2313.030 770.065 C 2308.029 763.111 2303.445 757.584 2299.280 753.473 C 2295.115 749.361 2291.358 746.396 2287.999 744.581 C 2284.645 742.772 2279.004 741.862 2271.082 741.862 L 2264.777 741.862 L 2264.777 815.520 Z M 2240.543 815.520"/>
+<path d="M 2402.577 646.276 L 2498.527 646.276 L 2498.527 667.840 L 2426.812 667.840 L 2426.812 719.447 L 2496.107 719.447 L 2496.107 741.134 L 2426.812 741.134 L 2426.812 793.714 L 2500.828 793.714 L 2500.828 815.274 L 2402.577 815.274 Z M 2402.577 646.276"/>
+<path d="M 2539.536 646.276 L 2635.486 646.276 L 2635.486 667.840 L 2563.766 667.840 L 2563.766 719.447 L 2633.061 719.447 L 2633.061 741.134 L 2563.766 741.134 L 2563.766 793.714 L 2637.787 793.714 L 2637.787 815.274 L 2539.536 815.274 Z M 2539.536 646.276"/>
+<path d="M 2749.607 748.766 L 2809.937 748.766 L 2809.937 772.391 L 2749.607 772.391 Z M 2749.607 748.766"/>
+<path d="M 3067.858 646.276 L 3090.514 646.276 L 3090.514 815.520 L 3066.161 815.520 L 3066.161 683.833 L 3014.131 749.253 L 3009.646 749.253 L 2957.007 683.833 L 2957.007 815.520 L 2932.777 815.520 L 2932.777 646.276 L 2955.719 646.276 L 3011.953 715.783 Z M 3067.858 646.276"/>
+<path d="M 3140.124 646.276 L 3164.353 646.276 L 3164.353 815.520 L 3140.124 815.520 Z M 3140.124 646.276"/>
+<path d="M 3349.285 646.276 L 3372.304 646.276 L 3372.304 815.520 L 3351.463 815.520 L 3238.311 685.175 L 3238.311 815.520 L 3215.537 815.520 L 3215.537 646.276 L 3235.164 646.276 L 3349.285 777.727 Z M 3349.285 646.276"/>
+<path d="M 3476.187 667.840 L 3445.898 667.840 L 3445.898 793.709 L 3476.914 793.709 C 3489.027 793.709 3498.434 792.883 3505.137 791.226 C 3511.845 789.574 3517.437 787.474 3521.921 784.931 C 3526.402 782.384 3530.498 779.256 3534.216 775.538 C 3546.166 763.426 3552.146 748.122 3552.146 729.627 C 3552.146 711.451 3546.009 696.633 3533.729 685.165 C 3529.210 680.882 3524.016 677.371 3518.164 674.622 C 3512.307 671.878 3506.755 670.063 3501.503 669.173 C 3496.256 668.283 3487.817 667.840 3476.187 667.840 M 3421.669 815.274 L 3421.669 646.276 L 3478.729 646.276 C 3501.749 646.276 3519.959 649.728 3533.370 656.633 C 3546.776 663.537 3557.432 673.697 3565.350 687.103 C 3573.263 700.509 3577.221 715.129 3577.221 730.959 C 3577.221 742.265 3575.043 753.089 3570.681 763.426 C 3566.319 773.763 3560.098 782.851 3552.023 790.685 C 3543.786 798.760 3534.216 804.858 3523.313 808.974 C 3516.930 811.482 3511.078 813.154 3505.747 814.005 C 3500.416 814.851 3490.241 815.274 3475.218 815.274 Z M 3421.669 815.274"/>
+<path d="M 3620.409 646.276 L 3716.359 646.276 L 3716.359 667.840 L 3644.643 667.840 L 3644.643 719.447 L 3713.939 719.447 L 3713.939 741.134 L 3644.643 741.134 L 3644.643 793.714 L 3718.660 793.714 L 3718.660 815.274 L 3620.409 815.274 Z M 3620.409 646.276"/>
+<path d="M 3812.127 667.840 L 3781.838 667.840 L 3781.838 793.709 L 3812.854 793.709 C 3824.967 793.709 3834.374 792.883 3841.082 791.226 C 3847.785 789.574 3853.377 787.474 3857.862 784.931 C 3862.342 782.384 3866.443 779.256 3870.156 775.538 C 3882.111 763.426 3888.086 748.122 3888.086 729.627 C 3888.086 711.451 3881.949 696.633 3869.674 685.165 C 3865.150 680.882 3859.961 677.371 3854.104 674.622 C 3848.247 671.878 3842.695 670.063 3837.448 669.173 C 3832.196 668.283 3823.757 667.840 3812.127 667.840 M 3757.609 815.274 L 3757.609 646.276 L 3814.674 646.276 C 3837.689 646.276 3855.899 649.728 3869.310 656.633 C 3882.716 663.537 3893.377 673.697 3901.295 687.103 C 3909.208 700.509 3913.166 715.129 3913.166 730.959 C 3913.166 742.265 3910.983 753.089 3906.621 763.426 C 3902.259 773.763 3896.043 782.851 3887.968 790.685 C 3879.726 798.760 3870.156 804.858 3859.253 808.974 C 3852.875 811.482 3847.018 813.154 3841.687 814.005 C 3836.356 814.851 3826.182 815.274 3811.158 815.274 Z M 3757.609 815.274"/>
+<path d="M 2029.144 1074.000 L 2029.144 1100.650 C 2011.376 1110.343 1990.860 1115.191 1967.599 1115.191 C 1948.700 1115.191 1932.668 1111.395 1919.503 1103.802 C 1906.339 1096.214 1895.923 1085.749 1888.246 1072.427 C 1880.575 1059.100 1876.739 1044.681 1876.739 1029.175 C 1876.739 1004.542 1885.522 983.824 1903.088 967.025 C 1920.654 950.226 1942.322 941.827 1968.086 941.827 C 1985.853 941.827 2005.598 946.474 2027.325 955.759 L 2027.325 981.808 C 2007.536 970.502 1988.194 964.847 1969.295 964.847 C 1949.915 964.847 1933.819 970.964 1921.018 983.200 C 1908.217 995.435 1901.819 1010.758 1901.819 1029.175 C 1901.819 1047.750 1908.114 1063.014 1920.718 1074.969 C 1933.312 1086.924 1949.428 1092.899 1969.054 1092.899 C 1989.566 1092.899 2009.596 1086.600 2029.144 1074.000"/>
+<path d="M 2153.878 964.601 C 2134.512 964.601 2118.598 970.659 2106.131 982.777 C 2093.665 994.889 2087.429 1010.355 2087.429 1029.175 C 2087.429 1047.430 2093.680 1062.611 2106.190 1074.723 C 2118.696 1086.841 2134.349 1092.899 2153.150 1092.899 C 2172.029 1092.899 2187.785 1086.718 2200.419 1074.359 C 2213.043 1062.006 2219.357 1046.619 2219.357 1028.207 C 2219.357 1010.277 2213.043 995.194 2200.419 982.959 C 2187.785 970.723 2172.275 964.601 2153.878 964.601 M 2152.909 941.586 C 2179.056 941.586 2200.832 949.862 2218.226 966.420 C 2235.615 982.978 2244.315 1003.736 2244.315 1028.689 C 2244.315 1053.646 2235.536 1074.300 2217.980 1090.657 C 2200.429 1107.013 2178.294 1115.191 2151.576 1115.191 C 2126.073 1115.191 2104.823 1107.013 2087.837 1090.657 C 2070.847 1074.300 2062.354 1053.808 2062.354 1029.175 C 2062.354 1003.898 2070.906 982.978 2088.019 966.420 C 2105.128 949.862 2126.756 941.586 2152.909 941.586"/>
+<path d="M 2419.509 944.010 L 2442.524 944.010 L 2442.524 1113.249 L 2421.687 1113.249 L 2308.535 982.909 L 2308.535 1113.249 L 2285.761 1113.249 L 2285.761 944.010 L 2305.388 944.010 L 2419.509 1075.461 Z M 2419.509 944.010"/>
+<path d="M 2531.584 1042.340 L 2513.167 1031.152 C 2501.615 1024.100 2493.403 1017.161 2488.514 1010.336 C 2483.626 1003.515 2481.187 995.656 2481.187 986.775 C 2481.187 973.448 2485.810 962.624 2495.055 954.308 C 2504.305 945.987 2516.319 941.827 2531.097 941.827 C 2545.231 941.827 2558.194 945.795 2569.986 953.728 L 2569.986 981.232 C 2557.790 969.499 2544.670 963.637 2530.615 963.637 C 2522.698 963.637 2516.196 965.466 2511.111 969.125 C 2506.022 972.789 2503.479 977.470 2503.479 983.180 C 2503.479 988.250 2505.353 993.001 2509.100 997.422 C 2512.847 1001.848 2518.872 1006.495 2527.178 1011.363 L 2545.688 1022.310 C 2566.328 1034.639 2576.650 1050.336 2576.650 1069.397 C 2576.650 1082.966 2572.106 1093.986 2563.023 1102.469 C 2553.935 1110.947 2542.123 1115.191 2527.586 1115.191 C 2510.865 1115.191 2495.640 1110.052 2481.915 1099.774 L 2481.915 1069.004 C 2494.996 1085.582 2510.138 1093.868 2527.345 1093.868 C 2534.933 1093.868 2541.257 1091.754 2546.303 1087.529 C 2551.348 1083.305 2553.876 1078.013 2553.876 1071.655 C 2553.876 1061.352 2546.440 1051.585 2531.584 1042.340"/>
+<path d="M 2599.803 943.764 L 2741.183 943.764 L 2741.183 965.328 L 2682.184 965.328 L 2682.184 1113.254 L 2657.832 1113.254 L 2657.832 965.328 L 2599.803 965.328 Z M 2599.803 943.764"/>
+<path d="M 2807.223 964.601 L 2799.954 964.601 L 2799.954 1018.027 L 2809.160 1018.027 C 2821.435 1018.027 2829.854 1016.979 2834.418 1014.880 C 2838.981 1012.780 2842.537 1009.608 2845.079 1005.369 C 2847.622 1001.130 2848.896 996.305 2848.896 990.891 C 2848.896 985.560 2847.479 980.736 2844.656 976.413 C 2841.829 972.095 2837.850 969.046 2832.721 967.266 C 2827.592 965.491 2819.094 964.601 2807.223 964.601 M 2775.725 1113.249 L 2775.725 944.010 L 2818.125 944.010 C 2835.249 944.010 2848.837 948.249 2858.888 956.727 C 2868.945 965.210 2873.976 976.679 2873.976 991.137 C 2873.976 1000.987 2871.507 1009.509 2866.585 1016.694 C 2861.657 1023.884 2854.590 1029.254 2845.384 1032.810 C 2850.794 1036.365 2856.085 1041.209 2861.254 1047.346 C 2866.422 1053.484 2873.691 1064.185 2883.059 1079.449 C 2888.955 1089.064 2893.676 1096.288 2897.232 1101.137 L 2906.197 1113.249 L 2877.364 1113.249 L 2869.983 1102.100 C 2869.742 1101.697 2869.260 1101.009 2868.532 1100.040 L 2863.816 1093.371 L 2856.312 1081.008 L 2848.207 1067.794 C 2843.206 1060.846 2838.622 1055.318 2834.457 1051.207 C 2830.297 1047.091 2826.535 1044.130 2823.181 1042.316 C 2819.822 1040.501 2814.186 1039.591 2806.259 1039.591 L 2799.954 1039.591 L 2799.954 1113.249 Z M 2775.725 1113.249"/>
+<path d="M 3046.136 944.010 L 3070.489 944.010 L 3070.489 1040.078 C 3070.489 1053.080 3069.539 1062.896 3067.641 1069.516 C 3065.743 1076.140 3063.402 1081.652 3060.614 1086.054 C 3057.830 1090.455 3054.417 1094.394 3050.380 1097.866 C 3036.969 1109.413 3019.442 1115.191 2997.800 1115.191 C 2975.748 1115.191 2958.064 1109.457 2944.737 1097.984 C 2940.700 1094.434 2937.287 1090.455 2934.499 1086.054 C 2931.715 1081.652 2929.414 1076.263 2927.594 1069.879 C 2925.779 1063.501 2924.870 1053.484 2924.870 1039.837 L 2924.870 944.010 L 2949.222 944.010 L 2949.222 1040.078 C 2949.222 1055.992 2951.037 1067.052 2954.671 1073.273 C 2958.305 1079.494 2963.838 1084.480 2971.268 1088.232 C 2978.699 1091.990 2987.462 1093.868 2997.559 1093.868 C 3011.933 1093.868 3023.642 1090.111 3032.691 1082.602 C 3037.456 1078.564 3040.889 1073.799 3042.989 1068.306 C 3045.088 1062.813 3046.136 1053.405 3046.136 1040.078 Z M 3046.136 944.010"/>
+<path d="M 3260.824 1074.000 L 3260.824 1100.650 C 3243.057 1110.343 3222.545 1115.191 3199.284 1115.191 C 3180.385 1115.191 3164.348 1111.395 3151.189 1103.802 C 3138.019 1096.214 3127.603 1085.749 3119.931 1072.427 C 3112.255 1059.100 3108.424 1044.681 3108.424 1029.175 C 3108.424 1004.542 3117.207 983.824 3134.773 967.025 C 3152.339 950.226 3174.002 941.827 3199.766 941.827 C 3217.534 941.827 3237.283 946.474 3259.010 955.759 L 3259.010 981.808 C 3239.221 970.502 3219.879 964.847 3200.981 964.847 C 3181.595 964.847 3165.499 970.964 3152.698 983.200 C 3139.897 995.435 3133.499 1010.758 3133.499 1029.175 C 3133.499 1047.750 3139.799 1063.014 3152.398 1074.969 C 3164.997 1086.924 3181.108 1092.899 3200.735 1092.899 C 3221.251 1092.899 3241.281 1086.600 3260.824 1074.000"/>
+<path d="M 3287.129 943.764 L 3428.509 943.764 L 3428.509 965.328 L 3369.506 965.328 L 3369.506 1113.254 L 3345.159 1113.254 L 3345.159 965.328 L 3287.129 965.328 Z M 3287.129 943.764"/>
+<path d="M 3462.564 944.005 L 3486.794 944.005 L 3486.794 1113.249 L 3462.564 1113.249 Z M 3462.564 944.005"/>
+<path d="M 3619.283 964.601 C 3599.917 964.601 3583.998 970.659 3571.532 982.777 C 3559.065 994.889 3552.834 1010.355 3552.834 1029.175 C 3552.834 1047.430 3559.085 1062.611 3571.591 1074.723 C 3584.101 1086.841 3599.754 1092.899 3618.555 1092.899 C 3637.434 1092.899 3653.190 1086.718 3665.819 1074.359 C 3678.448 1062.006 3684.762 1046.619 3684.762 1028.207 C 3684.762 1010.277 3678.448 995.194 3665.819 982.959 C 3653.190 970.723 3637.675 964.601 3619.283 964.601 M 3618.314 941.586 C 3644.462 941.586 3666.232 949.862 3683.626 966.420 C 3701.020 982.978 3709.720 1003.736 3709.720 1028.689 C 3709.720 1053.646 3700.942 1074.300 3683.385 1090.657 C 3665.829 1107.013 3643.699 1115.191 3616.981 1115.191 C 3591.478 1115.191 3570.228 1107.013 3553.238 1090.657 C 3536.247 1074.300 3527.754 1053.808 3527.754 1029.175 C 3527.754 1003.898 3536.311 982.978 3553.420 966.420 C 3570.528 949.862 3592.161 941.586 3618.314 941.586"/>
+<path d="M 3884.909 944.010 L 3907.929 944.010 L 3907.929 1113.249 L 3887.093 1113.249 L 3773.940 982.909 L 3773.940 1113.249 L 3751.162 1113.249 L 3751.162 944.010 L 3770.788 944.010 L 3884.909 1075.461 Z M 3884.909 944.010"/>
+</g></svg><span>Περιοχή αγοραστών</span></a>
+    <div class="who" id="who" hidden><b id="who-name"></b><button class="linkbtn" id="btn-signout" type="button">Αποσύνδεση</button></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Not configured yet -->
+  <section id="v-setup" class="card narrow" hidden>
+    <span class="eyebrow">Σύντομα</span>
+    <h1>Η περιοχή αγοραστών ετοιμάζεται</h1>
+    <p>Σύντομα οι αγοραστές των διαμερισμάτων μας θα παρακολουθούν εδώ την πρόοδο της οικοδομής τους.</p>
+    <a class="btn btn-orange" href="../#contact">Επικοινώνησε μαζί μας</a>
+  </section>
+
+  <!-- Loading -->
+  <section id="v-loading" class="card narrow"><p class="muted">Φόρτωση…</p></section>
+
+  <!-- Login -->
+  <section id="v-login" class="card narrow" hidden>
+    <span class="eyebrow">Περιοχή αγοραστών</span>
+    <h1>Σύνδεση</h1>
+    <p>Βάλε το email σου και θα σου στείλουμε σύνδεσμο για να μπεις. Δεν χρειάζεται κωδικός.</p>
+    <form id="f-login" class="stack" novalidate>
+      <div class="field"><label for="l-email">Email</label><input id="l-email" type="email" autocomplete="email" required></div>
+      <details id="l-new">
+        <summary class="note" style="cursor:pointer">Πρώτη φορά εδώ; Συμπλήρωσε και τα στοιχεία σου</summary>
+        <div class="stack" style="margin-top:14px">
+          <div class="field"><label for="l-name">Ονοματεπώνυμο</label><input id="l-name" type="text" autocomplete="name"></div>
+          <div class="field"><label for="l-phone">Τηλέφωνο</label><input id="l-phone" type="tel" autocomplete="tel"></div>
+        </div>
+      </details>
+      <button class="btn btn-orange" type="submit" id="l-submit">Στείλε μου σύνδεσμο</button>
+      <p class="note">Νέοι λογαριασμοί ενεργοποιούνται αφού τους εγκρίνει η ομάδα TAF και τους συνδέσει με το διαμέρισμά σου.</p>
+      <div class="notice err" id="l-error" hidden></div>
+    </form>
+  </section>
+
+  <!-- Link sent -->
+  <section id="v-sent" class="card narrow" hidden>
+    <span class="eyebrow">Έλεγξε το email σου</span>
+    <h1>Σου στείλαμε σύνδεσμο</h1>
+    <p>Άνοιξε το email που στείλαμε στο <b id="sent-to"></b> και πάτησε τον σύνδεσμο σύνδεσης. Αν δεν το βλέπεις, κοίτα και στα ανεπιθύμητα.</p>
+    <button class="btn btn-ghost" type="button" id="btn-back-login">Άλλο email</button>
+  </section>
+
+  <!-- Pending approval -->
+  <section id="v-pending" class="card narrow" hidden>
+    <span class="eyebrow" id="p-eyebrow">Σε αναμονή</span>
+    <h1 id="p-title">Ο λογαριασμός σου περιμένει έγκριση</h1>
+    <p id="p-text">Η ομάδα TAF θα επιβεβαιώσει τα στοιχεία σου και θα συνδέσει τον λογαριασμό με το διαμέρισμά σου. Θα δεις την πρόοδο της οικοδομής σου μόλις γίνει η έγκριση.</p>
+    <form id="f-profile" class="stack" novalidate>
+      <div class="row2">
+        <div class="field"><label for="p-name">Ονοματεπώνυμο</label><input id="p-name" type="text" autocomplete="name"></div>
+        <div class="field"><label for="p-phone">Τηλέφωνο</label><input id="p-phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <button class="btn btn-ghost" type="submit">Αποθήκευση στοιχείων</button>
+    </form>
+  </section>
+
+  <!-- App -->
+  <section id="v-app" class="stack" hidden>
+    <nav class="tabs" id="admin-tabs" role="tablist" hidden>
+      <button type="button" role="tab" data-tab="projects" aria-selected="true">Έργα</button>
+      <button type="button" role="tab" data-tab="approvals" aria-selected="false">Εγκρίσεις<span class="count" id="c-approvals" hidden></span></button>
+      <button type="button" role="tab" data-tab="buyers" aria-selected="false">Αγοραστές</button>
+      <button type="button" role="tab" data-tab="requests" aria-selected="false">Αιτήματα<span class="count" id="c-requests" hidden></span></button>
+    </nav>
+    <div id="t-projects" class="stack"></div>
+    <div id="t-approvals" class="stack" hidden></div>
+    <div id="t-buyers" class="stack" hidden></div>
+    <div id="t-requests" class="stack" hidden></div>
+  </section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
+<script>
+window.TAF_CONFIG = { url: 'https://brnhkfagxiucciumxblt.supabase.co', key: 'sb_publishable_yajiZquYvoeCRCivhA60yQ_DssNrSQD' };
+</script>
+<script>
+(function(){
+  var CFG = window.TAF_CONFIG || {};
+  var configured = /^https:\/\//.test(CFG.url||'') && (CFG.key||'').length > 20 && window.supabase;
+  var $ = function(s,r){return (r||document).querySelector(s)};
+  var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var esc = function(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+  var fmtDate = function(d){ try{ return new Date(d).toLocaleDateString('el-GR',{day:'numeric',month:'long',year:'numeric'}) }catch(e){ return d } };
+  var STATUS = {pending:'Προσεχώς', in_progress:'Σε εξέλιξη', done:'Ολοκληρώθηκε'};
+  var VIEWS = ['v-setup','v-loading','v-login','v-sent','v-pending','v-app'];
+  function show(id){ VIEWS.forEach(function(v){ $('#'+v).hidden = (v!==id); }); }
+  var toastT;
+  function toast(m){ var t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('show')},2200); }
+
+  if(!configured){ show('v-setup'); return; }
+
+  var sb = window.supabase.createClient(CFG.url, CFG.key, { auth:{ persistSession:true, autoRefreshToken:true, detectSessionInUrl:true } });
+  var me = null; // profile row
+  var buildingsCache = [];
+
+  // ───────── Auth ─────────
+  $('#f-login').addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = $('#l-email').value.trim(); var err = $('#l-error'); err.hidden = true;
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ err.textContent='Γράψε ένα έγκυρο email.'; err.hidden=false; return; }
+    var btn = $('#l-submit'); btn.disabled = true; btn.textContent = 'Αποστολή…';
+    sb.auth.signInWithOtp({ email: email, options: {
+      emailRedirectTo: location.origin + location.pathname,
+      shouldCreateUser: true,
+      data: { full_name: $('#l-name').value.trim(), phone: $('#l-phone').value.trim() }
+    }}).then(function(r){
+      btn.disabled = false; btn.textContent = 'Στείλε μου σύνδεσμο';
+      if(r.error){
+        err.textContent = /rate|security purposes/i.test(r.error.message) ? 'Έχουν σταλεί πολλά email. Δοκίμασε ξανά σε λίγα λεπτά.' : 'Δεν στάλθηκε το email: ' + r.error.message;
+        err.hidden = false; return;
+      }
+      $('#sent-to').textContent = email; show('v-sent');
+    });
+  });
+  $('#btn-back-login').addEventListener('click', function(){ show('v-login'); });
+  $('#btn-signout').addEventListener('click', function(){ sb.auth.signOut().then(function(){ me=null; $('#who').hidden=true; show('v-login'); }); });
+
+  sb.auth.onAuthStateChange(function(event, session){
+    if(event==='INITIAL_SESSION' || event==='SIGNED_IN' || event==='SIGNED_OUT'){ route(session); }
+  });
+
+  function route(session){
+    if(!session){ $('#who').hidden = true; show('v-login'); return; }
+    show('v-loading');
+    loadProfile(session.user, 0);
+  }
+
+  function loadProfile(user, tries){
+    sb.from('profiles').select('*').eq('id', user.id).maybeSingle().then(function(r){
+      if(!r.data && tries < 4){ return setTimeout(function(){ loadProfile(user, tries+1) }, 700); }
+      if(r.error || !r.data){ show('v-login'); toast('Δεν βρέθηκε ο λογαριασμός. Δοκίμασε ξανά.'); return; }
+      me = r.data;
+      $('#who-name').textContent = me.full_name || me.email; $('#who').hidden = false;
+      if(me.status !== 'approved'){ showPending(); return; }
+      show('v-app');
+      if(me.role === 'admin'){ $('#admin-tabs').hidden = false; refreshCounts(); }
+      renderProjects();
+    });
+  }
+
+  function showPending(){
+    var rejected = me.status === 'rejected';
+    $('#p-eyebrow').textContent = rejected ? 'Χωρίς πρόσβαση' : 'Σε αναμονή';
+    $('#p-title').textContent = rejected ? 'Ο λογαριασμός δεν έχει πρόσβαση' : 'Ο λογαριασμός σου περιμένει έγκριση';
+    $('#p-text').textContent = rejected
+      ? 'Αν πιστεύεις ότι πρόκειται για λάθος, επικοινώνησε με την ομάδα TAF στο info@thetafproject.gr ή στο +30 2541 200 831.'
+      : 'Η ομάδα TAF θα επιβεβαιώσει τα στοιχεία σου και θα συνδέσει τον λογαριασμό με το διαμέρισμά σου. Θα δεις την πρόοδο της οικοδομής σου μόλις γίνει η έγκριση.';
+    $('#p-name').value = me.full_name || ''; $('#p-phone').value = me.phone || '';
+    show('v-pending');
+  }
+  $('#f-profile').addEventListener('submit', function(e){
+    e.preventDefault();
+    sb.from('profiles').update({ full_name: $('#p-name').value.trim() || null, phone: $('#p-phone').value.trim() || null }).eq('id', me.id)
+      .then(function(r){ toast(r.error ? 'Δεν αποθηκεύτηκε' : 'Τα στοιχεία αποθηκεύτηκαν'); });
+  });
+
+  // ───────── Admin tabs ─────────
+  $('#admin-tabs').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-tab]'); if(!b) return;
+    $$('#admin-tabs button').forEach(function(x){ x.setAttribute('aria-selected', x===b ? 'true':'false'); });
+    ['projects','approvals','buyers','requests'].forEach(function(t){ $('#t-'+t).hidden = (t !== b.dataset.tab); });
+    ({projects:renderProjects, approvals:renderApprovals, buyers:renderBuyers, requests:renderRequests})[b.dataset.tab]();
+  });
+  function setCount(id, n){ var el=$(id); el.textContent=n; el.hidden = !n; }
+  function refreshCounts(){
+    sb.from('profiles').select('id',{count:'exact',head:true}).eq('status','pending').then(function(r){ setCount('#c-approvals', r.count||0); });
+    sb.from('requests').select('id',{count:'exact',head:true}).eq('handled',false).then(function(r){ setCount('#c-requests', r.count||0); });
+  }
+
+  // ───────── Projects (buyer + admin) ─────────
+  function renderProjects(){
+    var box = $('#t-projects'); box.innerHTML = '<p class="muted">Φόρτωση έργων…</p>';
+    Promise.all([
+      sb.from('buildings').select('*').order('name'),
+      sb.from('stages').select('*').order('position'),
+      sb.from('updates').select('*').order('published_at',{ascending:false}),
+      sb.from('memberships').select('building_id, unit:units(label)').eq('user_id', me.id)
+    ]).then(function(res){
+      var err = res.find(function(r){return r.error}); if(err){ box.innerHTML = '<div class="notice err">Δεν φορτώθηκαν τα έργα. Ανανέωσε τη σελίδα.</div>'; return; }
+      var buildings = res[0].data, stages = res[1].data, updates = res[2].data, mine = res[3].data;
+      buildingsCache = buildings;
+      if(!buildings.length){
+        box.innerHTML = '<div class="card"><h2>Δεν έχει συνδεθεί ακόμη οικοδομή</h2><p>Ο λογαριασμός σου εγκρίθηκε, αλλά δεν έχει συνδεθεί ακόμη με οικοδομή. Θα εμφανιστεί εδώ μόλις το κάνει η ομάδα TAF.</p></div>';
+        return;
+      }
+      box.innerHTML = '';
+      buildings.forEach(function(b){
+        var bStages = stages.filter(function(s){return s.building_id===b.id});
+        var bUpdates = updates.filter(function(u){return u.building_id===b.id});
+        var unit = (mine.find(function(m){return m.building_id===b.id})||{}).unit;
+        box.appendChild(buildingEl(b, bStages, bUpdates, unit && unit.label));
+      });
+      loadPhotos(box);
+    });
+  }
+
+  function buildingEl(b, stages, updates, unitLabel){
+    var admin = me.role === 'admin';
+    var current = stages.find(function(s){return s.status==='in_progress'}) || stages.find(function(s){return s.status==='pending'});
+    var el = document.createElement('article'); el.className = 'stack'; el.dataset.id = b.id;
+    var html = ''
+      + '<div class="bhead">'
+      +   '<span class="eyebrow" style="color:var(--black)">Η οικοδομή σου</span>'
+      +   '<h2>'+esc(b.name)+'</h2>'
+      +   '<p class="addr">'+esc(b.address||'')+'</p>'
+      +   (unitLabel ? '<span class="unit">Διαμέρισμα '+esc(unitLabel)+'</span>' : '')
+      +   '<div class="meter"><div class="top"><span>Συνολική πρόοδος</span><b>'+b.progress+'%</b></div>'
+      +   '<div class="track"><div class="fill" style="width:'+b.progress+'%"></div></div></div>'
+      +   '<div class="meta"><span>Τρέχον στάδιο: '+esc(current?current.name:'—')+'</span><span>Παράδοση: '+esc(b.expected_completion||'—')+'</span></div>'
+      + '</div>'
+      + '<div class="cols">'
+      +   '<div class="card"><h3>Στάδια εργασιών</h3><ol class="stages">'
+      +     stages.map(function(s){
+              return '<li class="'+s.status+'"><span class="dot">'+(s.status==='done'?'✓':s.position)+'</span><div><div class="nm">'+esc(s.name)+'</div>'
+                + '<div class="st">'+STATUS[s.status]+(s.finished_on?' · '+fmtDate(s.finished_on):(s.started_on?' · από '+fmtDate(s.started_on):''))+'</div>'
+                + (admin ? '<select data-stage="'+s.id+'" aria-label="Κατάσταση: '+esc(s.name)+'">'
+                    + ['pending','in_progress','done'].map(function(k){return '<option value="'+k+'"'+(k===s.status?' selected':'')+'>'+STATUS[k]+'</option>'}).join('')
+                    + '</select>' : '')
+                + '</div></li>';
+            }).join('')
+      +   '</ol></div>'
+      +   '<div class="stack">'
+      +     (admin ? adminBox(b, stages) : '')
+      +     '<div class="card"><h3>Ενημερώσεις από το εργοτάξιο</h3><div class="feed">'
+      +       (updates.length ? updates.map(function(u){ return updateEl(u, stages, admin) }).join('') : '<div class="empty">Δεν υπάρχουν ακόμη ενημερώσεις.</div>')
+      +     '</div></div>'
+      +   '</div>'
+      + '</div>';
+    el.innerHTML = html;
+    if(admin) wireAdmin(el, b);
+    el.addEventListener('click', function(e){
+      var a = e.target.closest('.photos a'); if(!a) return; e.preventDefault();
+      var lb = document.createElement('div'); lb.className='lightbox'; lb.innerHTML='<img alt="">'; lb.firstChild.src = a.href;
+      lb.addEventListener('click', function(){ lb.remove(); }); document.body.appendChild(lb);
+    });
+    return el;
+  }
+
+  function updateEl(u, stages, admin){
+    var st = stages.find(function(s){return s.id===u.stage_id});
+    return '<div class="upd" data-update="'+u.id+'">'
+      + '<div class="when"><span>'+fmtDate(u.published_at)+'</span>'+(st?'<span class="tag">'+esc(st.name)+'</span>':'')+'</div>'
+      + '<h4>'+esc(u.title)+'</h4>'
+      + (u.body ? '<p>'+esc(u.body)+'</p>' : '')
+      + (u.photos && u.photos.length ? '<div class="photos" data-paths="'+esc(JSON.stringify(u.photos))+'">'+u.photos.map(function(){return '<a href="#"><img alt="Φωτογραφία εργοταξίου" loading="lazy"></a>'}).join('')+'</div>' : '')
+      + (admin ? '<div><button class="btn btn-ghost btn-sm" type="button" data-del-update="'+u.id+'">Διαγραφή ενημέρωσης</button></div>' : '')
+      + '</div>';
+  }
+
+  function loadPhotos(root){
+    $$('.photos[data-paths]', root).forEach(function(g){
+      var paths = JSON.parse(g.dataset.paths||'[]'); if(!paths.length) return;
+      sb.storage.from('progress').createSignedUrls(paths, 3600).then(function(r){
+        if(r.error) return;
+        var links = $$('a', g);
+        r.data.forEach(function(x,i){ if(x.signedUrl && links[i]){ links[i].href = x.signedUrl; $('img',links[i]).src = x.signedUrl; } });
+      });
+    });
+  }
+
+  // ───────── Admin: progress, stages, new update ─────────
+  function adminBox(b, stages){
+    return '<div class="admin-box">'
+      + '<h4>Διαχείριση · '+esc(b.name)+'</h4>'
+      + '<div class="field"><label for="pr-'+b.id+'">Συνολική πρόοδος</label><div class="range-row">'
+      +   '<input type="range" min="0" max="100" step="5" id="pr-'+b.id+'" value="'+b.progress+'"><output>'+b.progress+'%</output>'
+      +   '<button class="btn btn-black btn-sm" type="button" data-save-progress>Αποθήκευση</button></div></div>'
+      + '<div class="field"><label for="ec-'+b.id+'">Εκτιμώμενη παράδοση</label><div class="range-row">'
+      +   '<input id="ec-'+b.id+'" type="text" value="'+esc(b.expected_completion||'')+'" placeholder="π.χ. Καλοκαίρι 2028" style="flex:1 1 200px">'
+      +   '<button class="btn btn-black btn-sm" type="button" data-save-ec>Αποθήκευση</button></div></div>'
+      + '<form class="stack" data-new-update novalidate>'
+      +   '<h4>Νέα ενημέρωση για τους αγοραστές</h4>'
+      +   '<div class="field"><label for="ut-'+b.id+'">Τίτλος</label><input id="ut-'+b.id+'" name="title" type="text" required maxlength="200" placeholder="π.χ. Ολοκληρώθηκε η πλάκα του 2ου ορόφου"></div>'
+      +   '<div class="field"><label for="ub-'+b.id+'">Κείμενο</label><textarea id="ub-'+b.id+'" name="body" maxlength="5000"></textarea></div>'
+      +   '<div class="row2">'
+      +     '<div class="field"><label for="us-'+b.id+'">Στάδιο</label><select id="us-'+b.id+'" name="stage"><option value="">—</option>'
+      +       stages.map(function(s){return '<option value="'+s.id+'"'+(s.status==='in_progress'?' selected':'')+'>'+esc(s.name)+'</option>'}).join('')
+      +     '</select></div>'
+      +     '<div class="field"><label for="uf-'+b.id+'">Φωτογραφίες</label><input id="uf-'+b.id+'" name="photos" type="file" accept="image/*" multiple><small>Έως 10 φωτογραφίες, μικραίνουν αυτόματα πριν το ανέβασμα.</small></div>'
+      +   '</div>'
+      +   '<div class="preview" data-preview></div>'
+      +   '<div><button class="btn btn-orange" type="submit">Δημοσίευση ενημέρωσης</button></div>'
+      + '</form>'
+      + '</div>';
+  }
+
+  function wireAdmin(el, b){
+    var range = $('#pr-'+b.id, el), out = $('output', range.parentNode);
+    range.addEventListener('input', function(){ out.textContent = range.value+'%'; });
+    $('[data-save-progress]', el).addEventListener('click', function(){
+      sb.from('buildings').update({progress: +range.value}).eq('id', b.id).then(function(r){ if(r.error) return toast('Δεν αποθηκεύτηκε'); toast('Η πρόοδος αποθηκεύτηκε'); renderProjects(); });
+    });
+    $('[data-save-ec]', el).addEventListener('click', function(){
+      sb.from('buildings').update({expected_completion: $('#ec-'+b.id, el).value.trim() || null}).eq('id', b.id).then(function(r){ if(r.error) return toast('Δεν αποθηκεύτηκε'); toast('Αποθηκεύτηκε'); renderProjects(); });
+    });
+    $$('select[data-stage]', el).forEach(function(sel){
+      sel.addEventListener('change', function(){
+        var patch = {status: sel.value}, today = new Date().toISOString().slice(0,10);
+        if(sel.value==='in_progress') patch.started_on = today;
+        if(sel.value==='done') patch.finished_on = today;
+        if(sel.value==='pending'){ patch.started_on = null; patch.finished_on = null; }
+        sb.from('stages').update(patch).eq('id', sel.dataset.stage).then(function(r){ if(r.error) return toast('Δεν αποθηκεύτηκε'); toast('Το στάδιο ενημερώθηκε'); renderProjects(); });
+      });
+    });
+    $$('[data-del-update]', el).forEach(function(btn){
+      var armed = false;
+      btn.addEventListener('click', function(){
+        if(!armed){ armed = true; btn.textContent = 'Πάτα ξανά για οριστική διαγραφή'; setTimeout(function(){ armed=false; btn.textContent='Διαγραφή ενημέρωσης'; }, 4000); return; }
+        var id = btn.dataset.delUpdate, card = btn.closest('.upd'), g = $('.photos', card);
+        var paths = g ? JSON.parse(g.dataset.paths||'[]') : [];
+        (paths.length ? sb.storage.from('progress').remove(paths) : Promise.resolve()).then(function(){
+          return sb.from('updates').delete().eq('id', id);
+        }).then(function(r){ if(r && r.error) return toast('Δεν διαγράφηκε'); toast('Η ενημέρωση διαγράφηκε'); renderProjects(); });
+      });
+    });
+    var form = $('[data-new-update]', el), fileIn = $('input[type=file]', form), prev = $('[data-preview]', form);
+    fileIn.addEventListener('change', function(){
+      prev.innerHTML = '';
+      Array.prototype.slice.call(fileIn.files, 0, 10).forEach(function(f){ var i = document.createElement('img'); i.alt=''; i.src = URL.createObjectURL(f); prev.appendChild(i); });
+    });
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var title = form.title.value.trim(); if(!title){ toast('Γράψε τίτλο'); form.title.focus(); return; }
+      var btn = $('button[type=submit]', form); btn.disabled = true; btn.textContent = 'Ανέβασμα…';
+      var updId = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()));
+      var files = Array.prototype.slice.call(fileIn.files, 0, 10);
+      var paths = [];
+      files.reduce(function(p, f, i){
+        return p.then(function(){ return shrink(f); }).then(function(blob){
+          var ext = blob.type === 'image/jpeg' ? 'jpg' : (f.name.split('.').pop()||'jpg').toLowerCase();
+          var path = b.id + '/' + updId + '/' + (i+1) + '.' + ext;
+          return sb.storage.from('progress').upload(path, blob, {contentType: blob.type || f.type, upsert:false}).then(function(r){ if(r.error) throw r.error; paths.push(path); });
+        });
+      }, Promise.resolve()).then(function(){
+        return sb.from('updates').insert({ id: updId, building_id: b.id, stage_id: form.stage.value || null, title: title, body: form.body.value.trim() || null, photos: paths });
+      }).then(function(r){
+        if(r.error) throw r.error;
+        toast('Η ενημέρωση δημοσιεύτηκε'); renderProjects();
+      }).catch(function(err){
+        btn.disabled = false; btn.textContent = 'Δημοσίευση ενημέρωσης';
+        toast('Κάτι πήγε στραβά: ' + (err && err.message ? err.message : 'δοκίμασε ξανά'));
+      });
+    });
+  }
+
+  // Resize large photos to max 2000px JPEG before upload; formats the browser cannot draw (e.g. HEIC) go up as they are.
+  function shrink(file){
+    return new Promise(function(resolve){
+      if(!/^image\/(jpeg|png|webp)$/.test(file.type)) return resolve(file);
+      var img = new Image(); var url = URL.createObjectURL(file);
+      img.onload = function(){
+        var max = 2000, w = img.naturalWidth, h = img.naturalHeight, k = Math.min(1, max/Math.max(w,h));
+        if(k === 1 && file.size < 2.5e6){ URL.revokeObjectURL(url); return resolve(file); }
+        var c = document.createElement('canvas'); c.width = Math.round(w*k); c.height = Math.round(h*k);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        c.toBlob(function(bl){ URL.revokeObjectURL(url); resolve(bl || file); }, 'image/jpeg', 0.85);
+      };
+      img.onerror = function(){ URL.revokeObjectURL(url); resolve(file); };
+      img.src = url;
+    });
+  }
+
+  // ───────── Admin: approvals ─────────
+  function buildingOptions(){
+    return buildingsCache.map(function(b){return '<option value="'+b.id+'">'+esc(b.name)+'</option>'}).join('');
+  }
+  function ensureBuildings(){
+    return buildingsCache.length ? Promise.resolve() : sb.from('buildings').select('*').order('name').then(function(r){ buildingsCache = r.data||[]; });
+  }
+  function renderApprovals(){
+    var box = $('#t-approvals'); box.innerHTML = '<p class="muted">Φόρτωση…</p>';
+    ensureBuildings().then(function(){ return sb.from('profiles').select('*').eq('status','pending').order('created_at'); }).then(function(r){
+      if(r.error){ box.innerHTML = '<div class="notice err">Δεν φορτώθηκαν οι εγγραφές.</div>'; return; }
+      if(!r.data.length){ box.innerHTML = '<div class="empty">Δεν υπάρχουν εγγραφές σε αναμονή.</div>'; return; }
+      box.innerHTML = '<div class="list">' + r.data.map(function(p){
+        return '<div class="item" data-user="'+p.id+'">'
+          + '<div class="head"><b>'+esc(p.full_name||'Χωρίς όνομα')+'</b><span class="pill warn">Σε αναμονή</span></div>'
+          + '<div class="sub">'+esc(p.email)+(p.phone?' · '+esc(p.phone):'')+' · εγγραφή '+fmtDate(p.created_at)+'</div>'
+          + '<div class="acts">'
+          +   '<div class="field"><label for="ab-'+p.id+'">Οικοδομή</label><select id="ab-'+p.id+'">'+buildingOptions()+'</select></div>'
+          +   '<div class="field"><label for="au-'+p.id+'">Διαμέρισμα</label><input id="au-'+p.id+'" type="text" maxlength="80" placeholder="π.χ. Α2 · 2ος όροφος"></div>'
+          +   '<button class="btn btn-orange btn-sm" type="button" data-approve>Έγκριση</button>'
+          +   '<button class="btn btn-ghost btn-sm" type="button" data-reject>Απόρριψη</button>'
+          + '</div></div>';
+      }).join('') + '</div>';
+      $$('.item', box).forEach(function(it){
+        var uid = it.dataset.user;
+        $('[data-approve]', it).addEventListener('click', function(){
+          var bid = $('#ab-'+uid).value, label = $('#au-'+uid).value.trim();
+          var unitP = label
+            ? sb.from('units').upsert({building_id: bid, label: label}, {onConflict:'building_id,label'}).select('id').single().then(function(r){ if(r.error) throw r.error; return r.data.id; })
+            : Promise.resolve(null);
+          unitP.then(function(unitId){
+            return sb.from('memberships').upsert({user_id: uid, building_id: bid, unit_id: unitId}, {onConflict:'user_id,building_id'});
+          }).then(function(r){ if(r.error) throw r.error; return sb.from('profiles').update({status:'approved'}).eq('id', uid); })
+            .then(function(r){ if(r.error) throw r.error; toast('Ο αγοραστής εγκρίθηκε'); refreshCounts(); renderApprovals(); })
+            .catch(function(e){ toast('Δεν ολοκληρώθηκε: ' + e.message); });
+        });
+        $('[data-reject]', it).addEventListener('click', function(){
+          sb.from('profiles').update({status:'rejected'}).eq('id', uid).then(function(r){ if(r.error) return toast('Δεν ολοκληρώθηκε'); toast('Η εγγραφή απορρίφθηκε'); refreshCounts(); renderApprovals(); });
+        });
+      });
+    });
+  }
+
+  // ───────── Admin: buyers ─────────
+  function renderBuyers(){
+    var box = $('#t-buyers'); box.innerHTML = '<p class="muted">Φόρτωση…</p>';
+    Promise.all([
+      sb.from('profiles').select('*').eq('role','buyer').neq('status','pending').order('full_name'),
+      sb.from('memberships').select('user_id, building:buildings(name), unit:units(label)')
+    ]).then(function(res){
+      if(res[0].error || res[1].error){ box.innerHTML = '<div class="notice err">Δεν φορτώθηκαν οι αγοραστές.</div>'; return; }
+      var people = res[0].data, links = res[1].data;
+      if(!people.length){ box.innerHTML = '<div class="empty">Δεν υπάρχουν ακόμη εγκεκριμένοι αγοραστές.</div>'; return; }
+      box.innerHTML = '<div class="list">' + people.map(function(p){
+        var mine = links.filter(function(l){return l.user_id===p.id});
+        var where = mine.length ? mine.map(function(l){return esc(l.building.name)+(l.unit?' · '+esc(l.unit.label):'')}).join(', ') : 'Χωρίς οικοδομή';
+        var ok = p.status==='approved';
+        return '<div class="item" data-user="'+p.id+'"><div class="head"><b>'+esc(p.full_name||p.email)+'</b><span class="pill '+(ok?'ok':'')+'">'+(ok?'Ενεργός':'Χωρίς πρόσβαση')+'</span></div>'
+          + '<div class="sub">'+esc(p.email)+(p.phone?' · '+esc(p.phone):'')+'</div><div class="sub">'+where+'</div>'
+          + '<div class="acts"><button class="btn btn-ghost btn-sm" type="button" data-toggle>'+(ok?'Ανάκληση πρόσβασης':'Επαναφορά πρόσβασης')+'</button></div></div>';
+      }).join('') + '</div>';
+      $$('.item', box).forEach(function(it){
+        $('[data-toggle]', it).addEventListener('click', function(){
+          var p = people.find(function(x){return x.id===it.dataset.user});
+          sb.from('profiles').update({status: p.status==='approved' ? 'rejected' : 'approved'}).eq('id', p.id).then(function(r){ if(r.error) return toast('Δεν ολοκληρώθηκε'); toast('Ενημερώθηκε'); renderBuyers(); });
+        });
+      });
+    });
+  }
+
+  // ───────── Admin: requests from the public site ─────────
+  function renderRequests(){
+    var box = $('#t-requests'); box.innerHTML = '<p class="muted">Φόρτωση…</p>';
+    sb.from('requests').select('*').order('created_at',{ascending:false}).limit(200).then(function(r){
+      if(r.error){ box.innerHTML = '<div class="notice err">Δεν φορτώθηκαν τα αιτήματα.</div>'; return; }
+      if(!r.data.length){ box.innerHTML = '<div class="empty">Δεν υπάρχουν αιτήματα ακόμη. Τα αιτήματα από τη φόρμα της σελίδας εμφανίζονται εδώ.</div>'; return; }
+      box.innerHTML = '<div class="list">' + r.data.map(function(q){
+        return '<div class="item" data-req="'+q.id+'"><div class="head"><b>'+esc(q.name)+'</b><span class="pill '+(q.handled?'ok':'warn')+'">'+(q.handled?'Απαντήθηκε':'Νέο')+'</span></div>'
+          + '<div class="sub">'+fmtDate(q.created_at)+' · '+esc(q.topic||'—')+' · '+esc(q.email)+(q.phone?' · '+esc(q.phone):'')+'</div>'
+          + '<p style="white-space:pre-wrap;font-size:15px">'+esc(q.message)+'</p>'
+          + '<div class="acts"><button class="btn btn-ghost btn-sm" type="button" data-handled="'+(q.handled?0:1)+'">'+(q.handled?'Σήμανση ως νέο':'Σήμανση ως απαντημένο')+'</button></div></div>';
+      }).join('') + '</div>';
+      $$('[data-handled]', box).forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var id = btn.closest('.item').dataset.req;
+          sb.from('requests').update({handled: btn.dataset.handled==='1'}).eq('id', id).then(function(r){ if(r.error) return toast('Δεν ολοκληρώθηκε'); refreshCounts(); renderRequests(); });
+        });
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
