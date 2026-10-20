@@ -174,6 +174,11 @@ img,svg{max-width:100%}
 .opt[aria-pressed="true"]{border-color:var(--orange)}
 .opt[aria-pressed="true"]::after{content:"";position:absolute;top:14px;right:14px;width:12px;height:12px;background:var(--orange);border-radius:50%}
 .opt[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.opt.addon::after{content:"";position:absolute;top:14px;right:14px;width:16px;height:16px;border:2px solid var(--line-strong);border-radius:3px;background:transparent}
+.opt.addon[aria-pressed="true"]::after{background:var(--orange);border-color:var(--orange);border-radius:3px;width:16px;height:16px}
+.opt.featured{border-color:var(--heading)}
+.opt.featured .code{color:var(--orange)}
+.opt.featured[aria-pressed="true"]{border-color:var(--orange)}
 .opt .code{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .opt h4{font-size:19px;padding-right:22px}
 .opt .meta{font-size:14px;color:var(--fg);display:grid;gap:4px}
@@ -447,38 +452,36 @@ img,svg{max-width:100%}
 
       <div class="config">
         <div class="config-main">
-          <div class="stepper" id="stepper" role="tablist" aria-label="Βήματα">
-            <button type="button" data-step="1" class="active" role="tab" aria-selected="true"><i></i><span>1 · Μέγεθος</span></button>
-            <button type="button" data-step="2" role="tab" aria-selected="false" disabled><i></i><span>2 · Πακέτο</span></button>
-            <button type="button" data-step="3" role="tab" aria-selected="false" disabled><i></i><span>3 · Όροφος</span></button>
-            <button type="button" data-step="4" role="tab" aria-selected="false" disabled><i></i><span>4 · Οικοδομή</span></button>
-            <button type="button" data-step="5" role="tab" aria-selected="false" disabled><i></i><span>Αποτέλεσμα</span></button>
-          </div>
+          <div class="stepper" id="stepper" role="tablist" aria-label="Βήματα"></div>
 
-          <div class="step active" data-step="1">
+          <div class="step active" data-key="size">
             <div class="step-title"><h3>Επίλεξε μέγεθος</h3><p>Πόσα υπνοδωμάτια χρειάζεσαι;</p></div>
             <div class="opts" id="opts-size"></div>
           </div>
-          <div class="step" data-step="2">
-            <div class="step-title"><h3>Επίλεξε πακέτο εξοπλισμού</h3><p>Τι επίπεδο φινιρίσματος θέλεις;</p></div>
+          <div class="step" data-key="package">
+            <div class="step-title"><h3>Επίλεξε πακέτο εξοπλισμού</h3><p>Τι επίπεδο φινιρίσματος θέλεις; Με το Essential μπορείς να προσθέσεις στο επόμενο βήμα επιλογές από το Signature.</p></div>
             <div class="opts" id="opts-package"></div>
           </div>
-          <div class="step" data-step="3">
+          <div class="step" data-key="addons">
+            <div class="step-title"><h3>Πρόσθετα από το Signature</h3><p>Κράτα το Essential και πρόσθεσε μόνο ό,τι θέλεις. Μπορείς να συνεχίσεις και χωρίς πρόσθετα. Οι τιμές είναι ενδεικτικές για το μέγεθος που διάλεξες.</p></div>
+            <div class="opts" id="opts-addons"></div>
+          </div>
+          <div class="step" data-key="floor">
             <div class="step-title"><h3>Επίλεξε όροφο</h3><p>Ψηλότερα σημαίνει περισσότερο φως και θέα.</p></div>
             <div class="opts" id="opts-floor"></div>
           </div>
-          <div class="step" data-step="4">
+          <div class="step" data-key="building">
             <div class="step-title"><h3>Επίλεξε οικοδομή</h3><p>Σε ποια από τις οικοδομές μας θέλεις να μείνεις;</p></div>
             <div class="opts" id="opts-building"></div>
           </div>
-          <div class="step" data-step="5">
+          <div class="step" data-key="result">
             <div class="step-title"><h3>Το σπίτι σου</h3><p>Η σύνοψη των επιλογών σου και η ενδεικτική κοστολόγηση.</p></div>
             <div class="result" id="result"></div>
           </div>
 
           <div class="config-nav" id="config-nav">
             <button type="button" class="btn btn-ghost" id="btn-back">← Πίσω</button>
-            <span class="count" id="step-count">Βήμα 1 από 4</span>
+            <span class="count" id="step-count"></span>
             <button type="button" class="btn btn-orange" id="btn-next" disabled>Επόμενο →</button>
           </div>
         </div>
@@ -497,7 +500,7 @@ img,svg{max-width:100%}
           <p class="note">Ενδεικτικές τιμές για παρουσίαση. Η τελική προσφορά διαμορφώνεται μετά από επικοινωνία και εξαρτάται από το ακριβές εμβαδόν και τις επιλογές σου.</p>
         </aside>
       </div>
-      <p class="disclaimer">Οι τιμές ξεκινούν από 2.000 €/τ.μ. Οι επιβαρύνσεις πακέτου και ορόφου είναι ενδεικτικές. Η τελική τιμή και η έκπτωση early bird επιβεβαιώνονται στην προσφορά, μετά από επικοινωνία.</p>
+      <p class="disclaimer">Οι τιμές ξεκινούν από 2.000 €/τ.μ. Οι επιβαρύνσεις πακέτου και ορόφου, καθώς και οι τιμές των πρόσθετων, είναι ενδεικτικές. Η τελική τιμή και η έκπτωση early bird επιβεβαιώνονται στην προσφορά, μετά από επικοινωνία.</p>
     </div>
   </section>
 
@@ -635,11 +638,28 @@ img,svg{max-width:100%}
     }catch(e){ return Promise.resolve(); }
   }
   // only_sizes: the package is offered only for these size codes (omit = all sizes).
+  // addons: the visitor can add single items from Signature in an extra step.
   var PACKAGES=[
-    {id:'p0',code:'Basic',name:'Basic',description:'Η οικονομική επιλογή για δυάρι',price_addition_per_sqm:-100,only_sizes:['1Y'],features:['Κλιματιστικά inverter σε όλους τους χώρους','Κουφώματα αλουμινίου','Πλακίδια και πόρτες βασικής σειράς','Χωρίς ηλιακό θερμοσίφωνα και αντλία θερμότητας']},
-    {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι',price_addition_per_sqm:0,features:['Κουφώματα αλουμινίου με θερμοδιακοπή','Ενεργειακοί υαλοπίνακες','Αντλία θερμότητας','Ηλιακός θερμοσίφωνας','Πλακίδια και πόρτες επιλογής']},
-    {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,features:['Ενδοδαπέδια θέρμανση','Ξύλινα δάπεδα στα υπνοδωμάτια','Κουζίνα με εντοιχιζόμενες συσκευές','Ηλεκτρικά ρολά']},
-    {id:'p3',code:'Signature',name:'Signature',description:'Υλικά και συστήματα κατά παραγγελία',price_addition_per_sqm:350,features:['Κουζίνα κατά παραγγελία','Μάρμαρο σε μπάνια','Smart home (φωτισμός, θέρμανση, ασφάλεια)','Συσκευές A+++']}
+    {id:'p0',code:'Basic',name:'Basic',description:'Η οικονομική επιλογή για δυάρι, μόνο με κλιματιστικά',price_addition_per_sqm:-100,only_sizes:['1Y'],features:[
+      'Κλιματιστικά inverter σε όλους τους χώρους','Ηλεκτρικός θερμοσίφωνας','Κουφώματα αλουμινίου','Πλακάκι βασικής σειράς','Βασικά είδη υγιεινής και βασική κουζίνα','Θωρακισμένη πόρτα']},
+    {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι, με πρόσθετα από το Signature',price_addition_per_sqm:0,addons:true,features:[
+      'Αντλία θερμότητας με καλοριφέρ','Ηλιακός θερμοσίφωνας','Κουφώματα αλουμινίου με θερμοδιακοπή, διπλά τζάμια','Πλακάκι μεγάλου format','Κρεμαστή λεκάνη και ντουζιέρα','Κουζίνα με συσκευές σειράς','Ντουλάπες laminate, θωρακισμένη πόρτα','Θυροτηλέφωνο με κάμερα']},
+    {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,features:[
+      'Ενδοδαπέδια θέρμανση με αντλία θερμότητας','Ζεστό νερό με ηλιακό και αντλία θερμότητας','Ηλεκτρικά ρολά στο σαλόνι','Ξύλινο δάπεδο στα υπνοδωμάτια','Χωνευτό ντους με βροχή','Κουζίνα με εντοιχιζόμενες συσκευές','Ντουλάπες λάκα, συναγερμός','Θέρμανση από το κινητό, πρίζα φόρτισης αυτοκινήτου']},
+    {id:'p3',code:'Signature',name:'Signature',description:'Τα πάντα όλα: κορυφαία υλικά και συστήματα',price_addition_per_sqm:450,badge:'Κορυφαίο πακέτο',features:[
+      'Ενδοδαπέδια θέρμανση και κρυφός κλιματισμός με αεραγωγούς','Αντλία θερμότητας ζεστού νερού και ηλιακός','Επάλληλα συρόμενα, τριπλά τζάμια, ηλεκτρικά ρολά παντού','Δρύινο δάπεδο παντού, μάρμαρο στο σαλόνι','Μπάνια με μάρμαρο, walk-in ντουζ, θερμαινόμενη πετσετοκρεμάστρα','Κουζίνα κατά παραγγελία με πάγκο χαλαζία και συσκευές κορυφαίας κατηγορίας','Ντουλάπες κατά παραγγελία, πόρτες ως το ταβάνι','Πλήρες smart home: φώτα, ρολά, κλίμα, ασφάλεια','Μηχανικός αερισμός με ανάκτηση θερμότητας, συναγερμός, κάμερες','Φορτιστής αυτοκινήτου, 2 συναντήσεις με διακοσμητή, 5 χρόνια εγγύηση εξοπλισμού']}
+  ];
+  // Indicative add-on prices per size (Δυάρι 1Y / Τριάρι 2Y / Τεσσάρι 3Y) or per sqm.
+  var ADDONS=[
+    {id:'a1',name:'Ενδοδαπέδια θέρμανση',note:'Σε όλους τους χώρους, με την αντλία θερμότητας του σπιτιού',price:{'1Y':4000,'2Y':5000,'3Y':6000}},
+    {id:'a2',name:'Ηλεκτρικά ρολά',note:'400 € ανά άνοιγμα',price:{'1Y':1600,'2Y':2000,'3Y':2800}},
+    {id:'a3',name:'Ξύλινο δάπεδο',note:'45 € ανά τ.μ.',per_sqm:45},
+    {id:'a4',name:'Μπάνιο με μάρμαρο',note:'2.500 € ανά μπάνιο',price:{'1Y':2500,'2Y':2500,'3Y':5000}},
+    {id:'a5',name:'Κουζίνα κατά παραγγελία',note:'Με πάγκο χαλαζία',price:{'1Y':4000,'2Y':5000,'3Y':6000}},
+    {id:'a6',name:'Βασικό smart home',note:'Φώτα, θέρμανση και ρολά από το κινητό',price:{'1Y':2500,'2Y':3000,'3Y':3500}},
+    {id:'a7',name:'Συναγερμός με κάμερες',note:'Με ειδοποιήσεις στο κινητό',price:{'1Y':1000,'2Y':1250,'3Y':1500}},
+    {id:'a8',name:'Μηχανικός αερισμός',note:'Με ανάκτηση θερμότητας, καθαρός αέρας χωρίς απώλειες',price:{'1Y':3500,'2Y':4250,'3Y':5000}},
+    {id:'a9',name:'Φορτιστής αυτοκινήτου',note:'Στη θέση στάθμευσης του διαμερίσματος',price:{'1Y':1500,'2Y':1500,'3Y':1500}}
   ];
   var FLOORS=[
     {id:'f1',level:1,name:'1ος όροφος',description:'Εύκολη πρόσβαση, μεγάλες βεράντες',price_addition_per_sqm:0},
@@ -651,8 +671,11 @@ img,svg{max-width:100%}
     {id:'b1',name:'Οδυσσέως',address:'Οδυσσέως 40–42 & Ζαλόγγου, Ξάνθη',area:'Κέντρο Ξάνθης',completion_date:'Σε μελέτη',available_sizes:['1Y','2Y','3Y'],available_floors:[1,2,4]},
     {id:'b2',name:'Τραπεζούντος',address:'Τραπεζούντος 12–14, Ξάνθη',area:'Κέντρο Ξάνθης',completion_date:'Σε μελέτη',available_sizes:['2Y','3Y'],available_floors:[1,2,4,6]}
   ];
-  var sel={sizeId:null,packageId:null,floorId:null,buildingId:null,earlyBird:false};
-  var step=1, maxReached=1;
+  var ORDER=['size','package','addons','floor','building','result'];
+  var LABELS={size:'Μέγεθος',package:'Πακέτο',addons:'Πρόσθετα',floor:'Όροφος',building:'Οικοδομή',result:'Αποτέλεσμα'};
+  function freshSel(){ return {sizeId:null,packageId:null,addons:[],floorId:null,buildingId:null,earlyBird:false}; }
+  var sel=freshSel();
+  var step='size', reached={size:true};
   var $=function(s,r){return (r||document).querySelector(s)};
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var eur=function(n){return '€'+Math.round(n).toLocaleString('el-GR')};
@@ -660,13 +683,26 @@ img,svg{max-width:100%}
   var signed=function(n){return (n<0?'−':'+')+eur(Math.abs(n))};
   var priceTag=function(n){return n?'<b>'+signed(n)+'/τ.μ.</b>':'<b>Χωρίς επιβάρυνση</b>'};
   var pkgFits=function(p,s){return !p.only_sizes||(!!s&&p.only_sizes.indexOf(s.code)>-1)};
+  var avgSqm=function(s){return s?Math.round((s.min_sqm+s.max_sqm)/2):0};
+  var addonPrice=function(a,s){ if(!s) return 0; return a.per_sqm ? a.per_sqm*avgSqm(s) : (a.price[s.code]||0); };
+
+  function flow(){
+    var p=find(PACKAGES,sel.packageId);
+    return ORDER.filter(function(k){ return k!=='addons' || (p&&p.addons); });
+  }
+  function invalidateFrom(key){
+    var i=ORDER.indexOf(key);
+    ORDER.forEach(function(k,j){ if(j>=i) reached[k]=false; });
+  }
 
   function calc(){
     var s=find(SIZES,sel.sizeId), p=find(PACKAGES,sel.packageId), f=find(FLOORS,sel.floorId);
     var base=s?s.base_price_per_sqm:0, pa=p?p.price_addition_per_sqm:0, fa=f?f.price_addition_per_sqm:0;
-    var list=base+pa+fa, avg=s?Math.round((s.min_sqm+s.max_sqm)/2):0;
+    var list=base+pa+fa, avg=avgSqm(s);
     var eb=sel.earlyBird, disc=eb?Math.round(list*EARLY_BIRD.pct/100):0, per=list-disc;
-    return {s:s,p:p,f:f,b:find(BUILDINGS,sel.buildingId),base:base,pa:pa,fa:fa,list:list,eb:eb,disc:disc,per:per,avg:avg,total:per*avg};
+    var ads=(p&&p.addons)?ADDONS.filter(function(a){return sel.addons.indexOf(a.id)>-1}):[];
+    var adsTotal=ads.reduce(function(t,a){return t+addonPrice(a,s)},0);
+    return {s:s,p:p,f:f,b:find(BUILDINGS,sel.buildingId),base:base,pa:pa,fa:fa,list:list,eb:eb,disc:disc,per:per,avg:avg,ads:ads,adsTotal:adsTotal,total:per*avg+adsTotal};
   }
 
   function renderOptions(){
@@ -678,10 +714,17 @@ img,svg{max-width:100%}
         +'<div class="price">από <b>'+eur(x.base_price_per_sqm)+'/τ.μ.</b></div></button>';
     }).join('');
     $('#opts-package').innerHTML=PACKAGES.filter(function(x){return pkgFits(x,c.s)}).map(function(x){
-      return '<button type="button" class="opt" data-type="packageId" data-id="'+x.id+'" aria-pressed="'+(sel.packageId===x.id)+'">'
-        +'<span class="code">'+(x.only_sizes?'Μόνο για '+SIZES.filter(function(s){return x.only_sizes.indexOf(s.code)>-1}).map(function(s){return s.name.toLowerCase()}).join(', '):'Πακέτο')+'</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.description+'</span></div>'
+      var label=x.only_sizes?'Μόνο για '+SIZES.filter(function(s){return x.only_sizes.indexOf(s.code)>-1}).map(function(s){return s.name.toLowerCase()}).join(', '):(x.badge||(x.addons?'Με πρόσθετα':'Πακέτο'));
+      return '<button type="button" class="opt'+(x.badge?' featured':'')+'" data-type="packageId" data-id="'+x.id+'" aria-pressed="'+(sel.packageId===x.id)+'">'
+        +'<span class="code">'+label+'</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.description+'</span></div>'
         +'<ul>'+x.features.map(function(f){return '<li>'+f+'</li>'}).join('')+'</ul>'
         +'<div class="price">'+priceTag(x.price_addition_per_sqm)+'</div></button>';
+    }).join('');
+    $('#opts-addons').innerHTML=ADDONS.map(function(a){
+      var on=sel.addons.indexOf(a.id)>-1;
+      return '<button type="button" class="opt addon" data-type="addon" data-id="'+a.id+'" aria-pressed="'+on+'">'
+        +'<span class="code">Από το Signature</span><h4>'+a.name+'</h4><div class="meta"><span>'+a.note+'</span></div>'
+        +'<div class="price"><b>'+(c.s?'+'+eur(addonPrice(a,c.s)):'—')+'</b> ενδεικτικά</div></button>';
     }).join('');
     $('#opts-floor').innerHTML=FLOORS.map(function(x){
       return '<button type="button" class="opt" data-type="floorId" data-id="'+x.id+'" aria-pressed="'+(sel.floorId===x.id)+'">'
@@ -708,9 +751,10 @@ img,svg{max-width:100%}
     rows+=c.f?'<div class="row"><span>'+c.f.name+'</span><b>'+signed(c.fa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Όροφος</span><b>—</b></div>';
     rows+=c.b?'<div class="row"><span>Οικοδομή</span><b>'+c.b.name+'</b></div>':'<div class="row empty"><span>Οικοδομή</span><b>—</b></div>';
     if(c.s&&c.eb) rows+='<div class="row eb"><span>Early bird −'+EARLY_BIRD.pct+'%</span><b>−'+eur(c.disc)+'/τ.μ.</b></div>';
+    if(c.ads.length) rows+='<div class="row"><span>Πρόσθετα ('+c.ads.length+')</span><b>+'+eur(c.adsTotal)+'</b></div>';
     $('#summary-rows').innerHTML=rows;
     $('#sum-sqm').textContent=c.s?eur(c.per):'—';
-    $('#sum-avg').textContent=c.s?'για ~'+c.avg+' τ.μ.':'';
+    $('#sum-avg').textContent=c.s?'για ~'+c.avg+' τ.μ.'+(c.ads.length?' με τα πρόσθετα':''):'';
     $('#sum-total').textContent=c.s?eur(c.total):'—';
   }
 
@@ -721,6 +765,7 @@ img,svg{max-width:100%}
       '<div class="result-card"><h4>Σύνοψη επιλογών</h4><dl class="kv">'
       +'<dt>Μέγεθος</dt><dd>'+c.s.name+'<small>'+c.s.bedrooms+' υπνοδωμάτι'+(c.s.bedrooms>1?'α':'ο')+' · '+c.s.min_sqm+' – '+c.s.max_sqm+' τ.μ.</small></dd>'
       +'<dt>Πακέτο</dt><dd>'+c.p.name+'<small>'+c.p.description+'</small></dd>'
+      +(c.ads.length?'<dt>Πρόσθετα</dt><dd>'+c.ads.map(function(a){return a.name}).join(', ')+'</dd>':'')
       +'<dt>Όροφος</dt><dd>'+c.f.name+'<small>'+c.f.description+'</small></dd>'
       +'<dt>Οικοδομή</dt><dd>'+c.b.name+'<small>'+c.b.address+'</small></dd>'
       +'</dl></div>'
@@ -730,73 +775,91 @@ img,svg{max-width:100%}
       +'<div class="row"><span>'+c.f.name+'</span><span>'+signed(c.fa)+'/τ.μ.</span></div>'
       +(c.eb?'<div class="row"><span>'+EARLY_BIRD.label+' (−'+EARLY_BIRD.pct+'%)</span><span>−'+eur(c.disc)+'/τ.μ.</span></div>':'')
       +'<div class="row sum"><span>Τιμή ανά τ.μ.</span><span>'+eur(c.per)+'</span></div>'
-      +'<div class="est"><small>Ενδεικτικό σύνολο για ~'+c.avg+' τ.μ.</small><b>'+eur(c.total)+'</b></div></div>'
+      +c.ads.map(function(a){return '<div class="row"><span>'+a.name+'</span><span>+'+eur(addonPrice(a,c.s))+'</span></div>'}).join('')
+      +'<div class="est"><small>Ενδεικτικό σύνολο για ~'+c.avg+' τ.μ.'+(c.ads.length?' με τα πρόσθετα':'')+'</small><b>'+eur(c.total)+'</b></div></div>'
       +'<div class="result-actions"><button type="button" class="btn btn-black" id="btn-quote">Στείλε αίτημα για αυτό το διαμέρισμα</button>'
       +'<button type="button" class="btn btn-ghost" id="btn-reset">Νέα διαμόρφωση</button>'
       +'<p class="hint">Οι επιλογές σου θα συμπληρωθούν αυτόματα στο αίτημα. Το στέλνεις με ένα κλικ.</p></div>';
     $('#btn-quote').addEventListener('click',function(){
       var msg='Ενδιαφέρομαι για διαμέρισμα με τις εξής επιλογές:\n'
         +'• Μέγεθος: '+c.s.name+' ('+c.s.min_sqm+'–'+c.s.max_sqm+' τ.μ.)\n'
-        +'• Πακέτο: '+c.p.name+'\n• Όροφος: '+c.f.name+'\n• Οικοδομή: '+c.b.name+', '+c.b.address+'\n'
+        +'• Πακέτο: '+c.p.name+'\n'
+        +(c.ads.length?'• Πρόσθετα: '+c.ads.map(function(a){return a.name}).join(', ')+' (+'+eur(c.adsTotal)+')\n':'')
+        +'• Όροφος: '+c.f.name+'\n• Οικοδομή: '+c.b.name+', '+c.b.address+'\n'
         +(c.eb?'• Early bird: ναι, αγορά πριν τα σχέδια (−'+EARLY_BIRD.pct+'%)\n':'')
-        +'Ενδεικτική τιμή: '+eur(c.per)+'/τ.μ. (~'+eur(c.total)+' για ~'+c.avg+' τ.μ.)\n\nΠαρακαλώ επικοινωνήστε μαζί μου για προσφορά.';
+        +'Ενδεικτική τιμή: '+eur(c.per)+'/τ.μ., σύνολο ~'+eur(c.total)+' για ~'+c.avg+' τ.μ.'+(c.ads.length?' με τα πρόσθετα':'')+'\n\nΠαρακαλώ επικοινωνήστε μαζί μου για προσφορά.';
       $('#f-msg').value=msg;
       $('#f-topic').value='Διαμέρισμα';
       location.hash='#contact';
       setTimeout(function(){ $('#f-name').focus(); },300);
     });
     $('#btn-reset').addEventListener('click',function(){
-      sel={sizeId:null,packageId:null,floorId:null,buildingId:null,earlyBird:false}; $('#eb').checked=false; maxReached=1; go(1);
+      sel=freshSel(); $('#eb').checked=false; reached={size:true}; go('size');
     });
   }
 
   function canProceed(){
-    return [null,sel.sizeId,sel.packageId,sel.floorId,sel.buildingId][step]!==null;
+    return ({size:sel.sizeId,package:sel.packageId,addons:true,floor:sel.floorId,building:sel.buildingId,result:true})[step]!=null;
   }
 
   var booted=false;
-  function go(n){
-    step=n; if(n>maxReached) maxReached=n;
+  function go(key){
+    var fl=flow(); if(fl.indexOf(key)<0) key=fl[0];
+    step=key; reached[key]=true;
     if(booted){ var top=$('#stepper').getBoundingClientRect().top; if(top<80||top>window.innerHeight*0.6) $('#stepper').scrollIntoView({behavior:'smooth',block:'start'}); }
-    $$('.step').forEach(function(el){ el.classList.toggle('active', +el.getAttribute('data-step')===n); });
-    $$('#stepper button').forEach(function(b){
-      var k=+b.getAttribute('data-step');
-      b.classList.toggle('active',k===n); b.classList.toggle('done',k<n);
-      b.setAttribute('aria-selected',k===n?'true':'false');
-      b.disabled = k>maxReached;
-    });
-    $('#config-nav').hidden = n===5;
-    $('#summary').hidden = n===5;
-    $('#btn-back').disabled = n===1;
-    $('#step-count').textContent='Βήμα '+n+' από 4';
-    $('#btn-next').textContent = n===4?'Δες το αποτέλεσμα →':'Επόμενο →';
+    $$('.step').forEach(function(el){ el.classList.toggle('active', el.getAttribute('data-key')===key); });
+    renderChrome();
+    renderOptions(); renderSummary(); if(key==='result') renderResult();
+  }
+  // Stepper, step counter and Next label; re-run whenever the flow can change (e.g. package picked).
+  function renderChrome(){
+    var key=step, fl=flow(), idx=fl.indexOf(key), total=fl.length-1;
+    var st=$('#stepper'); st.style.gridTemplateColumns='repeat('+fl.length+',minmax(0,1fr))';
+    st.innerHTML=fl.map(function(k,i){
+      var lbl=k==='result'?LABELS[k]:(i+1)+' · '+LABELS[k];
+      return '<button type="button" data-key="'+k+'" role="tab" class="'+(k===key?'active':(i<idx?'done':''))+'" aria-selected="'+(k===key)+'"'+(reached[k]?'':' disabled')+'><i></i><span>'+lbl+'</span></button>';
+    }).join('');
+    $('#config-nav').hidden = key==='result';
+    $('#summary').hidden = key==='result';
+    $('#btn-back').disabled = idx===0;
+    $('#step-count').textContent = key==='result' ? '' : 'Βήμα '+(idx+1)+' από '+total;
+    $('#btn-next').textContent = fl[idx+1]==='result' ? 'Δες το αποτέλεσμα →' : 'Επόμενο →';
     $('#btn-next').disabled=!canProceed();
-    renderOptions(); renderSummary(); if(n===5) renderResult();
   }
 
   document.addEventListener('click',function(e){
     var opt=e.target.closest('.opt'); if(!opt||opt.disabled) return;
     var type=opt.getAttribute('data-type'), id=opt.getAttribute('data-id');
+    if(type==='addon'){
+      var i=sel.addons.indexOf(id); if(i>-1) sel.addons.splice(i,1); else sel.addons.push(id);
+      renderOptions(); renderSummary(); return;
+    }
+    var prev=sel[type];
     sel[type]=id;
     if(type==='sizeId'){
       var cp=find(PACKAGES,sel.packageId);
-      if(cp&&!pkgFits(cp,find(SIZES,id))){ sel.packageId=null; if(maxReached>2) maxReached=2; toast('Το πακέτο '+cp.name+' δεν διατίθεται για αυτό το μέγεθος. Διάλεξε ξανά πακέτο.'); }
+      if(cp&&!pkgFits(cp,find(SIZES,id))){ sel.packageId=null; sel.addons=[]; invalidateFrom('package'); toast('Το πακέτο '+cp.name+' δεν διατίθεται για αυτό το μέγεθος. Διάλεξε ξανά πακέτο.'); }
+    }
+    if(type==='packageId' && prev!==id){
+      var np=find(PACKAGES,id);
+      if(!np.addons && sel.addons.length){ sel.addons=[]; toast('Τα πρόσθετα αφαιρέθηκαν, γιατί περιλαμβάνονται μόνο στο Essential.'); }
+      reached.addons=false;
     }
     if(type==='sizeId'||type==='floorId'){
       var c=calc();
       if(c.b){
         var sizeOk=!c.s||c.b.available_sizes.indexOf(c.s.code)>-1;
         var floorOk=!c.f||c.b.available_floors.indexOf(c.f.level)>-1;
-        if(!sizeOk||!floorOk){ sel.buildingId=null; if(maxReached>4) maxReached=4; }
+        if(!sizeOk||!floorOk){ sel.buildingId=null; invalidateFrom('result'); }
       }
     }
-    renderOptions(); renderSummary(); $('#btn-next').disabled=!canProceed();
+    renderOptions(); renderSummary(); renderChrome();
   });
-  $('#eb').addEventListener('change',function(){ sel.earlyBird=$('#eb').checked; renderSummary(); if(step===5) renderResult(); });
-  $('#btn-next').addEventListener('click',function(){ if(canProceed()&&step<5) go(step+1); });
-  $('#btn-back').addEventListener('click',function(){ if(step>1) go(step-1); });
-  $('#stepper').addEventListener('click',function(e){ var b=e.target.closest('button'); if(b&&!b.disabled) go(+b.getAttribute('data-step')); });
-  go(1); booted=true;
+  $('#eb').addEventListener('change',function(){ sel.earlyBird=$('#eb').checked; renderSummary(); if(step==='result') renderResult(); });
+  $('#btn-next').addEventListener('click',function(){ var fl=flow(), i=fl.indexOf(step); if(canProceed()&&i<fl.length-1) go(fl[i+1]); });
+  $('#btn-back').addEventListener('click',function(){ var fl=flow(), i=fl.indexOf(step); if(i>0) go(fl[i-1]); });
+  $('#stepper').addEventListener('click',function(e){ var b=e.target.closest('button'); if(b&&!b.disabled) go(b.getAttribute('data-key')); });
+  go('size'); booted=true;
 
   // Contact helpers
   var toastT;
