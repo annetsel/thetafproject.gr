@@ -459,11 +459,11 @@ img,svg{max-width:100%}
             <div class="opts" id="opts-size"></div>
           </div>
           <div class="step" data-key="package">
-            <div class="step-title"><h3>Επίλεξε πακέτο εξοπλισμού</h3><p>Τι επίπεδο φινιρίσματος θέλεις; Με το Essential μπορείς να προσθέσεις στο επόμενο βήμα επιλογές από το Signature.</p></div>
+            <div class="step-title"><h3>Επίλεξε πακέτο εξοπλισμού</h3><p>Τι επίπεδο φινιρίσματος θέλεις; Σε κάθε πακέτο εκτός από το Signature μπορείς να προσθέσεις στο επόμενο βήμα επιλογές από το Signature.</p></div>
             <div class="opts" id="opts-package"></div>
           </div>
           <div class="step" data-key="addons">
-            <div class="step-title"><h3>Πρόσθετα από το Signature</h3><p>Κράτα το Essential και πρόσθεσε μόνο ό,τι θέλεις. Μπορείς να συνεχίσεις και χωρίς πρόσθετα. Οι τιμές είναι ενδεικτικές για το μέγεθος που διάλεξες.</p></div>
+            <div class="step-title"><h3>Πρόσθετα από το Signature</h3><p>Κράτα το πακέτο σου και πρόσθεσε μόνο ό,τι θέλεις. Μπορείς να συνεχίσεις και χωρίς πρόσθετα. Οι τιμές είναι ενδεικτικές για το μέγεθος που διάλεξες.</p></div>
             <div class="opts" id="opts-addons"></div>
           </div>
           <div class="step" data-key="floor">
@@ -638,20 +638,20 @@ img,svg{max-width:100%}
     }catch(e){ return Promise.resolve(); }
   }
   // only_sizes: the package is offered only for these size codes (omit = all sizes).
-  // addons: the visitor can add single items from Signature in an extra step.
+  // addons: the visitor can add single items from Signature in an extra step (every package except Signature).
   var PACKAGES=[
-    {id:'p0',code:'Basic',name:'Basic',description:'Η οικονομική επιλογή για δυάρι, μόνο με κλιματιστικά',price_addition_per_sqm:-100,only_sizes:['1Y'],features:[
+    {id:'p0',code:'Basic',name:'Basic',description:'Η οικονομική επιλογή για δυάρι, μόνο με κλιματιστικά',price_addition_per_sqm:-100,only_sizes:['1Y'],addons:true,features:[
       'Κλιματιστικά inverter σε όλους τους χώρους','Ηλεκτρικός θερμοσίφωνας','Κουφώματα αλουμινίου','Πλακάκι βασικής σειράς','Βασικά είδη υγιεινής και βασική κουζίνα','Θωρακισμένη πόρτα']},
-    {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι, με πρόσθετα από το Signature',price_addition_per_sqm:0,addons:true,features:[
+    {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι',price_addition_per_sqm:0,addons:true,features:[
       'Αντλία θερμότητας με καλοριφέρ','Ηλιακός θερμοσίφωνας','Κουφώματα αλουμινίου με θερμοδιακοπή, διπλά τζάμια','Πλακάκι μεγάλου format','Κρεμαστή λεκάνη και ντουζιέρα','Κουζίνα με συσκευές σειράς','Ντουλάπες laminate, θωρακισμένη πόρτα','Θυροτηλέφωνο με κάμερα']},
-    {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,features:[
+    {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,addons:true,features:[
       'Ενδοδαπέδια θέρμανση με αντλία θερμότητας','Ζεστό νερό με ηλιακό και αντλία θερμότητας','Ηλεκτρικά ρολά στο σαλόνι','Ξύλινο δάπεδο στα υπνοδωμάτια','Χωνευτό ντους με βροχή','Κουζίνα με εντοιχιζόμενες συσκευές','Ντουλάπες λάκα, συναγερμός','Θέρμανση από το κινητό, πρίζα φόρτισης αυτοκινήτου']},
     {id:'p3',code:'Signature',name:'Signature',description:'Τα πάντα όλα: κορυφαία υλικά και συστήματα',price_addition_per_sqm:450,badge:'Κορυφαίο πακέτο',features:[
       'Ενδοδαπέδια θέρμανση και κρυφός κλιματισμός με αεραγωγούς','Αντλία θερμότητας ζεστού νερού και ηλιακός','Επάλληλα συρόμενα, τριπλά τζάμια, ηλεκτρικά ρολά παντού','Δρύινο δάπεδο παντού, μάρμαρο στο σαλόνι','Μπάνια με μάρμαρο, walk-in ντουζ, θερμαινόμενη πετσετοκρεμάστρα','Κουζίνα κατά παραγγελία με πάγκο χαλαζία και συσκευές κορυφαίας κατηγορίας','Ντουλάπες κατά παραγγελία, πόρτες ως το ταβάνι','Πλήρες smart home: φώτα, ρολά, κλίμα, ασφάλεια','Μηχανικός αερισμός με ανάκτηση θερμότητας, συναγερμός, κάμερες','Φορτιστής αυτοκινήτου, 2 συναντήσεις με διακοσμητή, 5 χρόνια εγγύηση εξοπλισμού']}
   ];
   // Indicative add-on prices per size (Δυάρι 1Y / Τριάρι 2Y / Τεσσάρι 3Y) or per sqm.
   var ADDONS=[
-    {id:'a1',name:'Ενδοδαπέδια θέρμανση',note:'Σε όλους τους χώρους, με την αντλία θερμότητας του σπιτιού',price:{'1Y':4000,'2Y':5000,'3Y':6000}},
+    {id:'a1',name:'Ενδοδαπέδια θέρμανση',note:'Σε όλους τους χώρους, με την αντλία θερμότητας του σπιτιού',not_for:['p0','p2'],price:{'1Y':4000,'2Y':5000,'3Y':6000}},
     {id:'a2',name:'Ηλεκτρικά ρολά',note:'400 € ανά άνοιγμα',price:{'1Y':1600,'2Y':2000,'3Y':2800}},
     {id:'a3',name:'Ξύλινο δάπεδο',note:'45 € ανά τ.μ.',per_sqm:45},
     {id:'a4',name:'Μπάνιο με μάρμαρο',note:'2.500 € ανά μπάνιο',price:{'1Y':2500,'2Y':2500,'3Y':5000}},
@@ -684,6 +684,7 @@ img,svg{max-width:100%}
   var priceTag=function(n){return n?'<b>'+signed(n)+'/τ.μ.</b>':'<b>Χωρίς επιβάρυνση</b>'};
   var pkgFits=function(p,s){return !p.only_sizes||(!!s&&p.only_sizes.indexOf(s.code)>-1)};
   var avgSqm=function(s){return s?Math.round((s.min_sqm+s.max_sqm)/2):0};
+  var addonFits=function(a,p){return !!(p&&p.addons)&&(!a.not_for||a.not_for.indexOf(p.id)<0)};
   var addonPrice=function(a,s){ if(!s) return 0; return a.per_sqm ? a.per_sqm*avgSqm(s) : (a.price[s.code]||0); };
 
   function flow(){
@@ -700,7 +701,7 @@ img,svg{max-width:100%}
     var base=s?s.base_price_per_sqm:0, pa=p?p.price_addition_per_sqm:0, fa=f?f.price_addition_per_sqm:0;
     var list=base+pa+fa, avg=avgSqm(s);
     var eb=sel.earlyBird, disc=eb?Math.round(list*EARLY_BIRD.pct/100):0, per=list-disc;
-    var ads=(p&&p.addons)?ADDONS.filter(function(a){return sel.addons.indexOf(a.id)>-1}):[];
+    var ads=ADDONS.filter(function(a){return sel.addons.indexOf(a.id)>-1 && addonFits(a,p)});
     var adsTotal=ads.reduce(function(t,a){return t+addonPrice(a,s)},0);
     return {s:s,p:p,f:f,b:find(BUILDINGS,sel.buildingId),base:base,pa:pa,fa:fa,list:list,eb:eb,disc:disc,per:per,avg:avg,ads:ads,adsTotal:adsTotal,total:per*avg+adsTotal};
   }
@@ -714,13 +715,13 @@ img,svg{max-width:100%}
         +'<div class="price">από <b>'+eur(x.base_price_per_sqm)+'/τ.μ.</b></div></button>';
     }).join('');
     $('#opts-package').innerHTML=PACKAGES.filter(function(x){return pkgFits(x,c.s)}).map(function(x){
-      var label=x.only_sizes?'Μόνο για '+SIZES.filter(function(s){return x.only_sizes.indexOf(s.code)>-1}).map(function(s){return s.name.toLowerCase()}).join(', '):(x.badge||(x.addons?'Με πρόσθετα':'Πακέτο'));
+      var label=x.only_sizes?'Μόνο για '+SIZES.filter(function(s){return x.only_sizes.indexOf(s.code)>-1}).map(function(s){return s.name.toLowerCase()}).join(', '):(x.badge||'Πακέτο');
       return '<button type="button" class="opt'+(x.badge?' featured':'')+'" data-type="packageId" data-id="'+x.id+'" aria-pressed="'+(sel.packageId===x.id)+'">'
         +'<span class="code">'+label+'</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.description+'</span></div>'
         +'<ul>'+x.features.map(function(f){return '<li>'+f+'</li>'}).join('')+'</ul>'
         +'<div class="price">'+priceTag(x.price_addition_per_sqm)+'</div></button>';
     }).join('');
-    $('#opts-addons').innerHTML=ADDONS.map(function(a){
+    $('#opts-addons').innerHTML=ADDONS.filter(function(a){return addonFits(a,c.p)}).map(function(a){
       var on=sel.addons.indexOf(a.id)>-1;
       return '<button type="button" class="opt addon" data-type="addon" data-id="'+a.id+'" aria-pressed="'+on+'">'
         +'<span class="code">Από το Signature</span><h4>'+a.name+'</h4><div class="meta"><span>'+a.note+'</span></div>'
@@ -842,7 +843,11 @@ img,svg{max-width:100%}
     }
     if(type==='packageId' && prev!==id){
       var np=find(PACKAGES,id);
-      if(!np.addons && sel.addons.length){ sel.addons=[]; toast('Τα πρόσθετα αφαιρέθηκαν, γιατί περιλαμβάνονται μόνο στο Essential.'); }
+      var dropped=ADDONS.filter(function(a){return sel.addons.indexOf(a.id)>-1 && !addonFits(a,np)});
+      if(dropped.length){
+        sel.addons=sel.addons.filter(function(id){return !dropped.some(function(a){return a.id===id})});
+        toast(np.addons ? dropped.map(function(a){return a.name}).join(', ')+': δεν προσφέρεται ως πρόσθετο στο '+np.name+'.' : 'Τα πρόσθετα αφαιρέθηκαν, γιατί το '+np.name+' τα περιλαμβάνει ήδη.');
+      }
       reached.addons=false;
     }
     if(type==='sizeId'||type==='floorId'){
