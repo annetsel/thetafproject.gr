@@ -634,8 +634,10 @@ img,svg{max-width:100%}
       return fetch(PORTAL.url+'/rest/v1/requests',{method:'POST',headers:{'Content-Type':'application/json',apikey:PORTAL.key,Authorization:'Bearer '+PORTAL.key,Prefer:'return=minimal'},body:JSON.stringify(rec)}).catch(function(){});
     }catch(e){ return Promise.resolve(); }
   }
+  // only_sizes: the package is offered only for these size codes (omit = all sizes).
   var PACKAGES=[
-    {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι',price_addition_per_sqm:0,features:['Κουφώματα αλουμινίου με θερμοδιακοπή','Ενεργειακοί υαλοπίνακες','Αντλία θερμότητας','Πλακίδια και πόρτες επιλογής']},
+    {id:'p0',code:'Basic',name:'Basic',description:'Η οικονομική επιλογή για δυάρι',price_addition_per_sqm:-100,only_sizes:['1Y'],features:['Κλιματιστικά inverter σε όλους τους χώρους','Κουφώματα αλουμινίου','Πλακίδια και πόρτες βασικής σειράς','Χωρίς ηλιακό θερμοσίφωνα και αντλία θερμότητας']},
+    {id:'p1',code:'Essential',name:'Essential',description:'Ό,τι χρειάζεται ένα σύγχρονο σπίτι',price_addition_per_sqm:0,features:['Κουφώματα αλουμινίου με θερμοδιακοπή','Ενεργειακοί υαλοπίνακες','Αντλία θερμότητας','Ηλιακός θερμοσίφωνας','Πλακίδια και πόρτες επιλογής']},
     {id:'p2',code:'Comfort',name:'Comfort',description:'Περισσότερη άνεση στην καθημερινότητα',price_addition_per_sqm:150,features:['Ενδοδαπέδια θέρμανση','Ξύλινα δάπεδα στα υπνοδωμάτια','Κουζίνα με εντοιχιζόμενες συσκευές','Ηλεκτρικά ρολά']},
     {id:'p3',code:'Signature',name:'Signature',description:'Υλικά και συστήματα κατά παραγγελία',price_addition_per_sqm:350,features:['Κουζίνα κατά παραγγελία','Μάρμαρο σε μπάνια','Smart home (φωτισμός, θέρμανση, ασφάλεια)','Συσκευές A+++']}
   ];
@@ -655,6 +657,9 @@ img,svg{max-width:100%}
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var eur=function(n){return '€'+Math.round(n).toLocaleString('el-GR')};
   var find=function(arr,id){for(var i=0;i<arr.length;i++) if(arr[i].id===id) return arr[i]; return null};
+  var signed=function(n){return (n<0?'−':'+')+eur(Math.abs(n))};
+  var priceTag=function(n){return n?'<b>'+signed(n)+'/τ.μ.</b>':'<b>Χωρίς επιβάρυνση</b>'};
+  var pkgFits=function(p,s){return !p.only_sizes||(!!s&&p.only_sizes.indexOf(s.code)>-1)};
 
   function calc(){
     var s=find(SIZES,sel.sizeId), p=find(PACKAGES,sel.packageId), f=find(FLOORS,sel.floorId);
@@ -672,16 +677,16 @@ img,svg{max-width:100%}
         +'<div class="meta"><span>'+x.bedrooms+' υπνοδωμάτι'+(x.bedrooms>1?'α':'ο')+'</span><span>'+x.min_sqm+' – '+x.max_sqm+' τ.μ.</span></div>'
         +'<div class="price">από <b>'+eur(x.base_price_per_sqm)+'/τ.μ.</b></div></button>';
     }).join('');
-    $('#opts-package').innerHTML=PACKAGES.map(function(x){
+    $('#opts-package').innerHTML=PACKAGES.filter(function(x){return pkgFits(x,c.s)}).map(function(x){
       return '<button type="button" class="opt" data-type="packageId" data-id="'+x.id+'" aria-pressed="'+(sel.packageId===x.id)+'">'
-        +'<span class="code">Πακέτο</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.description+'</span></div>'
+        +'<span class="code">'+(x.only_sizes?'Μόνο για '+SIZES.filter(function(s){return x.only_sizes.indexOf(s.code)>-1}).map(function(s){return s.name.toLowerCase()}).join(', '):'Πακέτο')+'</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.description+'</span></div>'
         +'<ul>'+x.features.map(function(f){return '<li>'+f+'</li>'}).join('')+'</ul>'
-        +'<div class="price">'+(x.price_addition_per_sqm?'<b>+'+eur(x.price_addition_per_sqm)+'/τ.μ.</b>':'<b>Χωρίς επιβάρυνση</b>')+'</div></button>';
+        +'<div class="price">'+priceTag(x.price_addition_per_sqm)+'</div></button>';
     }).join('');
     $('#opts-floor').innerHTML=FLOORS.map(function(x){
       return '<button type="button" class="opt" data-type="floorId" data-id="'+x.id+'" aria-pressed="'+(sel.floorId===x.id)+'">'
         +'<span class="code">Όροφος</span><h4>'+x.name+'</h4><div class="meta"><span>'+x.description+'</span></div>'
-        +'<div class="price">'+(x.price_addition_per_sqm?'<b>+'+eur(x.price_addition_per_sqm)+'/τ.μ.</b>':'<b>Χωρίς επιβάρυνση</b>')+'</div></button>';
+        +'<div class="price">'+priceTag(x.price_addition_per_sqm)+'</div></button>';
     }).join('');
     $('#opts-building').innerHTML=BUILDINGS.map(function(x){
       var sizeOk=!c.s||x.available_sizes.indexOf(c.s.code)>-1;
@@ -699,8 +704,8 @@ img,svg{max-width:100%}
     var c=calc();
     var rows='';
     rows+=c.s?'<div class="row"><span>Βάση · '+c.s.name+'</span><b>'+eur(c.base)+'/τ.μ.</b></div>':'<div class="row empty"><span>Μέγεθος</span><b>—</b></div>';
-    rows+=c.p?'<div class="row"><span>Πακέτο '+c.p.name+'</span><b>+'+eur(c.pa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Πακέτο</span><b>—</b></div>';
-    rows+=c.f?'<div class="row"><span>'+c.f.name+'</span><b>+'+eur(c.fa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Όροφος</span><b>—</b></div>';
+    rows+=c.p?'<div class="row"><span>Πακέτο '+c.p.name+'</span><b>'+signed(c.pa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Πακέτο</span><b>—</b></div>';
+    rows+=c.f?'<div class="row"><span>'+c.f.name+'</span><b>'+signed(c.fa)+'/τ.μ.</b></div>':'<div class="row empty"><span>Όροφος</span><b>—</b></div>';
     rows+=c.b?'<div class="row"><span>Οικοδομή</span><b>'+c.b.name+'</b></div>':'<div class="row empty"><span>Οικοδομή</span><b>—</b></div>';
     if(c.s&&c.eb) rows+='<div class="row eb"><span>Early bird −'+EARLY_BIRD.pct+'%</span><b>−'+eur(c.disc)+'/τ.μ.</b></div>';
     $('#summary-rows').innerHTML=rows;
@@ -721,8 +726,8 @@ img,svg{max-width:100%}
       +'</dl></div>'
       +'<div class="result-card result-price"><h4>Ενδεικτική κοστολόγηση</h4>'
       +'<div class="row"><span>Βασική τιμή</span><span>'+eur(c.base)+'/τ.μ.</span></div>'
-      +'<div class="row"><span>Πακέτο '+c.p.name+'</span><span>+'+eur(c.pa)+'/τ.μ.</span></div>'
-      +'<div class="row"><span>'+c.f.name+'</span><span>+'+eur(c.fa)+'/τ.μ.</span></div>'
+      +'<div class="row"><span>Πακέτο '+c.p.name+'</span><span>'+signed(c.pa)+'/τ.μ.</span></div>'
+      +'<div class="row"><span>'+c.f.name+'</span><span>'+signed(c.fa)+'/τ.μ.</span></div>'
       +(c.eb?'<div class="row"><span>'+EARLY_BIRD.label+' (−'+EARLY_BIRD.pct+'%)</span><span>−'+eur(c.disc)+'/τ.μ.</span></div>':'')
       +'<div class="row sum"><span>Τιμή ανά τ.μ.</span><span>'+eur(c.per)+'</span></div>'
       +'<div class="est"><small>Ενδεικτικό σύνολο για ~'+c.avg+' τ.μ.</small><b>'+eur(c.total)+'</b></div></div>'
@@ -773,6 +778,10 @@ img,svg{max-width:100%}
     var opt=e.target.closest('.opt'); if(!opt||opt.disabled) return;
     var type=opt.getAttribute('data-type'), id=opt.getAttribute('data-id');
     sel[type]=id;
+    if(type==='sizeId'){
+      var cp=find(PACKAGES,sel.packageId);
+      if(cp&&!pkgFits(cp,find(SIZES,id))){ sel.packageId=null; if(maxReached>2) maxReached=2; toast('Το πακέτο '+cp.name+' δεν διατίθεται για αυτό το μέγεθος. Διάλεξε ξανά πακέτο.'); }
+    }
     if(type==='sizeId'||type==='floorId'){
       var c=calc();
       if(c.b){
