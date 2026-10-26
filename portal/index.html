@@ -150,6 +150,51 @@ main{padding-block:28px 64px}
 .toast.show{opacity:1}
 .lightbox{position:fixed;inset:0;background:rgba(16,15,13,.92);display:grid;place-items:center;z-index:60;padding:20px;cursor:zoom-out}
 .lightbox img{max-height:90vh;max-width:100%;object-fit:contain;border-radius:var(--radius)}
+/* Pricing (admin) */
+.pr-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(16,15,13,.2);border:1px solid rgba(16,15,13,.2);border-radius:var(--radius);overflow:hidden}
+.pr-tiles .tile{background:var(--orange);color:var(--on-orange);padding:14px 16px;display:grid;gap:2px;min-width:0}
+.pr-tiles small{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(16,15,13,.7)}
+.pr-tiles b{font-size:24px;font-weight:800;color:var(--black);font-variant-numeric:tabular-nums}
+.pr-tiles span{font-size:13px;color:rgba(16,15,13,.75)}
+@media (max-width:760px){.pr-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pr-controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1.5px solid var(--line-strong);border-radius:var(--radius);overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--fg);font-weight:700;font-size:14px;padding:8px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--black);color:var(--paper)}
+@media (prefers-color-scheme: dark){.seg button[aria-pressed="true"]{background:var(--orange);color:var(--on-orange)}}
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.tablebox table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.tablebox th,.tablebox td{padding:8px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line);font-size:14px}
+.tablebox thead th{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;background:var(--surface)}
+.tablebox thead tr.grp th{font-size:13px;color:var(--heading);border-bottom:2px solid var(--orange);text-align:center}
+.tablebox .rowh{text-align:left;font-weight:700;color:var(--heading);background:var(--surface);position:sticky;left:0;z-index:1}
+.tablebox .rowh small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.tablebox td.v{background:rgba(16,15,13,.03)}
+.tablebox td.v.planned{background:rgba(226,63,37,.12);font-weight:700;color:var(--heading)}
+.tablebox .sep{border-left:2px solid var(--line-strong)}
+.tablebox tbody tr:last-child td{border-bottom:0}
+.tablebox .lt{text-align:left;white-space:normal;min-width:160px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;background:rgba(226,63,37,.3);vertical-align:-1px;margin-right:6px;border:1px solid var(--line-strong)}
+.pr-assume{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.pr-assume{grid-template-columns:1fr}}
+.pr-assume .card{gap:10px;padding:16px;align-content:start}
+.pr-assume h4{font-size:15px}
+.pr-assume .f{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:10px;align-items:center;font-size:14px}
+.pr-assume .f input{font-size:15px;font-variant-numeric:tabular-nums;text-align:right;padding:7px 9px;border:1.5px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);color:var(--fg);width:100%;min-width:0}
+.pr-assume .f input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(226,63,37,.2)}
+.pr-stat{display:grid;gap:8px}
+.pr-stat .r{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--line);font-size:14px}
+.pr-stat .r:last-child{border-bottom:0;padding-bottom:0}
+.pr-stat b{font-variant-numeric:tabular-nums;color:var(--heading)}
+.pr-cols{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.pr-cols{grid-template-columns:1fr}}
+.pr-notes{margin:0;padding-left:18px;display:grid;gap:8px;font-size:14px;max-width:80ch}
+.pr-sources{font-size:13px;display:grid;gap:4px}
+.pr-addcomp{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;align-items:end}
+.pr-addcomp .field input,.pr-addcomp .field select{font-size:14px;padding:8px 10px}
+.pr-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.pr-head h3{font-size:19px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 </head>
@@ -254,11 +299,13 @@ main{padding-block:28px 64px}
       <button type="button" role="tab" data-tab="approvals" aria-selected="false">Εγκρίσεις<span class="count" id="c-approvals" hidden></span></button>
       <button type="button" role="tab" data-tab="buyers" aria-selected="false">Αγοραστές</button>
       <button type="button" role="tab" data-tab="requests" aria-selected="false">Αιτήματα<span class="count" id="c-requests" hidden></span></button>
+      <button type="button" role="tab" data-tab="pricing" aria-selected="false">Τιμολόγηση</button>
     </nav>
     <div id="t-projects" class="stack"></div>
     <div id="t-approvals" class="stack" hidden></div>
     <div id="t-buyers" class="stack" hidden></div>
     <div id="t-requests" class="stack" hidden></div>
+    <div id="t-pricing" class="stack" hidden></div>
   </section>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -352,8 +399,8 @@ window.TAF_CONFIG = { url: 'https://brnhkfagxiucciumxblt.supabase.co', key: 'sb_
   $('#admin-tabs').addEventListener('click', function(e){
     var b = e.target.closest('button[data-tab]'); if(!b) return;
     $$('#admin-tabs button').forEach(function(x){ x.setAttribute('aria-selected', x===b ? 'true':'false'); });
-    ['projects','approvals','buyers','requests'].forEach(function(t){ $('#t-'+t).hidden = (t !== b.dataset.tab); });
-    ({projects:renderProjects, approvals:renderApprovals, buyers:renderBuyers, requests:renderRequests})[b.dataset.tab]();
+    ['projects','approvals','buyers','requests','pricing'].forEach(function(t){ $('#t-'+t).hidden = (t !== b.dataset.tab); });
+    ({projects:renderProjects, approvals:renderApprovals, buyers:renderBuyers, requests:renderRequests, pricing:renderPricing})[b.dataset.tab]();
   });
   function setCount(id, n){ var el=$(id); el.textContent=n; el.hidden = !n; }
   function refreshCounts(){
@@ -643,6 +690,209 @@ window.TAF_CONFIG = { url: 'https://brnhkfagxiucciumxblt.supabase.co', key: 'sb_
         });
       });
     });
+  }
+
+  // ───────── Admin: pricing (assumptions + comparables live in Supabase, admin-only RLS) ─────────
+  var PR = {
+    DEFAULTS: {b1:2250,b2:2100,b3:1950,fl:1.5,top:6,tr:-3,p0:-100,p1:0,p2:150,p3:450,sqm1:53,sqm2:80,sqm3:115},
+    SIZES: [{k:'b1',sq:'sqm1',name:'Δυάρι'},{k:'b2',sq:'sqm2',name:'Τριάρι'},{k:'b3',sq:'sqm3',name:'Τεσσάρι'}],
+    PKGS: [{k:'p0',name:'Basic',only:'b1'},{k:'p1',name:'Essential'},{k:'p2',name:'Comfort'},{k:'p3',name:'Signature'}],
+    FLOORS: [1,2,3,4,5,6],
+    // Planned units per floor in the Οδυσσέως layout (sheet «Αγοραία Αξία», 6-storey scenario)
+    PLANNED_OD: {1:['b1','b2'],2:['b1','b2'],3:['b1','b2'],4:['b2'],5:['b3'],6:['b3']},
+    UNITS_OD: {1:'Α1 56 · Α2 81 · Α3 80',2:'Β1 56 · Β2 81 · Β3 80',3:'Γ1 47 · Γ2 47 · Γ3 43 · Γ4 80',4:'Δ1–Δ3 73',5:'Ε1–Ε2 110',6:'Ζ1–Ζ2 110'},
+    A: null, comps: [], building:'od', unit:'sqm', dirty:false, updatedAt:null
+  };
+  var fmtN = function(n){ return Math.round(n).toLocaleString('el-GR') };
+  var fmtMonth = function(d){ try{ return new Date(d).toLocaleDateString('el-GR',{month:'short',year:'numeric'}) }catch(e){ return d } };
+  var r10 = function(x){ return Math.round(x/10)*10 };
+  function prPrice(b, size, pkg, floor){
+    var A = PR.A;
+    var m = (1 + A.fl/100*(floor-1)) * (floor===6 ? 1+A.top/100 : 1) * (b==='tr' ? 1+A.tr/100 : 1);
+    return r10(A[size]*m + A[pkg]);
+  }
+  function median(v){ v=v.slice().sort(function(a,b){return a-b}); var n=v.length; return n ? (n%2 ? v[(n-1)/2] : (v[n/2-1]+v[n/2])/2) : 0; }
+
+  function renderPricing(){
+    var box = $('#t-pricing'); box.innerHTML = '<p class="muted">Φόρτωση…</p>';
+    Promise.all([
+      sb.from('pricing_settings').select('*').eq('id','current').maybeSingle(),
+      sb.from('pricing_comps').select('*').order('created_at')
+    ]).then(function(res){
+      if(res[0].error || res[1].error){
+        box.innerHTML = '<div class="notice err">Δεν φορτώθηκε η τιμολόγηση. Αν δεν έχουν δημιουργηθεί οι πίνακες pricing_settings / pricing_comps στη Supabase, τρέξε το pricing.sql.</div>'; return;
+      }
+      PR.A = {}; Object.keys(PR.DEFAULTS).forEach(function(k){ PR.A[k] = PR.DEFAULTS[k]; });
+      if(res[0].data){ Object.keys(res[0].data.data||{}).forEach(function(k){ if(typeof res[0].data.data[k]==='number') PR.A[k]=res[0].data.data[k]; }); PR.updatedAt = res[0].data.updated_at; }
+      else { PR.updatedAt = null; }
+      PR.comps = res[1].data || [];
+      PR.dirty = false;
+      box.innerHTML = prShell();
+      prWire(box);
+      prRenderTiles(); prRenderTable(); prRenderComps();
+    });
+  }
+
+  function prShell(){
+    var A = PR.A;
+    function fld(k, label, step){ return '<label class="f" for="pa-'+k+'">'+label+'<input id="pa-'+k+'" data-a="'+k+'" type="number" step="'+step+'" value="'+A[k]+'"></label>'; }
+    return ''
+      + '<div class="card" style="gap:14px">'
+      +   '<div class="pr-head"><div><span class="eyebrow">Τιμολόγηση · τιμή ζήτησης ανά μεικτό τ.μ.</span><h3>Οδυσσέως και Τραπεζούντος</h3></div>'
+      +   '<span class="note" id="pr-when"></span></div>'
+      +   '<div class="pr-tiles" id="pr-tiles"></div>'
+      +   '<div class="pr-controls">'
+      +     '<div class="seg" role="group" aria-label="Οικοδομή"><button type="button" data-b="od" aria-pressed="true">Οδυσσέως</button><button type="button" data-b="tr" aria-pressed="false">Τραπεζούντος</button></div>'
+      +     '<div class="seg" role="group" aria-label="Μονάδα"><button type="button" data-u="sqm" aria-pressed="true">€ / τ.μ.</button><button type="button" data-u="tot" aria-pressed="false">Συνολική τιμή</button></div>'
+      +   '</div>'
+      +   '<div class="tablebox"><table id="pr-tbl"></table></div>'
+      +   '<div class="legend" id="pr-legend"></div>'
+      + '</div>'
+      + '<div class="card" style="gap:14px">'
+      +   '<div class="pr-head"><h3>Παραδοχές</h3><div class="acts" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-ghost btn-sm" type="button" id="pr-reset">Επαναφορά αρχικών</button><button class="btn btn-orange btn-sm" type="button" id="pr-save" disabled>Αποθήκευση παραδοχών</button></div></div>'
+      +   '<p class="note">Οι αλλαγές υπολογίζονται αμέσως στον πίνακα. Με «Αποθήκευση» τις βλέπουν όλοι οι διαχειριστές.</p>'
+      +   '<div class="pr-assume">'
+      +     '<div class="card"><h4>Τιμή βάσης (Essential, 1ος, Οδυσσέως)</h4>'+fld('b1','Δυάρι (€/τ.μ.)',10)+fld('b2','Τριάρι (€/τ.μ.)',10)+fld('b3','Τεσσάρι (€/τ.μ.)',10)
+      +       '<p class="note">Τα μικρά διαμερίσματα πουλιούνται ακριβότερα ανά τ.μ., όπως δείχνουν και οι αγγελίες.</p></div>'
+      +     '<div class="card"><h4>Όροφος και οικοδομή</h4>'+fld('fl','Προσαύξηση ανά όροφο (%)',0.5)+fld('top','Επιπλέον για τελευταίο όροφο (%)',0.5)+fld('tr','Τραπεζούντος έναντι Οδυσσέως (%)',0.5)
+      +       '<p class="note">Τραπεζούντος −3%: μικρότερο οικόπεδο (245 τ.μ.) και αβέβαιη θέση στάθμευσης. Να επιβεβαιωθεί.</p></div>'
+      +     '<div class="card"><h4>Πακέτα (€/τ.μ. πάνω στη βάση)</h4>'+fld('p0','Basic (μόνο Δυάρι)',10)+fld('p1','Essential',10)+fld('p2','Comfort',10)+fld('p3','Signature',10)
+      +       '<h4 style="margin-top:6px">Τυπικό εμβαδό (τ.μ., για τη συνολική τιμή)</h4>'+fld('sqm1','Δυάρι',1)+fld('sqm2','Τριάρι',1)+fld('sqm3','Τεσσάρι',1)+'</div>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="card" style="gap:14px">'
+      +   '<div class="pr-head"><h3>Συγκριτικά στοιχεία</h3><span class="note">Τιμές ζήτησης ανά μεικτό τ.μ. διαμερίσματος</span></div>'
+      +   '<div class="pr-cols"><div class="tablebox"><table id="pr-comps"></table></div><div class="card pr-stat" id="pr-stats" style="padding:16px"></div></div>'
+      +   '<form id="pr-addcomp" class="pr-addcomp" novalidate>'
+      +     '<div class="field"><label for="pc-kind">Είδος</label><select id="pc-kind"><option value="listing">Αγγελία</option><option value="valuation">Εκτίμηση</option></select></div>'
+      +     '<div class="field" style="grid-column:span 2"><label for="pc-label">Περιοχή / ακίνητο</label><input id="pc-label" type="text" maxlength="120" required placeholder="π.χ. Κέντρο"></div>'
+      +     '<div class="field"><label for="pc-area">τ.μ.</label><input id="pc-area" type="number" step="0.01" min="1" required></div>'
+      +     '<div class="field"><label for="pc-floor">Όροφος</label><input id="pc-floor" type="number" step="1" min="0" value="1"></div>'
+      +     '<div class="field"><label for="pc-bed">Υ/Δ</label><input id="pc-bed" type="number" step="1" min="0"></div>'
+      +     '<div class="field"><label for="pc-price">Τιμή (€)</label><input id="pc-price" type="number" step="100" min="1" required></div>'
+      +     '<div class="field"><label for="pc-date">Ημερομηνία</label><input id="pc-date" type="date"></div>'
+      +     '<button class="btn btn-ghost btn-sm" type="submit" style="height:40px">Προσθήκη συγκριτικού</button>'
+      +   '</form>'
+      + '</div>'
+      + '<div class="card" style="gap:14px"><h3>Πώς βγαίνουν οι τιμές</h3><ul class="pr-notes">'
+      +   '<li><b>Βάση:</b> το Essential αντιστοιχεί στα σημερινά νεόδμητα της Ξάνθης, με αντλία θερμότητας, ηλιακό και κλάση Α. Τοποθετείται στη διάμεση τιμή των αγγελιών ανά μέγεθος, λίγο πάνω για τα μικρότερα τετραγωνικά των TAF και για την αποθήκη και τη θέση στάθμευσης της Οδυσσέως.</li>'
+      +   '<li><b>Έλεγχος με τις εκτιμήσεις του 2025:</b> τα Α1–Α3 βγήκαν 2.188–2.304 €/τ.μ. και το Γ3 2.447 €/τ.μ. Με την άνοδο της αγοράς κατά 7% μέσα στο έτος, οι βάσεις είναι συντηρητικές.</li>'
+      +   '<li><b>Όροφος:</b> στις αγγελίες κάθε όροφος προσθέτει περίπου 1%, ενώ στο φύλλο εκτίμησης ο συντελεστής είναι 2–3%. Επιλέχθηκε 1,5% ανά όροφο και 6% επιπλέον για τον τελευταίο, λόγω θέας και ταράτσας.</li>'
+      +   '<li><b>Πακέτα:</b> οι διαφορές είναι αυτές του configurator στο site και καλύπτουν το επιπλέον κόστος κάθε πακέτου. Δεν προέρχονται από αγγελίες, αφού στην Ξάνθη δεν υπάρχουν συγκρίσιμα διαμερίσματα με τόσο υψηλό εξοπλισμό.</li>'
+      +   '<li><b>Εμβαδό:</b> όλες οι τιμές είναι ανά μεικτό τ.μ. διαμερίσματος (με τοίχους, χωρίς αναλογία κοινοχρήστων). Αποθήκη και θέση στάθμευσης θεωρούνται μέσα στην τιμή.</li>'
+      +   '<li><b>Τιμές ζήτησης:</b> είναι τιμές αγγελίας, όχι τελικές τιμές πώλησης. Στις συμφωνίες συνήθως υπάρχει περιθώριο 3–5%.</li>'
+      +   '<li><b>Ανώτατο όριο αγοράς:</b> οι τιμές Signature στους ψηλούς ορόφους ξεπερνούν τα 2.700 €/τ.μ., πάνω από κάθε νεόδμητο που είναι σήμερα στην αγορά της Ξάνθης. Αξίζει να δοκιμαστεί η ζήτηση με τα πρώτα αιτήματα πριν κλειδώσει η τιμή.</li>'
+      + '</ul><div class="pr-sources"><span class="eyebrow">Πηγές</span>'
+      +   '<a href="https://www.spitogatos.gr/pwliseis-katoikies/xanthi/neodmita" target="_blank" rel="noopener">Spitogatos: νεόδμητα προς πώληση στην Ξάνθη</a>'
+      +   '<a href="https://www.eleftherostypos.gr/oikonomia/oi-times-akiniton-se-120-perioches-pinakes" target="_blank" rel="noopener">Ελεύθερος Τύπος: τιμές ακινήτων σε 120 περιοχές (Ξάνθη 1.222 €/τ.μ., +7%)</a>'
+      +   '<a href="https://www.olympia.gr/1671167/oikonomia/i-apoktisi-katoikias-ginetai-oloena-pio-dyskoli-gia-ta-noikokyria-kathos-to-kostos-agoras-ayxanetai-synechos/" target="_blank" rel="noopener">Olympia: μέση ζητούμενη τιμή νεόδμητων στην Ελλάδα 1.931 €/τ.μ.</a>'
+      +   '<span class="muted">Εκτιμήσεις αγοραίας αξίας Α1, Α2, Α3, Γ3 της Οδυσσέως (Οκτ. 2025), φάκελος «04. Μελέτες & Άδειες / 01. Αρχικός Υπολογισμός Μεγεθών / ΟΔΥΣΣΕΩΣ».</span>'
+      + '</div></div>';
+  }
+
+  function prWire(box){
+    $$('[data-a]', box).forEach(function(el){
+      el.addEventListener('input', function(){
+        var v = parseFloat(el.value); if(isNaN(v)) return;
+        PR.A[el.dataset.a] = v; PR.dirty = true; $('#pr-save').disabled = false; prWhen();
+        prRenderTiles(); prRenderTable();
+      });
+    });
+    $('#pr-reset', box).addEventListener('click', function(){
+      Object.keys(PR.DEFAULTS).forEach(function(k){ PR.A[k] = PR.DEFAULTS[k]; var el = $('#pa-'+k); if(el) el.value = PR.A[k]; });
+      PR.dirty = true; $('#pr-save').disabled = false; prWhen(); prRenderTiles(); prRenderTable();
+    });
+    $('#pr-save', box).addEventListener('click', function(){
+      var btn = $('#pr-save'); btn.disabled = true; btn.textContent = 'Αποθήκευση…';
+      sb.from('pricing_settings').upsert({ id:'current', data: PR.A, updated_at: new Date().toISOString(), updated_by: me.id }).select('updated_at').single().then(function(r){
+        btn.textContent = 'Αποθήκευση παραδοχών';
+        if(r.error){ btn.disabled = false; toast('Δεν αποθηκεύτηκε: ' + r.error.message); return; }
+        PR.dirty = false; PR.updatedAt = r.data.updated_at; prWhen(); toast('Οι παραδοχές αποθηκεύτηκαν');
+      });
+    });
+    $$('[data-b]', box).forEach(function(b){ b.addEventListener('click', function(){ PR.building = b.dataset.b; $$('[data-b]', box).forEach(function(x){ x.setAttribute('aria-pressed', String(x===b)) }); prRenderTable(); }); });
+    $$('[data-u]', box).forEach(function(b){ b.addEventListener('click', function(){ PR.unit = b.dataset.u; $$('[data-u]', box).forEach(function(x){ x.setAttribute('aria-pressed', String(x===b)) }); prRenderTable(); }); });
+    $('#pr-addcomp', box).addEventListener('submit', function(e){
+      e.preventDefault();
+      var row = { kind: $('#pc-kind').value, label: $('#pc-label').value.trim(), area: parseFloat($('#pc-area').value), floor: parseInt($('#pc-floor').value,10)||0,
+        bedrooms: $('#pc-bed').value==='' ? null : parseInt($('#pc-bed').value,10), price: parseFloat($('#pc-price').value), listed_on: $('#pc-date').value || null, created_by: me.id };
+      if(!row.label || !(row.area>0) || !(row.price>0)){ toast('Συμπλήρωσε περιοχή, τ.μ. και τιμή.'); return; }
+      sb.from('pricing_comps').insert(row).select('*').single().then(function(r){
+        if(r.error){ toast('Δεν προστέθηκε: ' + r.error.message); return; }
+        PR.comps.push(r.data); $('#pr-addcomp').reset(); $('#pc-floor').value = 1; prRenderComps(); toast('Το συγκριτικό προστέθηκε');
+      });
+    });
+    prWhen();
+  }
+  function prWhen(){
+    var el = $('#pr-when'); if(!el) return;
+    el.textContent = PR.dirty ? 'Μη αποθηκευμένες αλλαγές' : (PR.updatedAt ? 'Αποθηκεύτηκε ' + fmtDate(PR.updatedAt) : 'Αρχικές παραδοχές, δεν έχουν αποθηκευτεί');
+  }
+
+  function prRenderTiles(){
+    var el = $('#pr-tiles'); if(!el) return;
+    var lo = Math.min(prPrice('tr','b3','p1',1), prPrice('tr','b1','p0',1)), hi = prPrice('od','b1','p3',6);
+    el.innerHTML = PR.SIZES.map(function(s){
+      return '<div class="tile"><small>'+s.name+' · Essential</small><b>'+fmtN(prPrice('od',s.k,'p1',1))+' €</b><span>ανά τ.μ., 1ος όροφος Οδυσσέως</span></div>';
+    }).join('') + '<div class="tile"><small>Εύρος πίνακα</small><b>'+fmtN(lo)+'–'+fmtN(hi)+' €</b><span>ανά τ.μ., και οι δύο οικοδομές</span></div>';
+  }
+
+  function prRenderTable(){
+    var tbl = $('#pr-tbl'); if(!tbl) return;
+    var A = PR.A, cols = [];
+    PR.SIZES.forEach(function(s){ PR.PKGS.forEach(function(p){ if(!p.only || p.only===s.k) cols.push({s:s,p:p}); }); });
+    var head1 = '<tr class="grp"><th class="rowh"></th>' + PR.SIZES.map(function(s){
+      var n = PR.PKGS.filter(function(p){ return !p.only || p.only===s.k }).length;
+      return '<th colspan="'+n+'" class="sep">'+s.name+(PR.unit==='tot' ? ' · ~'+A[s.sq]+' τ.μ.' : '')+'</th>';
+    }).join('') + '</tr>';
+    var head2 = '<tr><th class="rowh">Όροφος</th>' + cols.map(function(c,i){
+      var first = i===0 || cols[i-1].s.k!==c.s.k; return '<th class="'+(first?'sep':'')+'">'+c.p.name+'</th>';
+    }).join('') + '</tr>';
+    var body = PR.FLOORS.map(function(fl){
+      var label = fl===6 ? '6ος · τελευταίος' : fl+'ος';
+      if(PR.building==='od') label += '<small>'+PR.UNITS_OD[fl]+'</small>';
+      return '<tr><td class="rowh">'+label+'</td>' + cols.map(function(c,i){
+        var first = i===0 || cols[i-1].s.k!==c.s.k;
+        var v = prPrice(PR.building, c.s.k, c.p.k, fl);
+        var shown = PR.unit==='tot' ? fmtN(v*A[c.s.sq]/1000)+'k' : fmtN(v);
+        var planned = PR.building==='od' && PR.PLANNED_OD[fl].indexOf(c.s.k) > -1;
+        return '<td class="v'+(first?' sep':'')+(planned?' planned':'')+'">'+shown+'</td>';
+      }).join('') + '</tr>';
+    }).join('');
+    tbl.innerHTML = '<thead>'+head1+head2+'</thead><tbody>'+body+'</tbody>';
+    $('#pr-legend').innerHTML = (PR.building==='od'
+        ? '<span><i></i>Μεγέθη που υπάρχουν στη διάταξη της Οδυσσέως (6όροφη λύση)</span>'
+        : '<span>Η διάταξη της Τραπεζούντος δεν έχει οριστικοποιηθεί, οπότε φαίνονται όλα τα μεγέθη.</span>')
+      + '<span>' + (PR.unit==='tot' ? 'Συνολική τιμή σε χιλιάδες €, για τυπικό εμβαδό ανά μέγεθος, χωρίς πρόσθετα.' : 'Τιμές ζήτησης σε € ανά μεικτό τ.μ., στρογγυλεμένες στα 10 €.') + '</span>';
+  }
+
+  function prRenderComps(){
+    var tbl = $('#pr-comps'); if(!tbl) return;
+    var rows = PR.comps.map(function(c){ return Object.assign({ppm: c.price/c.area}, c); }).sort(function(x,y){ return y.ppm - x.ppm; });
+    tbl.innerHTML = '<thead><tr><th class="lt">Ακίνητο</th><th>τ.μ.</th><th>Όροφος</th><th>Τιμή</th><th>€/τ.μ.</th><th></th></tr></thead><tbody>'
+      + (rows.length ? rows.map(function(r){
+          var sub = (r.kind==='valuation' ? 'Εκτίμηση TAF' : 'Αγγελία') + (r.listed_on ? ' ' + fmtMonth(r.listed_on) : '') + (r.bedrooms ? ' · ' + r.bedrooms + ' υ/δ' : '');
+          return '<tr><td class="lt">'+esc(r.label)+'<small style="display:block;color:var(--muted);font-size:12px">'+esc(sub)+'</small></td><td>'+fmtN(r.area)+'</td><td>'+(r.floor===0?'Ισόγειο':r.floor+'ος')+'</td><td>'+fmtN(r.price)+' €</td><td><b>'+fmtN(r.ppm)+'</b></td>'
+            + '<td><button class="btn btn-ghost btn-sm" type="button" data-del-comp="'+r.id+'" aria-label="Διαγραφή συγκριτικού">×</button></td></tr>';
+        }).join('') : '<tr><td class="lt" colspan="6">Δεν υπάρχουν συγκριτικά. Πρόσθεσε το πρώτο από τη φόρμα.</td></tr>')
+      + '</tbody>';
+    $$('[data-del-comp]', tbl).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(!confirm('Να διαγραφεί το συγκριτικό;')) return;
+        var id = btn.dataset.delComp;
+        sb.from('pricing_comps').delete().eq('id', id).then(function(r){
+          if(r.error){ toast('Δεν διαγράφηκε'); return; }
+          PR.comps = PR.comps.filter(function(c){ return String(c.id)!==String(id) }); prRenderComps();
+        });
+      });
+    });
+    var L = PR.comps.filter(function(c){ return c.kind==='listing' });
+    function grp(f){ var v = L.filter(f).map(function(c){ return c.price/c.area }); return {n:v.length, min:v.length?Math.min.apply(null,v):0, med:median(v), max:v.length?Math.max.apply(null,v):0}; }
+    var g = [['Μικρά έως 63 τ.μ.', grp(function(c){ return c.area<=63 })], ['2 υπνοδωμάτια', grp(function(c){ return c.bedrooms===2 })], ['3 υπνοδωμάτια', grp(function(c){ return c.bedrooms===3 })]];
+    $('#pr-stats').innerHTML = '<span class="eyebrow">Διάμεση τιμή αγγελιών</span>'
+      + g.map(function(x){ return '<div class="r"><span>'+x[0]+' <span class="note">('+x[1].n+(x[1].n===1?' αγγελία':' αγγελίες')+(x[1].n>1?', '+fmtN(x[1].min)+'–'+fmtN(x[1].max):'')+')</span></span><b>'+(x[1].n?fmtN(x[1].med)+' €/τ.μ.':'—')+'</b></div>'; }).join('')
+      + '<div class="r"><span>Όλες οι κατοικίες Ξάνθης, Απρ. 2026</span><b>1.222 €/τ.μ.</b></div>'
+      + '<div class="r"><span>Νεόδμητα, μέσος όρος Ελλάδας 2025</span><b>1.931 €/τ.μ.</b></div>';
   }
 })();
 </script>
