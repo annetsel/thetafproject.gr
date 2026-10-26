@@ -1,0 +1,27 @@
+# Keeps the Supabase project "taf-portal" (free plan) from being auto-paused.
+# Supabase pauses free projects that receive no API requests for 7 days, so
+# this workflow sends one read-only request every 3 days. The key below is the
+# project's public (publishable) key, the same one shipped in portal/index.html;
+# row-level security still applies, so the request returns no private data.
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: "0 6 */3 * *"   # 06:00 UTC every 3 days
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query taf-portal
+        env:
+          SUPABASE_URL: https://brnhkfagxiucciumxblt.supabase.co
+          SUPABASE_KEY: sb_publishable_yajiZquYvoeCRCivhA60yQ_DssNrSQD
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            "$SUPABASE_URL/rest/v1/stages?select=id&limit=1" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY")
+          echo "HTTP $code"
+          [ "$code" = "200" ]
